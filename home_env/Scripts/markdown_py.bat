@@ -1,0 +1,1 @@
+@"c:\users\leven\onedrive\documents\visual studio 2017\Projects\DjangoHome\DjangoHome\home_env\Scripts\python.exe" "c:\users\leven\onedrive\documents\visual studio 2017\Projects\DjangoHome\DjangoHome\home_env\Scripts\markdown_py" %*
