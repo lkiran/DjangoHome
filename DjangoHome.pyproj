@@ -16,7 +16,7 @@
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
-    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <WebBrowserUrl>http://localhost:4000</WebBrowserUrl>
     <LaunchProvider>Django launcher</LaunchProvider>
     <DjangoSettingsModule>DjangoHome.settings</DjangoSettingsModule>
     <OutputPath>.</OutputPath>
@@ -31,6 +31,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="app\admin.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app\Controllers\ControlController.py" />
     <Compile Include="app\Controllers\InterfaceController.py" />
     <Compile Include="app\Controllers\__init__.py">
@@ -52,7 +55,6 @@
     <Compile Include="app\tests.py" />
     <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
-    <Compile Include="app\migrations\__init__.py" />
     <Compile Include="manage.py" />
     <Compile Include="DjangoHome\__init__.py" />
     <Compile Include="DjangoHome\settings.py" />
@@ -75,8 +77,8 @@
     <Folder Include="DjangoHome\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HomeAutomation.sqlite3" />
     <Content Include="requirements.txt" />
-    <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
     <Content Include="app\static\app\content\bootstrap.min.css" />
     <Content Include="app\static\app\content\site.css" />

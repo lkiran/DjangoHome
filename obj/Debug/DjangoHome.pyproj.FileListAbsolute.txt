@@ -1,1 +1,2 @@
 c:\users\leven\onedrive\documents\visual studio 2017\Projects\DjangoHome\DjangoHome\obj\Debug\DjangoHome.pyproj.CoreCompileInputs.cache
+C:\Users\leven\Desktop\DjangoHome\DjangoHome\obj\Debug\DjangoHome.pyproj.CoreCompileInputs.cache
