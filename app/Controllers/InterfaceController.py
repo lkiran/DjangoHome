@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from app.serializers import InterfaceSerializer
+from app.ModelSerializers import InterfaceSerializer
 from app.Repositories import InterfaceRepository
 from rest_framework.views import APIView
 

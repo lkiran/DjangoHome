@@ -1,16 +1,14 @@
 from datetime import datetime
-from app.Controllers import ControlController
-from django.contrib import admin
-from django.conf.urls import url, include
+
 import django.contrib.auth.views
+from django.conf.urls import url, include
+from django.contrib import admin
 
-import app.forms
 import app.views
-
-# Uncomment the next lines to enable the admin:
-# from django.conf.urls import include
-# from django.contrib import admin
-# admin.autodiscover()
+from app.Controllers.ConditionController import ConditionController
+from app.Controllers.ControlController import ControlController
+from app.Controllers.DeviceController import DeviceController
+from app.Controllers.TaskController import TaskController
 
 urlpatterns = [
 	# Examples:
@@ -37,7 +35,12 @@ urlpatterns = [
 		name='logout'),
 
 	url(r'^admin/', admin.site.urls),
-	url(r'^controls/', ControlController.ControlController.as_view()),
+
+	url(r'^(?i)controls/', ControlController.as_view()),
+	url(r'^(?i)devices/', DeviceController.as_view()),
+	url(r'^(?i)tasks/', TaskController.as_view()),
+	url(r'^(?i)condition/', ConditionController.as_view()),
+
 	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 	# Uncomment the admin/doc line below to enable admin documentation:
