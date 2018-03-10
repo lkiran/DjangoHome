@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from app.ModelSerializers import ControlSerializer
+from app.ModelSerializers import ControlSerializer, BaseControlSerializer
 from app.Repositories.ControlRepository import ControlRepository
 
 
@@ -8,7 +8,7 @@ class ControlController(APIView):
 	__controlRepo = ControlRepository()
 
 	def get(self, request, format=None):
-		result = ControlSerializer(data=self.__controlRepo.Get(), many=True)
+		result = BaseControlSerializer(data=self.__controlRepo.Get(), many=True)
 		result.is_valid()
 		return Response(result.data)
 

@@ -1,5 +1,7 @@
 import string
 
+import shortuuid
+
 from app.Repositories.PropertyRepository import PropertyRepository
 from app.enums import ModelStatus
 from app.models import Task
@@ -25,12 +27,13 @@ class TaskRepository:
 		status = self.Status(model)
 
 		if status is ModelStatus.New:
-			model.Id = None
+			model.Id = shortuuid.random(10)
 			model.save()
+			print(str(model) + " is Created")
 		elif status is ModelStatus.Modified:
 			model.save()
+			print(str(model) + " is Updated")
 
-		print(str(model) + " " + model.Id)
 		return model
 
 	def Status(self, model):

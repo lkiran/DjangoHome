@@ -1,4 +1,7 @@
 import collections
+
+import shortuuid
+
 from app.Repositories.ConditionRepository import ConditionRepository
 from app.Repositories.TaskRepository import TaskRepository
 from app.enums import ModelStatus
@@ -40,38 +43,43 @@ class ControlRepository:
 
 		control = self.Get(model.Id)
 		status = self.Status(model, control)
+
 		if status is ModelStatus.New:
-			model.Id = None
+			model.Id = shortuuid.random(10)
 			model.save()
+			print(str(model) + " is Created")
+
 		elif status is ModelStatus.Modified:
 			model.save()
+			print(str(model) + " is Updated")
 
-		print(str(model) + " " + model.Id)
 
 		return model
 
 	def DisassociteTask(self, control, tasks):
 		for task in tasks:
 			control.Tasks.remove(task)
+			print(str(task) + " is Deleted")
 
 	def DisassociteCondition(self, control, conditions):
 		for condition in conditions:
 			control.Conditions.remove(condition)
+			print(str(condition) + " is Deleted")
 
 
-def Status(self, model, control=None):
-	if control == None:
-		control = self.Get(model.Id)
-	if not control:
-		return ModelStatus.New
+	def Status(self, model, control=None):
+		if control == None:
+			control = self.Get(model.Id)
+		if not control:
+			return ModelStatus.New
 
-	if control.Name is model.Name:
-		return ModelStatus.Modified
+		if control.Name is model.Name:
+			return ModelStatus.Modified
 
-	if collections.Counter(model.Tasks.all()) == collections.Counter(control.Tasks.all()):
-		return ModelStatus.Modified
+		if collections.Counter(model.Tasks.all()) == collections.Counter(control.Tasks.all()):
+			return ModelStatus.Modified
 
-	if collections.Counter(model.Conditions.all()) == collections.Counter(control.Conditions.all()):
-		return ModelStatus.Modified
+		if collections.Counter(model.Conditions.all()) == collections.Counter(control.Conditions.all()):
+			return ModelStatus.Modified
 
-	return ModelStatus.Same
+		return ModelStatus.Same

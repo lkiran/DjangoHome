@@ -4,18 +4,16 @@ from rest_framework.views import APIView
 
 from app.ModelSerializers import ConditionSerializer, BaseConditionSerializer
 from app.Repositories.ConditionRepository import ConditionRepository
-from app.Repositories.ControlRepository import ControlRepository
 
 
-class ConditionController(APIView):
+class AndConditionController(APIView):
 	__conditionRepo = ConditionRepository()
-	__controlRepo = ControlRepository()
 
 	def get(self, request, format=None):
-		controlId = request.query_params["controlId"]
-		control = self.__controlRepo.Get(controlId)
+		conditionId = request.query_params["conditionId"]
+		condition = self.__conditionRepo.Get(conditionId)
 
-		result = BaseConditionSerializer(data=control.Conditions.all(), many=True)
+		result = BaseConditionSerializer(data=condition.AndConditions.all(), many=True)
 		result.is_valid()
 
 		return Response(result.data)

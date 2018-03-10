@@ -1,6 +1,6 @@
-import collections
+import shortuuid
 
-from app.enums import ModelStatus
+from app.enums import ModelStatus, ComparerEnum
 from app.models import Condition
 
 
@@ -19,6 +19,8 @@ class ConditionRepository:
 		model.Value = data["Value"]
 		model.Property_id = data["PropertyId"]
 		model.Operator = data["Operator"]
+		if model.Operator == "":
+			model.Operator = ComparerEnum.Equal
 
 		andConditionList = data["AndConditions"]
 		for conditionDict in andConditionList:
@@ -28,12 +30,14 @@ class ConditionRepository:
 		status = self.Status(model)
 
 		if status is ModelStatus.New:
-			model.Id = None
+			model.Id = shortuuid.random(10)
 			model.save()
+			print(str(model) + " is Created")
+
 		elif status is ModelStatus.Modified:
 			model.save()
+			print(str(model) + " is Updated")
 
-		print(str(model) + " " + model.Id)
 		return model
 
 	def Status(self, model):

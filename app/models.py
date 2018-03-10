@@ -54,7 +54,7 @@ class Condition(models.Model):
 	Property = models.ForeignKey(Property, blank=True)
 	Operator = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in ComparerEnum])
 	Value = models.CharField(max_length=50)
-	AndConditions = models.ManyToManyField("self", blank=True)
+	AndConditions = models.ManyToManyField("self", blank=True, symmetrical=False)
 
 	def __str__(self):
 		return "When " + self.Property.Name + ' -> ' + self.Value
@@ -67,7 +67,7 @@ class Control(models.Model):
 	Conditions = models.ManyToManyField(Condition, blank=True)
 
 	def __str__(self):
-		return self.Name
+		return "Task " + self.Name
 
 
 class Interface(models.Model):
@@ -77,7 +77,7 @@ class Interface(models.Model):
 	Monitor = models.ForeignKey(Property, null=True)
 
 	def __str__(self):
-		return self.Name
+		return "Interface " + self.Name
 
 
 class Prefab(models.Model):
@@ -90,7 +90,9 @@ class Prefab(models.Model):
 
 
 class PropertyInfo(Property):
-	FunctionId = ""
-	FunctionName = ""
-	DeviceId = ""
-	DeviceName = ""
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.FunctionId = ""
+		self.FunctionName = ""
+		self.DeviceId = ""
+		self.DeviceName = ""
