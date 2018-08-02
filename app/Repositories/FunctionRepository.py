@@ -33,13 +33,8 @@ class FunctionRepository:
 
 	def Save(self, data):
 		model = Function()
-		model.Id = data['Id']
-		model.Name = data['Name']
-
-		Properties = data['Properties']
-		for propertyDict in Properties:
-			property = self.__propertyRepo.UpdateValue(propertyDict)
-			model.Properties.add(property.Id)
+		model.Id = data.get("Id", "")
+		model.Name = data.get("Name", "")
 
 		function = self.Get(model.Id)
 		status = self.Status(model, function)
@@ -48,6 +43,11 @@ class FunctionRepository:
 			model.save()
 		elif status is ModelStatus.Modified:
 			model.save()
+
+		Properties = data['Properties']
+		for propertyDict in Properties:
+			property = self.__propertyRepo.Save(propertyDict)
+			model.Properties.add(property.Id)
 
 		return model
 

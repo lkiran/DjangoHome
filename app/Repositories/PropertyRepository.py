@@ -1,7 +1,6 @@
 from app.enums import ModelStatus
 from app.models import Property, PropertyInfo
 
-
 class PropertyRepository:
 	def Get(self, id=None):
 		if id is not None:
@@ -23,6 +22,7 @@ class PropertyRepository:
 		propertyInfo.Type = property.Type
 		propertyInfo.Class = property.Class
 		propertyInfo.Comparable = property.Comparable
+		propertyInfo.CallFunction = property.CallFunction
 
 		propertyInfo.FunctionId = function.Id
 		propertyInfo.FunctionName = function.Name
@@ -34,12 +34,14 @@ class PropertyRepository:
 
 	def Save(self, data):
 		model = Property()
-		model.Id = data['Id']
+		model.Id = data.get("Id", "")
 		model.Name = data['Name']
 		model.Value = data['Value']
 		model.Type = data['Type']
 		model.Class = data['Class']
 		model.Comparable = data['Comparable']
+		model.CallFunction = data.get("CallFunction", "")
+		model.Parameters = data.get("Parameters", None)
 
 		status = self.Status(model)
 
@@ -52,7 +54,7 @@ class PropertyRepository:
 		return model
 
 	def UpdateValue(self, data):
-		id = data['Id']
+		id = data.get("Id", None)
 		value = data['Value']
 
 		property = self.Get(id)

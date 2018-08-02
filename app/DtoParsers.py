@@ -3,10 +3,10 @@ class ControlParser():
 		self.data = data
 
 	def Tasks(self):
-		return self.data.Get("Tasks")
+		return self.data.Produce("Tasks")
 
 	def Conditions(self):
-		return self.data.Get("Conditions")
+		return self.data.Produce("Conditions")
 
 
 class ConditionParser():
@@ -14,4 +14,4 @@ class ConditionParser():
 		self.data = data
 
 	def AndConditions(self):
-		return self.data.Get("AndConditions")
+		return self.data.Produce("AndConditions")

@@ -1,25 +1,27 @@
-from enum import IntEnum, Enum
+from enum import Enum
 
 
-class ClassEnum(IntEnum):
+class ClassEnum(Enum):
 	Error = 0
 	Integer = 1
 	String = 2
 	Boolean = 3
 	Color = 4
-	Day_Of_Weeks = 5
+	DayOfWeek = 5
 	Date = 6
 	Time = 7
+	Empty = 8
+	DateTime = 9
 
 
-class ComparerEnum(IntEnum):
+class ComparerEnum(Enum):
 	Equal = 0
 	Not_Equal = 1
 	Greater = 2
 	Smaller = 3
 
 
-class TypeEnum(IntEnum):
+class TypeEnum(Enum):
 	Error = 0
 	Read_Only = 1
 	Write_Only = 2

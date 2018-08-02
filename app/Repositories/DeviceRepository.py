@@ -2,7 +2,6 @@ from app.Repositories.FunctionRepository import FunctionRepository
 from app.enums import ModelStatus
 from app.models import Device
 
-
 class DeviceRepository:
 	__functionRepo = FunctionRepository()
 
@@ -14,15 +13,13 @@ class DeviceRepository:
 		except Device.DoesNotExist:
 			return None
 
+
 	def Save(self, data):
 		model = Device()
-		model.Id = data['Id']
-		model.Name = data['Name']
-
-		Functions = data['Functions']
-		for functionDict in Functions:
-			function = self.__functionRepo.Save(functionDict)
-			model.Functions.add(function.Id)
+		model.Id = data.get("Id", "")
+		model.Name = data.get("Name", "")
+		model.CallClass = data.get("CallClass", "")
+		model.Parameters = data.get("Parameters", None)
 
 		device = self.Get(model.Id)
 		status = self.Status(model, device)
@@ -32,12 +29,16 @@ class DeviceRepository:
 		elif status is ModelStatus.Modified:
 			model.save()
 
-		print(str(model) + " " + model.Id)
+		Functions = data.get("Functions", None)
+		for functionDict in Functions:
+			function = self.__functionRepo.Save(functionDict)
+			model.Functions.add(function.Id)
 
 		return model
 
+
 	def Status(self, model, device=None):
-		if device == None:
+		if device is None:
 			device = self.Get(model.Id)
 
 		if not device:
