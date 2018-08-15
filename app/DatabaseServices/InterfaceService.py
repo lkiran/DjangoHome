@@ -1,5 +1,6 @@
 from app.DatabaseServices.PropertyService import PropertyService
 from app.ValueParser import ValueParser
+from app.enums import ClassEnum
 
 
 class InterfaceService(object):
@@ -19,6 +20,6 @@ class InterfaceService(object):
 			InterfaceService.__instance = self
 
 	def CallEditor(self, model, value):
-		parser = ValueParser().Get(model.Editor.Class)
+		parser = ValueParser().Get(ClassEnum(model.Editor.Class))
 		object = parser.ToObject(value)
-		self.__propertyService.SetProperty(model.Editor.Id, object)
+		return self.__propertyService.SetProperty(model.Editor.Id, object)

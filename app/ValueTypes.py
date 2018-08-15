@@ -11,4 +11,7 @@ class Color(object):
 		self.Alpha = a
 
 	def __str__(self):
-		return "rgba({0},{1},{2},{3})".format(self.Red, self.Green, self.Blue, self.Alpha)
+		return u'rgba({0},{1},{2},{3})'.format(self.Red, self.Green, self.Blue, self.Alpha)
+
+	def __unicode__(self):
+		return u'rgba({0},{1},{2},{3})'.format(self.Red, self.Green, self.Blue, self.Alpha)

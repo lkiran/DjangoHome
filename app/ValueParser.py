@@ -49,7 +49,7 @@ class IntegerValueParser(AbsValueParser):
 		return ClassEnum.Integer
 
 	def ToObject(self, value):
-		return  int(value)
+		return int(value)
 
 	def ToString(self, value):
 		return str(value)
@@ -61,16 +61,16 @@ class BooleanValueParser(AbsValueParser):
 		return ClassEnum.Boolean
 
 	def ToObject(self, value):
-		if value == '1':
+		if value == 'true':
 			return True
-		elif value == '0':
+		elif value == 'false':
 			return False
 
 	def ToString(self, value):
 		if value:
-			return '1'
+			return 'true'
 		else:
-			return '0'
+			return 'false'
 
 
 class ColorValueParser(AbsValueParser):
@@ -83,7 +83,10 @@ class ColorValueParser(AbsValueParser):
 		red = int(colorsOnly[0])
 		green = int(colorsOnly[1])
 		blue = int(colorsOnly[2])
-		alpha = int(colorsOnly[3])
+		if value[0:value.find("(")] == "rgba":
+			alpha = float(colorsOnly[3])
+		else:
+			alpha = 1.0
 		return Color(red, green, blue, alpha)
 
 	def ToString(self, value):
@@ -125,29 +128,38 @@ class DayOfWeekValueParser(AbsValueParser):
 	def ToString(self, value):
 		pass
 
-	class StringValueParser(AbsValueParser):
-		@property
-		def TemplateClass(self):
-			return ClassEnum.String
 
-		def ToObject(self, value):
-			pass
+class StringValueParser(AbsValueParser):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.String
 
-		def ToString(self, value):
-			pass
+	def ToObject(self, value):
+		pass
 
-	class DateTimeValueParser(AbsValueParser):
-		@property
-		def TemplateClass(self):
-			return ClassEnum.DateTime
-
-		def ToObject(self, value):
-			return datetime.now()
-
-		def ToString(self, value):
-			return str(datetime.now())
+	def ToString(self, value):
+		pass
 
 
-if __name__ == "__main__":
-	parser = ValueParser().Get(ClassEnum.Boolean)
-	print "ok"
+class DateTimeValueParser(AbsValueParser):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.DateTime
+
+	def ToObject(self, value):
+		return datetime.now()
+
+	def ToString(self, value):
+		return str(datetime.now())
+
+
+class EmptyValueParser(AbsValueParser):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.Empty
+
+	def ToObject(self, value):
+		return None
+
+	def ToString(self, value):
+		return u''

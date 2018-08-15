@@ -1,3 +1,5 @@
+import sys
+
 from django.contrib import admin
 from django.conf.urls import url, include
 
@@ -32,7 +34,6 @@ urlpatterns = [
 	url(r'^(?i)tasks', TaskController.as_view()),
 ]
 
-# deviceService = DeviceService.Instance()
-# deviceService.ProduceDevices()
-# propertyService=PropertyService.Instance()
-# propertyService.SetProperty("AHCJrbt3QHdKNMbpN8VASk", False)
+deviceService = DeviceService.Instance()
+deviceService.ProduceDevices()
+print("----------------------------------------")

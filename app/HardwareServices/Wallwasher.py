@@ -22,12 +22,14 @@ class Wallwasher(BaseClassService):
 		value = kwargs.get("Value")
 		if value is None:
 			return self._color
-		self._color=value
+		self._color = value
+		self.Model.Properties.filter(CallFunction='Color').first().Object = value
+		return self._color
 
 	def TransitionTime(self, **kwargs):
 		pass
 
 	def _InstantiateUsingModel(self):
 		properties = self.Model.Properties
-		self._color = properties.filter(lambda p: p.CallFunction == 'Color', self.Properties)[0].Object
-		self._transitionTime = properties.filter(lambda p: p.CallFunction == 'TransitionTime', self.Properties)[0].Object
+		self._color = properties.filter(CallFunction='Color').first().Object
+		self._transitionTime = properties.filter(CallFunction='TransitionTime').first().Object

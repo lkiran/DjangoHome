@@ -20,19 +20,19 @@ class TaskRepository:
 
 	def Save(self, data):
 		model = Task()
-		model.Id = data["Id"]
-		model.Value = data["Value"]
-		model.Property_id = data["PropertyId"]
+		model.Id = data.get('Id', u'')
+		model.Property_id = data.get("PropertyId", u'')
+		model.Object = data.get('Value', u'')
 
 		status = self.Status(model)
 
 		if status is ModelStatus.New:
 			model.Id = shortuuid.random(10)
 			model.save()
-			print(str(model) + " is Created")
+			print("{0} is Created".format(model))
 		elif status is ModelStatus.Modified:
 			model.save()
-			print(str(model) + " is Updated")
+			print("{0} is Updated".format(model))
 
 		return model
 

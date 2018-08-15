@@ -15,14 +15,13 @@ class ConditionRepository:
 
 	def Save(self, data):
 		model = Condition()
-		model.Id = data["Id"]
-		model.Value = data["Value"]
-		model.Property_id = data["PropertyId"]
-		model.Operator = data["Operator"]
-		if model.Operator == "":
-			model.Operator = ComparerEnum.Equal
-
-		andConditionList = data["AndConditions"]
+		model.Id = data.get('Id', u'')
+		model.Value = data.get('Value', u'')
+		model.Property_id = data.get('PropertyId', u'')
+		model.Operator = data.get('Operator', u'')
+		if model.Operator == u'':
+			model.Operator = u'0'
+		andConditionList = data.get('AndConditions', u'')
 		for conditionDict in andConditionList:
 			andCondition = self.Save(conditionDict)
 			model.AndConditions.add(andCondition.Id)
@@ -32,11 +31,11 @@ class ConditionRepository:
 		if status is ModelStatus.New:
 			model.Id = shortuuid.random(10)
 			model.save()
-			print(str(model) + " is Created")
+			print(u"{0} condition is created".format(model))
 
 		elif status is ModelStatus.Modified:
 			model.save()
-			print(str(model) + " is Updated")
+			print(u"{0} condition is updated".format(model))
 
 		return model
 

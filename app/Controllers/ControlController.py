@@ -14,6 +14,5 @@ class ControlController(APIView):
 
 	def post(self, request, format=None):
 		control = self.__controlRepo.Save(request.data)
-
 		result = ControlSerializer(control)
 		return Response(result.data)

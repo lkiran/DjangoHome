@@ -16,9 +16,11 @@ class ClassEnum(Enum):
 
 class ComparerEnum(Enum):
 	Equal = 0
-	Not_Equal = 1
+	NotEqual = 1
 	Greater = 2
-	Smaller = 3
+	EqualOrGreater = 3
+	Smaller = 4
+	EqualOrSmaller = 5
 
 
 class TypeEnum(Enum):

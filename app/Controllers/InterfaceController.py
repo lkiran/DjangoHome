@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -18,9 +19,14 @@ class InterfaceController(APIView):
 			result = InterfaceSerializer(interface)
 		return Response(result.data)
 
+	def post(self, request, format=None):
+		interface = self.__interfaceRepo.Save(request.data)
+		result = InterfaceSerializer(interface)
+		return Response(result.data)
+
 	def put(self, request, format=None):
-		interfaceId = request.query_params.get("interfaceId")
-		value = request.query_params.get("value")
+		interfaceId = request.data.get("interfaceId")
+		value = request.data.get("value")
 		interface = self.__interfaceRepo.Get(interfaceId)
-		result= self.__interfaceService.CallEditor(interface,value)
-		return Response(result)
+		result = self.__interfaceService.CallEditor(interface,value)
+		return Response(status=status.HTTP_200_OK)

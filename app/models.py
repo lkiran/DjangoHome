@@ -1,5 +1,6 @@
 from django.db import models
 import jsonfield as jsonfield
+from django.utils import timezone
 from shortuuidfield import ShortUUIDField
 
 from app.ValueParser import ValueParser
@@ -15,10 +16,17 @@ class Property(models.Model):
 	Type = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in TypeEnum])
 	Class = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in ClassEnum])
 	Comparable = models.BooleanField(default=True)
-	CreatedOn = models.DateTimeField(auto_now_add=True)
-	ModifiedOn = models.DateTimeField(auto_now=True)
-
+	CreatedOn = models.DateTimeField()
+	ModifiedOn = models.DateTimeField()
 	_Parser = None
+
+	def save(self, *args, **kwargs):
+		if not self.Id:
+			self.CreatedOn = timezone.now()
+		else:
+			del self.CreatedOn
+		self.ModifiedOn = timezone.now()
+		return super(Property, self).save(*args, **kwargs)
 
 	@property
 	def Parser(self):
@@ -51,8 +59,16 @@ class Function(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
 	Properties = models.ManyToManyField(Property, blank=True)
-	CreatedOn = models.DateTimeField(auto_now_add=True)
-	ModifiedOn = models.DateTimeField(auto_now=True)
+	CreatedOn = models.DateTimeField()
+	ModifiedOn = models.DateTimeField()
+
+	def save(self, *args, **kwargs):
+		if not self.Id:
+			self.CreatedOn = timezone.now()
+		else:
+			del self.CreatedOn
+		self.ModifiedOn = timezone.now()
+		return super(Function, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
@@ -67,8 +83,16 @@ class Device(models.Model):
 	CallClass = models.CharField(max_length=50)
 	Parameters = jsonfield.JSONField(default="{}")
 	Functions = models.ManyToManyField(Function, blank=True)
-	CreatedOn = models.DateTimeField(auto_now_add=True)
-	ModifiedOn = models.DateTimeField(auto_now=True)
+	CreatedOn = models.DateTimeField()
+	ModifiedOn = models.DateTimeField()
+
+	def save(self, *args, **kwargs):
+		if not self.Id:
+			self.CreatedOn = timezone.now()
+		else:
+			del self.CreatedOn
+		self.ModifiedOn = timezone.now()
+		return super(Device, self).save(*args, **kwargs)
 
 	@property
 	def Properties(self):
@@ -85,14 +109,37 @@ class Task(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Property = models.ForeignKey(Property, blank=True)
 	Value = models.CharField(max_length=50)
-	CreatedOn = models.DateTimeField(auto_now_add=True)
-	ModifiedOn = models.DateTimeField(auto_now=True)
+	CreatedOn = models.DateTimeField()
+	ModifiedOn = models.DateTimeField()
+	_Parser = None
+
+	def save(self, *args, **kwargs):
+		if not self.Id:
+			self.CreatedOn = timezone.now()
+		else:
+			del self.CreatedOn
+		self.ModifiedOn = timezone.now()
+		return super(Task, self).save(*args, **kwargs)
+
+	@property
+	def Parser(self):
+		if not self._Parser:
+			self._Parser = ValueParser().Get(ClassEnum(self.Property.Class))
+		return self._Parser
+
+	@property
+	def Object(self):
+		return self.Parser.ToObject(self.Value)
+
+	@Object.setter
+	def Object(self, object):
+		self.Value = self.Parser.ToString(object)
 
 	def __str__(self):
-		return 'Set ' + unicode(self.Property.Name) + ' to ' + self.Value
+		return u'Set {0} to {1}'.format(self.Property, self.Value)
 
 	def __unicode__(self):
-		return 'Set ' + unicode(self.Property.Name) + ' to ' + self.Value
+		return u'Set {0} to {1}'.format(self.Property, self.Value)
 
 
 class Condition(models.Model):
@@ -101,14 +148,24 @@ class Condition(models.Model):
 	Operator = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in ComparerEnum])
 	Value = models.CharField(max_length=50)
 	AndConditions = models.ManyToManyField("self", blank=True, symmetrical=False)
-	CreatedOn = models.DateTimeField(auto_now_add=True)
-	ModifiedOn = models.DateTimeField(auto_now=True)
+	CreatedOn = models.DateTimeField(editable=False)
+	ModifiedOn = models.DateTimeField()
+
+	def save(self, *args, **kwargs):
+		if not self.Id:
+			self.CreatedOn = timezone.now()
+		else:
+			del self.CreatedOn
+		self.ModifiedOn = timezone.now()
+		return super(Condition, self).save(*args, **kwargs)
 
 	def __str__(self):
-		return "When " + unicode(self.Property.Name) + ' -> ' + self.Value
+		comparerName = ComparerEnum(int(self.Operator)).name.replace('_', ' ')
+		return u"When {0} is {1} to {2}".format(self.Property, comparerName, self.Value)
 
 	def __unicode__(self):
-		return "When " + unicode(self.Property.Name) + ' -> ' + self.Value
+		comparerName = ComparerEnum(int(self.Operator)).name.replace('_', ' ')
+		return u"When {0} is {1} to {2}".format(self.Property, comparerName, self.Value)
 
 
 class Control(models.Model):
@@ -116,8 +173,16 @@ class Control(models.Model):
 	Name = models.CharField(max_length=50)
 	Tasks = models.ManyToManyField(Task, blank=True)
 	Conditions = models.ManyToManyField(Condition, blank=True)
-	CreatedOn = models.DateTimeField(auto_now_add=True)
-	ModifiedOn = models.DateTimeField(auto_now=True)
+	CreatedOn = models.DateTimeField()
+	ModifiedOn = models.DateTimeField()
+
+	def save(self, *args, **kwargs):
+		if not self.Id:
+			self.CreatedOn = timezone.now()
+		else:
+			del self.CreatedOn
+		self.ModifiedOn = timezone.now()
+		return super(Control, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return "Task " + unicode(self.Name)
@@ -131,8 +196,16 @@ class Interface(models.Model):
 	Name = models.CharField(max_length=50)
 	Editor = models.ForeignKey(Property, null=True, related_name="editor")
 	Monitor = models.ForeignKey(Property, null=True)
-	CreatedOn = models.DateTimeField(auto_now_add=True)
-	ModifiedOn = models.DateTimeField(auto_now=True)
+	CreatedOn = models.DateTimeField()
+	ModifiedOn = models.DateTimeField()
+
+	def save(self, *args, **kwargs):
+		if not self.Id:
+			self.CreatedOn = timezone.now()
+		else:
+			del self.CreatedOn
+		self.ModifiedOn = timezone.now()
+		return super(Interface, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return "Interface " + unicode(self.Name)
@@ -145,6 +218,16 @@ class Prefab(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
 	Template = jsonfield.JSONField(default="{}")
+	CreatedOn = models.DateTimeField()
+	ModifiedOn = models.DateTimeField()
+
+	def save(self, *args, **kwargs):
+		if not self.Id:
+			self.CreatedOn = timezone.now()
+		else:
+			del self.CreatedOn
+		self.ModifiedOn = timezone.now()
+		return super(Prefab, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return unicode(self.Name)

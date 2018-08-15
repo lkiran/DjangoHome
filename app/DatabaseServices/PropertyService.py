@@ -24,14 +24,13 @@ class PropertyService(object):
 		model = self.__propertyRepository.Get(propertyId)
 		if model.Type == TypeEnum.Read_Only:
 			raise Exception(u"Property '{0}' is read-only".format(model))
-		model.Object = value
 		functionName = model.CallFunction
 		deviceId = model.Device.Id
 		callFunction = self.__deviceService.GetProducedDeviceFunction(deviceId, functionName)
-		model.Parameters[u"Value"] = model.Value
+		model.Parameters[u"Value"] = value
 		kwargs = dict(model.Parameters)
 		print(u"Calling '{0}' function of {1} device with arguments {2}".format(functionName, model.Device, kwargs))
-		callFunction(**kwargs)
+		return callFunction(**kwargs)
 
 	def GetProperty(self, propertyId):
 		model = self.__propertyRepository.Get(propertyId)

@@ -1,3 +1,4 @@
+import logging
 from inspect import getmembers, isclass
 
 from app import HardwareServices
@@ -8,6 +9,7 @@ class DeviceFactory:
 
 	def __init__(self):
 		self.__collectDevices()
+		self.__logger = logging.getLogger('DeviceFactory')
 
 	def __collectDevices(self):
 		if self.devices:
@@ -17,6 +19,8 @@ class DeviceFactory:
 			self.devices[name] = _type
 
 	def Produce(self, device):
-		print(u'Producing {0} device'.format(device))
+		self.__logger.info(u'Producing {0} device'.format(device))
 		type = device.CallClass
 		return self.devices[type](device)
+		#self.__logger.exception(u'Device "{0}" could not be produced!'.format(device), e)
+

@@ -9,8 +9,9 @@ from app.models import Control, Task
 
 
 class ControlRepository:
-	__taskRepo = TaskRepository()
-	__conditionRepo = ConditionRepository()
+	def __init__(self):
+		self.__taskRepo = TaskRepository()
+		self.__conditionRepo = ConditionRepository()
 
 	def Get(self, id=None):
 		if id is None:
@@ -30,7 +31,8 @@ class ControlRepository:
 		for taskDict in taskList:
 			task = self.__taskRepo.Save(taskDict)
 			model.Tasks.add(task.Id)
-			tasksToBeDeleted.remove(task)
+			if task in tasksToBeDeleted:
+				tasksToBeDeleted.remove(task)
 		self.DisassociteTask(model, tasksToBeDeleted)
 
 		conditionsToBeDeleted = set(model.Conditions.all())
@@ -38,7 +40,8 @@ class ControlRepository:
 		for conditionDict in conditionList:
 			condition = self.__conditionRepo.Save(conditionDict)
 			model.Conditions.add(condition.Id)
-			conditionsToBeDeleted.remove(condition)
+			if condition in conditionsToBeDeleted:
+				conditionsToBeDeleted.remove(condition)
 		self.DisassociteCondition(model, conditionsToBeDeleted)
 
 		control = self.Get(model.Id)
@@ -47,28 +50,26 @@ class ControlRepository:
 		if status is ModelStatus.New:
 			model.Id = shortuuid.random(10)
 			model.save()
-			print(str(model) + " is Created")
+			print(u"{0} is Created".format(model))
 
 		elif status is ModelStatus.Modified:
 			model.save()
-			print(str(model) + " is Updated")
-
+			print(u"{0} is Updated".format(model))
 
 		return model
 
 	def DisassociteTask(self, control, tasks):
 		for task in tasks:
 			control.Tasks.remove(task)
-			print(str(task) + " is Deleted")
+			print(u"{0} is Deleted".format(task))
 
 	def DisassociteCondition(self, control, conditions):
 		for condition in conditions:
 			control.Conditions.remove(condition)
-			print(str(condition) + " is Deleted")
-
+			print(u"{0} is Deleted".format(condition))
 
 	def Status(self, model, control=None):
-		if control == None:
+		if control is None:
 			control = self.Get(model.Id)
 		if not control:
 			return ModelStatus.New
