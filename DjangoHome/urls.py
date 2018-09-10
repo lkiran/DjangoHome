@@ -1,10 +1,6 @@
-import sys
-
 from django.contrib import admin
 from django.conf.urls import url, include
 
-
-import app.views
 from app.Controllers.AndConditionController import AndConditionController
 from app.Controllers.InterfaceController import InterfaceController
 from app.Controllers.PropertyInfoController import PropertyInfoController
@@ -15,14 +11,12 @@ from app.Controllers.ControlController import ControlController
 from app.Controllers.DeviceController import DeviceController
 from app.Controllers.TaskController import TaskController
 from app.DatabaseServices.DeviceService import DeviceService
-from app.DatabaseServices.PropertyService import PropertyService
+from rest_framework import routers
 
+router = routers.DefaultRouter()
 urlpatterns = [
-	url(r'^$', app.views.home, name='home'),
-
+	url(r'^', include(router.urls)),
 	url(r'^admin/', admin.site.urls),
-	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
 	url(r'^(?i)andConditions', AndConditionController.as_view()),
 	url(r'^(?i)propertyInfo', PropertyInfoController.as_view()),
 	url(r'^(?i)conditions', ConditionController.as_view()),

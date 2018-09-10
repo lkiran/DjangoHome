@@ -56,7 +56,7 @@ class IOExtender(BaseClassService):
 	def _PopulatePins(self, numberOfPins):
 		modelProperties = self.Model.Properties
 		for i in range(0, numberOfPins):
-			pinProperties = modelProperties.filter(Parameters={'Pin': i} )
+			pinProperties = modelProperties.filter(Parameters={'Pin': i})
 			pin = Pin(pinProperties)
 			self.Pins.append(pin)
 
@@ -64,7 +64,10 @@ class IOExtender(BaseClassService):
 class Pin(object):
 	def __init__(self, properties):
 		self.Properties = properties
-		self._Status = filter(lambda p: p.CallFunction == 'State', self.Properties)[0].Object
+		state = self.Properties.filter(CallFunction='State').first()
+		self._Status = False
+		if state:
+			self._Status = state.Object
 		self.ActivatedOn = None
 		self.ClosedOn = None
 

@@ -1,5 +1,5 @@
 from django.db import models
-import jsonfield as jsonfield
+from jsonfield import JSONField
 from django.utils import timezone
 from shortuuidfield import ShortUUIDField
 
@@ -11,7 +11,7 @@ class Property(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
 	CallFunction = models.CharField(max_length=50)
-	Parameters = jsonfield.JSONField(default="{}")
+	Parameters = JSONField(default="{}")
 	Value = models.CharField(max_length=50)
 	Type = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in TypeEnum])
 	Class = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in ClassEnum])
@@ -81,7 +81,7 @@ class Device(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
 	CallClass = models.CharField(max_length=50)
-	Parameters = jsonfield.JSONField(default="{}")
+	Parameters = JSONField(default="{}")
 	Functions = models.ManyToManyField(Function, blank=True)
 	CreatedOn = models.DateTimeField()
 	ModifiedOn = models.DateTimeField()
@@ -217,7 +217,7 @@ class Interface(models.Model):
 class Prefab(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
-	Template = jsonfield.JSONField(default="{}")
+	Template = JSONField(default="{}")
 	CreatedOn = models.DateTimeField()
 	ModifiedOn = models.DateTimeField()
 

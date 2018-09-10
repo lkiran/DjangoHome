@@ -1,4 +1,9 @@
 shortuuid
-django-jsonfield
 django-shortuuidfield
-django >=1.11.5, <2
+django = 1.11.14
+django-filter
+djangorestframework
+django-cors-headers
+Markdown
+jsonfield
+smbus2

@@ -11,6 +11,8 @@
           <option value="set.delete" />
           <option value="app.models.Task.__add__" />
           <option value="app.models.Control.__add__" />
+          <option value="int.value" />
+          <option value="int.*" />
         </list>
       </option>
     </inspection_tool>

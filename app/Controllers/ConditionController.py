@@ -1,8 +1,7 @@
-from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from app.ModelSerializers import ConditionSerializer, BaseConditionSerializer
+from app.ModelSerializers import BaseConditionSerializer
 from app.Repositories.ConditionRepository import ConditionRepository
 from app.Repositories.ControlRepository import ControlRepository
 
