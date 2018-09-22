@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from app.HardwareServices.BaseDeviceService import BaseClassService
+from app.HardwareServices.BaseFunctionService import BaseFunctionService
 
 
 class IOExtender(BaseClassService):
@@ -9,7 +10,6 @@ class IOExtender(BaseClassService):
 		self.Address = 0
 		self.Pins = []
 		self._InstantiateUsingModel()
-		self._PopulatePins(4)
 
 	def State(self, **kwargs):
 		value = kwargs.get("Value")
@@ -18,7 +18,7 @@ class IOExtender(BaseClassService):
 			print ("Set pin {0} value as {1}".format(pin, value))
 			pinObject = self.Pins[pin]
 			pinObject.Status = value
-		print ("Get pin {0} value".format(pin, value))
+		print ("Get pin {0} value".format(pin))
 		return self.Pins[pin].Status
 
 	def __State(self, pin, value=None):
@@ -52,6 +52,7 @@ class IOExtender(BaseClassService):
 
 	def _InstantiateUsingModel(self):
 		self.Address = self.Model.Parameters.get("Address", "")
+		self._PopulatePins(4)
 
 	def _PopulatePins(self, numberOfPins):
 		modelProperties = self.Model.Properties
@@ -61,13 +62,11 @@ class IOExtender(BaseClassService):
 			self.Pins.append(pin)
 
 
-class Pin(object):
+class Pin(BaseFunctionService):
 	def __init__(self, properties):
 		self.Properties = properties
 		state = self.Properties.filter(CallFunction='State').first()
-		self._Status = False
-		if state:
-			self._Status = state.Object
+		self._Status = self.GetValue(state, False)
 		self.ActivatedOn = None
 		self.ClosedOn = None
 
@@ -86,4 +85,4 @@ class Pin(object):
 			self.ClosedOn = datetime.now()
 			print("Turning off the pin")
 		self._Status = value
-		self.Properties.filter(CallFunction='State').first().Object = value
+		self.SetValue(self.Properties.filter(CallFunction='State').first(), value)

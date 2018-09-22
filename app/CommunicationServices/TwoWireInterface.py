@@ -1,47 +1,47 @@
+import logging
 import threading
 
-from enum import Enum
-from smbus2 import SMBus, SMBusWrapper
-
-
-class Instruction(Enum):
-	NoneInstruction = 0
-	TurnOn_TL = 1
-	TurnOff_TL = 2
-	TurnOn_TR = 3
-	TurnOff_TR = 4
-	TurnOn_BL = 5
-	TurnOff_BL = 6
-	TurnOn_BR = 7
-	TurnOff_BR = 8
-	Actions_TL = 9
-	Actions_TR = 10
-	Actions_BL = 11
-	Actions_BR = 12
-	Temp_C = 13
-
-
-class StateType(Enum):
-	Empty = 0
-	Pressed = 1
-	Released = 2
-	Clicked = 3
-	LongPress = 4
-	DoublePress = 5
+from smbus2 import SMBusWrapper
 
 
 class TwoWireInterface(object):
+	__instance = None
+	__lock = threading.Lock()
+
+	@staticmethod
+	def Instance():
+		if TwoWireInterface.__instance is None:
+			TwoWireInterface()
+		return TwoWireInterface.__instance
 
 	def __init__(self):
-		address = 8
-		with SMBusWrapper(1) as bus:
-			bus.write_byte_data(address, 0, Instruction.TurnOn_TL.value)
-			bus.write_byte_data(address, 0, Instruction.Actions_TL.value)
-			block = bus.read_i2c_block_data(address, 0, 12)
+		if TwoWireInterface.__instance is not None:
+			raise Exception("TwoWireInterface is a singleton, use 'TwoWireInterface.Instance()'")
+		else:
+			self.__logger = logging.getLogger('TwoWireInterface')
+			TwoWireInterface.__instance = self
 
+	def Read(self, address, dataLength=1):
+		with self.__lock:
+			data = None
+			self.__logger.info("Read from {0} with SMBusWrapper enter".format(data))
+			with SMBusWrapper(1) as bus:
+				if dataLength > 1:
+					data = bus.read_i2c_block_data(address, 0, dataLength)
+				else:
+					data = bus.read_byte(address, dataLength)
+			# if not works data = bus.read_byte_data(address, 0, dataLength)
+			self.__logger.info("Read from {0} with SMBusWrapper exit".format(data))
+			return data
 
-# self.lock = threading.Lock()
-
-
-if __name__ == '__main__':
-	test = TwoWireInterface()
+	def Write(self, address, data):
+		with self.__lock:
+			self.__logger.info("Write from {0} with SMBusWrapper enter".format(data))
+			with SMBusWrapper(1) as bus:
+				dataLength = len(data)
+				if dataLength > 1:
+					bus.write_i2c_block_data(address, 0, data)
+				else:
+					bus.write_byte(address, data)
+					# if not works bus.write_byte_data(address, 0, data)
+			self.__logger.info("Write from {0} with SMBusWrapper exit".format(data))

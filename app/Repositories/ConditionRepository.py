@@ -13,6 +13,11 @@ class ConditionRepository:
 		except Condition.DoesNotExist:
 			return None
 
+	def GetAllByProperty(self, property):
+		if property:
+			return Condition.objects.filter(Property_id=property.id).all()
+		return None
+
 	def Save(self, data):
 		model = Condition()
 		model.Id = data.get('Id', u'')

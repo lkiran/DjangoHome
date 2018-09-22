@@ -40,7 +40,12 @@ class ValueParser:
 				self.parsers[key] = _type
 
 	def Get(self, _class):
-		return self.parsers[_class]()
+		if _class is not ClassEnum:
+			_class= ClassEnum(_class)
+		parserClass = self.parsers.get(_class)
+		if parserClass:
+			return parserClass()
+		return None
 
 
 class IntegerValueParser(AbsValueParser):

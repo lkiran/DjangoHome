@@ -1,12 +1,17 @@
-from app.DatabaseServices.DeviceService import DeviceService
+import logging
+
+from app.DatabaseServices.ConditionService import ConditionService
 from app.Repositories.PropertyRepository import PropertyRepository
-from app.enums import TypeEnum
+
+from app.ValueParser import ValueParser
+from app.enums import TypeEnum, ClassEnum
 
 
 class PropertyService(object):
 	__instance = None
 	__propertyRepository = PropertyRepository()
-	__deviceService = DeviceService.Instance()
+	__conditionService = ConditionService.Instance()
+	__logger = logging.getLogger('PropertyService')
 
 	@staticmethod
 	def Instance():
@@ -20,25 +25,16 @@ class PropertyService(object):
 		else:
 			PropertyService.__instance = self
 
-	def SetProperty(self, propertyId, value=None):
-		model = self.__propertyRepository.Get(propertyId)
-		if model.Type == TypeEnum.Read_Only:
-			raise Exception(u"Property '{0}' is read-only".format(model))
-		functionName = model.CallFunction
-		deviceId = model.Device.Id
-		callFunction = self.__deviceService.GetProducedDeviceFunction(deviceId, functionName)
-		model.Parameters[u"Value"] = value
-		kwargs = dict(model.Parameters)
-		print(u"Calling '{0}' function of {1} device with arguments {2}".format(functionName, model.Device, kwargs))
-		return callFunction(**kwargs)
+	def GetParser(self, object):
+		return ValueParser().Get(object.Class)
 
-	def GetProperty(self, propertyId):
-		model = self.__propertyRepository.Get(propertyId)
-		if model.Type == TypeEnum.Write_Only:
-			raise Exception(u"Property '{0}' is write-only".format(model))
-		functionName = model.CallFunction
-		deviceId = model.Device.Id
-		callFunction = self.__deviceService.GetProducedDeviceFunction(deviceId, functionName)
-		kwargs = dict(model.Parameters)
-		print(u"Calling {0} function of {1}".format(callFunction, model.Device))
-		return callFunction(**kwargs)
+	def GetObject(self, object):
+		parser = self.GetParser(object)
+		return parser.ToObject(object.Value)
+
+	def SaveObject(self, object, value):
+		self.__logger.info(u"SaveObject is called with object={0}; value={1}".format(object, value))
+		parser = self.GetParser(object)
+		object.Value = parser.ToString(value)
+		object.save()
+		self.__conditionService.UpdateLiveConditions(object, value)

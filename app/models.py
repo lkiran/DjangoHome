@@ -18,7 +18,6 @@ class Property(models.Model):
 	Comparable = models.BooleanField(default=True)
 	CreatedOn = models.DateTimeField()
 	ModifiedOn = models.DateTimeField()
-	_Parser = None
 
 	def save(self, *args, **kwargs):
 		if not self.Id:
@@ -27,22 +26,6 @@ class Property(models.Model):
 			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Property, self).save(*args, **kwargs)
-
-	@property
-	def Parser(self):
-		if not self._Parser:
-			self._Parser = ValueParser().Get(ClassEnum(self.Class))
-		return self._Parser
-
-	@property
-	def Object(self):
-		return self.Parser.ToObject(self.Value)
-
-	@Object.setter
-	def Object(self, object):
-		self.Value = self.Parser.ToString(object)
-		self.save()
-		print("Property value is updated in database")
 
 	@property
 	def Device(self):
@@ -120,20 +103,6 @@ class Task(models.Model):
 			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Task, self).save(*args, **kwargs)
-
-	@property
-	def Parser(self):
-		if not self._Parser:
-			self._Parser = ValueParser().Get(ClassEnum(self.Property.Class))
-		return self._Parser
-
-	@property
-	def Object(self):
-		return self.Parser.ToObject(self.Value)
-
-	@Object.setter
-	def Object(self, object):
-		self.Value = self.Parser.ToString(object)
 
 	def __str__(self):
 		return u'Set {0} to {1}'.format(self.Property, self.Value)

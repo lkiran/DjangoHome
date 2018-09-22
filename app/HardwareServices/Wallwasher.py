@@ -23,7 +23,7 @@ class Wallwasher(BaseClassService):
 		if value is None:
 			return self._color
 		self._color = value
-		self.Model.Properties.filter(CallFunction='Color').first().Object = value
+		self.SetValue(self.Model.Properties.filter(CallFunction='Color').first(), value)
 		return self._color
 
 	def TransitionTime(self, **kwargs):
@@ -31,5 +31,6 @@ class Wallwasher(BaseClassService):
 
 	def _InstantiateUsingModel(self):
 		properties = self.Model.Properties
-		self._color = properties.filter(CallFunction='Color').first().Object
-		self._transitionTime = properties.filter(CallFunction='TransitionTime').first().Object
+
+		self._color = self.GetValue(properties.filter(CallFunction='Color').first())
+		self._transitionTime = self.GetValue(properties.filter(CallFunction='TransitionTime').first())
