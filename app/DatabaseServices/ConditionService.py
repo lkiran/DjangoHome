@@ -1,14 +1,17 @@
 import logging
 
-from app.models import Condition
-from app.ControlServices import LiveCondition
+from app.DatabaseServices.TaskService import TaskService
 from app.Repositories.ConditionRepository import ConditionRepository
+from app.Repositories.PropertyRepository import PropertyRepository
+from app.ValueComparator import ValueComparator
+from app.models import Condition, Control
 
 
 class ConditionService(object):
 	__instance = None
 	__logger = logging.getLogger('ConditionService')
 	__conditionRepository = ConditionRepository()
+	__propertyRepository = PropertyRepository()
 
 	@staticmethod
 	def Instance():
@@ -19,17 +22,28 @@ class ConditionService(object):
 	def __init__(self):
 		if ConditionService.__instance is not None:
 			raise Exception("ConditionService is a singleton, use 'ConditionService.Instance()'")
-		self.LiveConditions = {}
-		self.__populateConditions()
 		ConditionService.__instance = self
 
-	def __populateConditions(self):
-		for condition in Condition.objects.all():
-			liveCondition = LiveCondition(condition)
-			self.LiveConditions[condition.id] = liveCondition
-
-	def UpdateLiveConditions(self, property):
+	def NotifyConditionsOfProperty(self, property):
 		conditions = self.__conditionRepository.GetAllByProperty(property)
-		for condition in conditions.order_by("AndConditions__count"):
-			liveCondition = self.LiveConditions[condition.id]
-			liveCondition.UpdateStatus(property.Value)
+		for condition in conditions:
+			self.NotifyConditions(condition)
+
+	def NotifyConditions(self, condition):
+		if not self.__isSatisfied(condition):
+			return
+		TaskService().ExecuteTasksOfCondition(condition)
+		parentConditions = Condition.objects.filter(AndConditions__condition=condition)
+		for parentCondition in parentConditions:
+			self.NotifyConditions(parentCondition)
+
+	def __isSatisfied(self, condition):
+		property = self.__propertyRepository.Get(condition.Property.Id)
+		comparator = ValueComparator()
+		satisfied = comparator.CompareCondition(condition, property.Value)
+		if not satisfied:
+			return False
+		for andCondition in condition.AndConditions.all():
+			if self.__isSatisfied(andCondition):
+				return False
+		return True

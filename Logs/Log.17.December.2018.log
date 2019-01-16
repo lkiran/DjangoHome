@@ -1,0 +1,10 @@
+Dec 17, Mon 23:54:42,607 - DeviceService - INFO - Init
+Dec 17, Mon 23:54:42,747 - DeviceFactory - INFO - Producing Wallwasher 1 (BVgWGjqNt22Ld5SgoqbZq8) device
+Dec 17, Mon 23:54:42,763 - DeviceFactory - INFO - Producing Role Modülü 1 (Y7nVZ5G6gEMtaektRAuQTo) device
+Dec 17, Mon 23:54:45,746 - MARKDOWN - DEBUG - Successfuly imported extension module "markdown.extensions.toc".
+Dec 17, Mon 23:54:45,749 - MARKDOWN - DEBUG - Successfully loaded extension "markdown.extensions.toc.TocExtension".
+Dec 17, Mon 23:54:49,680 - django.request - WARNING - Not Found: /favicon.ico
+Dec 17, Mon 23:57:37,232 - PropertyService - INFO - SaveObject is called with object=Durum (4YpAdzqfKpJnEvaHpD4ZnY); value=False
+Dec 17, Mon 23:57:38,562 - PropertyService - INFO - SaveObject is called with object=Durum (4YpAdzqfKpJnEvaHpD4ZnY); value=True
+Dec 17, Mon 23:57:53,213 - PropertyService - INFO - SaveObject is called with object=Renk (LYYiyPwxNiur6tENsqmjzh); value=rgba(243,147,139,1.0)
+Dec 17, Mon 23:57:57,897 - PropertyService - INFO - SaveObject is called with object=Renk (LYYiyPwxNiur6tENsqmjzh); value=rgba(243,147,139,0.02)

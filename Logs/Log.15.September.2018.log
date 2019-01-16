@@ -1,0 +1,6 @@
+Sep 15, Sat 15:16:04,525 - DeviceService - INFO - Init
+Sep 15, Sat 15:16:04,733 - DeviceFactory - INFO - Producing Wallwasher 1 (BVgWGjqNt22Ld5SgoqbZq8) device
+Sep 15, Sat 15:16:04,747 - DeviceFactory - INFO - Producing Role Modülü 1 (Y7nVZ5G6gEMtaektRAuQTo) device
+Sep 15, Sat 15:16:05,582 - MARKDOWN - DEBUG - Successfuly imported extension module "markdown.extensions.toc".
+Sep 15, Sat 15:16:05,582 - MARKDOWN - DEBUG - Successfully loaded extension "markdown.extensions.toc.TocExtension".
+Sep 15, Sat 15:16:06,927 - django.request - WARNING - Not Found: /favicon.ico

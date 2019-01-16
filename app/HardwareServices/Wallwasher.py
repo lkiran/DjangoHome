@@ -1,10 +1,10 @@
-from app.HardwareServices.BaseDeviceService import BaseClassService
+from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.ValueTypes import Color
 
 
-class Wallwasher(BaseClassService):
+class Wallwasher(BaseDeviceService):
 	def __init__(self, model):
-		BaseClassService.__init__(self, model)
+		BaseDeviceService.__init__(self, model)
 		self._color = Color(0, 0, 0, 0)
 		self._transitionTime = 0
 		self._InstantiateUsingModel()

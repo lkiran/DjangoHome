@@ -22,12 +22,11 @@ class TaskRepository:
 		model = Task()
 		model.Id = data.get('Id', u'')
 		model.Property_id = data.get("PropertyId", u'')
-		model.Object = data.get('Value', u'')
+		model.Value = data.get('Value', u'')
 
 		status = self.Status(model)
 
 		if status is ModelStatus.New:
-			model.Id = shortuuid.random(10)
 			model.save()
 			print("{0} is Created".format(model))
 		elif status is ModelStatus.Modified:

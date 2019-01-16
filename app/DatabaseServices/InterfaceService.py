@@ -4,7 +4,7 @@ from app.enums import ClassEnum
 
 
 class InterfaceService(object):
-	__propertyService = PropertyService.Instance()
+	__deviceService = PropertyService.Instance()
 	__instance = None
 
 	@staticmethod
@@ -22,4 +22,4 @@ class InterfaceService(object):
 	def CallEditor(self, model, value):
 		parser = ValueParser().Get(ClassEnum(model.Editor.Class))
 		object = parser.ToObject(value)
-		return self.__propertyService.SetProperty(model.Editor.Id, object)
+		return self.__deviceService.SetProperty(model.Editor.Id, object)

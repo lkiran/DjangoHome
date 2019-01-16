@@ -3,8 +3,8 @@ import time
 
 from enum import Enum
 
-from app.CommunicationServices.TwoWireInterface import TwoWireInterface
-from app.HardwareServices.BaseDeviceService import BaseClassService
+# from app.CommunicationServices.TwoWireInterface import TwoWireInterface
+from app.HardwareServices.BaseDeviceService import BaseDeviceService
 
 
 class Instruction(Enum):
@@ -34,11 +34,11 @@ class StateType(Enum):
 	DoublePress = 5
 
 
-class Wallswitch(BaseClassService):
-	__i2c = TwoWireInterface.Instance()
+class Wallswitch(BaseDeviceService):
+	__i2c = None #TwoWireInterface.Instance()
 
 	def __init__(self, model):
-		BaseClassService.__init__(self, model)
+		BaseDeviceService.__init__(self, model)
 		self.Address = 0
 		self.Buttons = []
 		self._InstantiateUsingModel()

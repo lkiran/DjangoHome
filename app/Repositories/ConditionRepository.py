@@ -1,4 +1,5 @@
 import shortuuid
+from django.db.models.aggregates import Count
 
 from app.enums import ModelStatus, ComparerEnum
 from app.models import Condition
@@ -7,7 +8,10 @@ from app.models import Condition
 class ConditionRepository:
 	def Get(self, id=None):
 		if id is None:
-			return Condition.objects.all()
+			return Condition.objects\
+				.annotate(AndConditionCount=Count('AndConditions'))\
+				.order_by('-AndConditionCount')\
+				.all()  #Get top conditions at beginning of list
 		try:
 			return Condition.objects.get(Id=id)
 		except Condition.DoesNotExist:
@@ -15,7 +19,26 @@ class ConditionRepository:
 
 	def GetAllByProperty(self, property):
 		if property:
-			return Condition.objects.filter(Property_id=property.id).all()
+			return Condition.objects\
+				.filter(Property_id=property.Id)\
+				.annotate(AndConditionCount=Count('AndConditions'))\
+				.order_by('-AndConditionCount')\
+				.all()  #Get top conditions at beginning of list
+		return None
+
+	def GetAndConditions(self, condition):
+		if condition:
+			return condition.AndConditions\
+				.annotate(AndConditionCount=Count('AndConditions'))\
+				.order_by('-AndConditionCount')\
+				.all()  #Get top conditions at beginning of list
+		return None
+
+	def GetParentConditions(self, condition):
+		if condition:
+			return Condition.objects\
+				.filter(Condit=condition.Id)\
+				.all()  #Get top conditions at beginning of list
 		return None
 
 	def Save(self, data):
@@ -34,7 +57,6 @@ class ConditionRepository:
 		status = self.Status(model)
 
 		if status is ModelStatus.New:
-			model.Id = shortuuid.random(10)
 			model.save()
 			print(u"{0} condition is created".format(model))
 

@@ -4,7 +4,7 @@ from app.DatabaseServices.PropertyService import PropertyService
 from app.models import Device
 
 
-class BaseClassService(object):
+class BaseDeviceService(object):
 	_propertyService = PropertyService.Instance()
 
 	def __init__(self, model):

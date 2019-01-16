@@ -31,20 +31,20 @@ class ValueParser:
 		self.__collectParsers()
 
 	def __collectParsers(self):
-		if self.parsers:
-			pass
+		if ValueParser.parsers:
+			return
 		parserClasses = getmembers(sys.modules[__name__], lambda o: isclass(o) and not isabstract(o))
 		for name, _type in parserClasses:
 			if isclass(_type) and issubclass(_type, AbsValueParser) and not isabstract(_type):
 				key = _type().TemplateClass
-				self.parsers[key] = _type
+				ValueParser.parsers[key] = _type()
 
 	def Get(self, _class):
 		if _class is not ClassEnum:
-			_class= ClassEnum(_class)
-		parserClass = self.parsers.get(_class)
+			_class = ClassEnum(_class)
+		parserClass = ValueParser.parsers.get(_class)
 		if parserClass:
-			return parserClass()
+			return parserClass
 		return None
 
 
@@ -66,6 +66,7 @@ class BooleanValueParser(AbsValueParser):
 		return ClassEnum.Boolean
 
 	def ToObject(self, value):
+		value = value.lower()
 		if value == 'true':
 			return True
 		elif value == 'false':

@@ -1,4 +1,5 @@
 import collections
+import logging
 
 import shortuuid
 
@@ -10,6 +11,7 @@ from app.models import Control, Task
 
 class ControlRepository:
 	def __init__(self):
+		self.__logger = logging.getLogger('ControlRepository')
 		self.__taskRepo = TaskRepository()
 		self.__conditionRepo = ConditionRepository()
 
@@ -18,6 +20,13 @@ class ControlRepository:
 			return Control.objects.all()
 		try:
 			return Control.objects.get(Id=id)
+		except Control.DoesNotExist:
+			return None
+
+	def GetByCondition(self, condition):
+		self.__logger.info("GetByCondition is called")
+		try:
+			return Control.objects.filter(Condition=condition)
 		except Control.DoesNotExist:
 			return None
 

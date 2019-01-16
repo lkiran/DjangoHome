@@ -4,240 +4,253 @@ from inspect import getmembers, isclass, isabstract
 
 from django.utils.datetime_safe import datetime
 
+from app.ValueParser import ValueParser
 from app.ValueTypes import Color
-from app.enums import ClassEnum
+from app.enums import ClassEnum, ComparerEnum
 
 
-class AbsValueComparator(object):
-	__metaclass__ = abc.ABCMeta
+class BaseValueComparator(object):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.Error
 
-	@abc.abstractmethod
-	def Equal(self, value):
+	def Equal(self, value, otherValue):
 		pass
 
-	@abc.abstractmethod
-	def NotEqual(self, value):
-		pass
-
-	@abc.abstractmethod
-	def Greater(self, value):
-		pass
-
-	@abc.abstractmethod
-	def Smaller(self, value):
-		pass
-
-	@abc.abstractmethod
-	def EqualOrGreater(self, value):
-		pass
-
-	@abc.abstractmethod
-	def EqualOrSmaller(self, value):
-		pass
+	def NotEqual(self, value, otherValue):
+		return not self.NotEqual(value, otherValue)
 
 
 class ValueComparator:
-	parsers = {}
+	comparators = {}
 
 	def __init__(self):
-		self.__collectParsers()
+		self.__collectComparators()
 
-	def __collectParsers(self):
-		if self.parsers:
-			pass
-		parserClasses = getmembers(sys.modules[__name__], lambda o: isclass(o) and not isabstract(o))
-		for name, _type in parserClasses:
-			if isclass(_type) and issubclass(_type, AbsValueComparator) and not isabstract(_type):
+	def __collectComparators(self):
+		if ValueComparator.comparators:
+			return
+		comparatorClasses = getmembers(sys.modules[__name__], lambda o: isclass(o) and not isabstract(o))
+		for name, _type in comparatorClasses:
+			if isclass(_type) and issubclass(_type, BaseValueComparator) and not isabstract(_type):
 				key = _type().TemplateClass
-				self.parsers[key] = _type
+				ValueComparator.comparators[key] = _type()
 
-	def Get(self, _class):
-		return self.parsers[_class]()
+	def CompareValue(self, _class, value, operator, otherValue):
+		_class = ClassEnum(_class)
+		comparator = self.comparators.get(_class)
+		operator = ComparerEnum(operator)
+		compare = getattr(comparator, operator.name)
+		parser = ValueParser().Get(_class)
+		value = parser.ToObject(value)
+		otherValue = parser.ToObject(otherValue)
+		result = compare(value, otherValue)
+		return result
+
+	def CompareProperty(self, property, operator, otherValue):
+		return self.CompareValue(property.Class, property.Value, operator, otherValue)
+
+	def CompareCondition(self, condition, otherValue):
+		property = condition.Property
+		return self.CompareValue(property.Class, condition.Value, condition.Operator, otherValue)
 
 
-class BooleanValueParser(AbsValueComparator):
+class BooleanValueComparator(BaseValueComparator):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.Boolean
 
-	def Equal(self, value):
+	def Equal(self, value, otherValue):
+		return value is otherValue
+
+
+class ColorValueComparator(BaseValueComparator):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.Color
+
+	def Equal(self, value, otherValue):
 		pass
 
-	def NotEqual(self, value):
+	def NotEqual(self, value, otherValue):
 		pass
 
-	def Greater(self, value):
+	def Greater(self, value, otherValue):
 		pass
 
-	def Smaller(self, value):
+	def Smaller(self, value, otherValue):
 		pass
 
-	def EqualOrGreater(self, value):
+	def EqualOrGreater(self, value, otherValue):
 		pass
 
-	def EqualOrSmaller(self, value):
-		pass
-
-
-class ColorValueParser(AbsValueComparator):
-
-	def Equal(self, value):
-		pass
-
-	def NotEqual(self, value):
-		pass
-
-	def Greater(self, value):
-		pass
-
-	def Smaller(self, value):
-		pass
-
-	def EqualOrGreater(self, value):
-		pass
-
-	def EqualOrSmaller(self, value):
-		pass
-
-
-class DateValueParser(AbsValueComparator):
-
-	def Equal(self, value):
-		pass
-
-	def NotEqual(self, value):
-		pass
-
-	def Greater(self, value):
-		pass
-
-	def Smaller(self, value):
-		pass
-
-	def EqualOrGreater(self, value):
-		pass
-
-	def EqualOrSmaller(self, value):
+	def EqualOrSmaller(self, value, otherValue):
 		pass
 
 
-class TimeValueParser(AbsValueComparator):
+class DateValueComparator(BaseValueComparator):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.Date
 
-	def Equal(self, value):
+	def Equal(self, value, otherValue):
 		pass
 
-	def NotEqual(self, value):
+	def NotEqual(self, value, otherValue):
 		pass
 
-	def Greater(self, value):
+	def Greater(self, value, otherValue):
 		pass
 
-	def Smaller(self, value):
+	def Smaller(self, value, otherValue):
 		pass
 
-	def EqualOrGreater(self, value):
+	def EqualOrGreater(self, value, otherValue):
 		pass
 
-	def EqualOrSmaller(self, value):
-		pass
-
-
-class DayOfWeekValueParser(AbsValueComparator):
-
-	def Equal(self, value):
-		pass
-
-	def NotEqual(self, value):
-		pass
-
-	def Greater(self, value):
-		pass
-
-	def Smaller(self, value):
-		pass
-
-	def EqualOrGreater(self, value):
-		pass
-
-	def EqualOrSmaller(self, value):
+	def EqualOrSmaller(self, value, otherValue):
 		pass
 
 
-class StringValueParser(AbsValueComparator):
+class TimeValueComparator(BaseValueComparator):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.Time
 
-	def Equal(self, value):
+	def Equal(self, value, otherValue):
 		pass
 
-	def NotEqual(self, value):
+	def NotEqual(self, value, otherValue):
 		pass
 
-	def Greater(self, value):
+	def Greater(self, value, otherValue):
 		pass
 
-	def Smaller(self, value):
+	def Smaller(self, value, otherValue):
 		pass
 
-	def EqualOrGreater(self, value):
+	def EqualOrGreater(self, value, otherValue):
 		pass
 
-	def EqualOrSmaller(self, value):
-		pass
-
-
-class DateTimeValueParser(AbsValueComparator):
-
-	def Equal(self, value):
-		pass
-
-	def NotEqual(self, value):
-		pass
-
-	def Greater(self, value):
-		pass
-
-	def Smaller(self, value):
-		pass
-
-	def EqualOrGreater(self, value):
-		pass
-
-	def EqualOrSmaller(self, value):
+	def EqualOrSmaller(self, value, otherValue):
 		pass
 
 
-class IntegerValueParser(AbsValueComparator):
+class DayOfWeekValueComparator(BaseValueComparator):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.DayOfWeek
 
-	def Equal(self, value):
+	def Equal(self, value, otherValue):
 		pass
 
-	def NotEqual(self, value):
+	def NotEqual(self, value, otherValue):
 		pass
 
-	def Greater(self, value):
+	def Greater(self, value, otherValue):
 		pass
 
-	def Smaller(self, value):
+	def Smaller(self, value, otherValue):
 		pass
 
-	def EqualOrGreater(self, value):
+	def EqualOrGreater(self, value, otherValue):
 		pass
 
-	def EqualOrSmaller(self, value):
+	def EqualOrSmaller(self, value, otherValue):
 		pass
 
 
-class EmptyValueParser(AbsValueComparator):
-	def Equal(self, value):
+class StringValueComparator(BaseValueComparator):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.String
+
+	def Equal(self, value, otherValue):
 		pass
 
-	def NotEqual(self, value):
+	def NotEqual(self, value, otherValue):
 		pass
 
-	def Greater(self, value):
+	def Greater(self, value, otherValue):
 		pass
 
-	def Smaller(self, value):
+	def Smaller(self, value, otherValue):
 		pass
 
-	def EqualOrGreater(self, value):
+	def EqualOrGreater(self, value, otherValue):
 		pass
 
-	def EqualOrSmaller(self, value):
+	def EqualOrSmaller(self, value, otherValue):
+		pass
+
+
+class DateTimeValueComparator(BaseValueComparator):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.DateTime
+
+	def Equal(self, value, otherValue):
+		pass
+
+	def NotEqual(self, value, otherValue):
+		pass
+
+	def Greater(self, value, otherValue):
+		pass
+
+	def Smaller(self, value, otherValue):
+		pass
+
+	def EqualOrGreater(self, value, otherValue):
+		pass
+
+	def EqualOrSmaller(self, value, otherValue):
+		pass
+
+
+class IntegerValueComparator(BaseValueComparator):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.Integer
+
+	def Equal(self, value, otherValue):
+		pass
+
+	def NotEqual(self, value, otherValue):
+		pass
+
+	def Greater(self, value, otherValue):
+		pass
+
+	def Smaller(self, value, otherValue):
+		pass
+
+	def EqualOrGreater(self, value, otherValue):
+		pass
+
+	def EqualOrSmaller(self, value, otherValue):
+		pass
+
+
+class EmptyValueComparator(BaseValueComparator):
+	@property
+	def TemplateClass(self):
+		return ClassEnum.Empty
+
+	def Equal(self, value, otherValue):
+		pass
+
+	def NotEqual(self, value, otherValue):
+		pass
+
+	def Greater(self, value, otherValue):
+		pass
+
+	def Smaller(self, value, otherValue):
+		pass
+
+	def EqualOrGreater(self, value, otherValue):
+		pass
+
+	def EqualOrSmaller(self, value, otherValue):
 		pass

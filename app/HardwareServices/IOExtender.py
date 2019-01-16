@@ -1,12 +1,12 @@
 from datetime import datetime
 
-from app.HardwareServices.BaseDeviceService import BaseClassService
+from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.HardwareServices.BaseFunctionService import BaseFunctionService
 
 
-class IOExtender(BaseClassService):
+class IOExtender(BaseDeviceService):
 	def __init__(self, model):
-		BaseClassService.__init__(self, model)
+		BaseDeviceService.__init__(self, model)
 		self.Address = 0
 		self.Pins = []
 		self._InstantiateUsingModel()
