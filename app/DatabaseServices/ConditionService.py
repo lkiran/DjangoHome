@@ -4,7 +4,7 @@ from app.DatabaseServices.TaskService import TaskService
 from app.Repositories.ConditionRepository import ConditionRepository
 from app.Repositories.PropertyRepository import PropertyRepository
 from app.ValueComparator import ValueComparator
-from app.models import Condition, Control
+from app.models import Condition
 
 
 class ConditionService(object):

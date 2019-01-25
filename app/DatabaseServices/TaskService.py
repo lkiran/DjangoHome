@@ -1,6 +1,5 @@
 import logging
 
-from app.DatabaseServices.DeviceService import DeviceService
 from app.Repositories.TaskRepository import TaskRepository
 from app.models import Control
 
@@ -9,7 +8,6 @@ class TaskService(object):
 	__instance = None
 	__logger = logging.getLogger('TaskService')
 	__taskRepository = TaskRepository()
-	__deviceService = DeviceService.Instance()
 
 	@staticmethod
 	def Instance():
@@ -22,9 +20,14 @@ class TaskService(object):
 			raise Exception("TaskService is a singleton, use 'TaskService.Instance()'")
 		TaskService.__instance = self
 
-	def ExecuteTask(self, task):
-		self.__deviceService.SetProperty(task.Property, task.Value)
+	def Execute(self, property, value):
+		from app.DatabaseServices.DeviceService import DeviceService
+		__deviceService = DeviceService.Instance()
+		self.__deviceService.SetProperty(property, value)
 		raise NotImplemented
+
+	def ExecuteTask(self, task):
+		self.Execute(task.Property, task.Value)
 
 	def ExecuteTasksOfControl(self, control):
 		for task in control.Tasks:

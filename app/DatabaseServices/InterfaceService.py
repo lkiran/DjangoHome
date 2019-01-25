@@ -1,10 +1,8 @@
-from app.DatabaseServices.PropertyService import PropertyService
-from app.ValueParser import ValueParser
-from app.enums import ClassEnum
+from app.DatabaseServices.TaskService import TaskService
 
 
 class InterfaceService(object):
-	__deviceService = PropertyService.Instance()
+	__taskService = TaskService.Instance()
 	__instance = None
 
 	@staticmethod
@@ -20,6 +18,4 @@ class InterfaceService(object):
 			InterfaceService.__instance = self
 
 	def CallEditor(self, model, value):
-		parser = ValueParser().Get(ClassEnum(model.Editor.Class))
-		object = parser.ToObject(value)
-		return self.__deviceService.SetProperty(model.Editor.Id, object)
+		return self.__taskService.Execute(model.Editor, value)
