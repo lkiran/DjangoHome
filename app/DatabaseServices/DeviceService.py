@@ -42,16 +42,19 @@ class DeviceService(object):
 			raise Exception("Device is not alive!")
 		return getattr(producedDevice, functionName)
 
-	def SetProperty(self, propertyId, value=None):
+	def SetPropertyById(self, propertyId, value=None):
 		model = self.__propertyRepository.Get(propertyId)
-		if model.Type == TypeEnum.Read_Only:
-			raise Exception(u"Property '{0}' is read-only".format(model))
-		functionName = model.CallFunction
-		deviceId = model.Device.Id
+		self.SetProperty(model, value)
+
+	def SetProperty(self, property, value=None):
+		if property.Type == TypeEnum.Read_Only:
+			raise Exception(u"Property '{0}' is read-only".format(property))
+		functionName = property.CallFunction
+		deviceId = property.Device.Id
 		callFunction = self.GetProducedDeviceFunction(deviceId, functionName)
-		model.Parameters[u"Value"] = value
-		kwargs = dict(model.Parameters)
-		print(u"Calling '{0}' function of {1} device with arguments {2}".format(functionName, model.Device, kwargs))
+		property.Parameters[u"Value"] = value
+		kwargs = dict(property.Parameters)
+		print(u"Calling '{0}' function of {1} device with arguments {2}".format(functionName, property.Device, kwargs))
 		return callFunction(**kwargs)
 
 	def GetProperty(self, propertyId):

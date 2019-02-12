@@ -32,7 +32,7 @@ class ConditionService(object):
 	def NotifyConditions(self, condition):
 		if not self.__isSatisfied(condition):
 			return
-		TaskService().ExecuteTasksOfCondition(condition)
+		TaskService.Instance().ExecuteTasksOfCondition(condition)
 		parentConditions = Condition.objects.filter(AndConditions__condition=condition)
 		for parentCondition in parentConditions:
 			self.NotifyConditions(parentCondition)

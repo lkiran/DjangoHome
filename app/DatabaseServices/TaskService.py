@@ -23,14 +23,13 @@ class TaskService(object):
 	def Execute(self, property, value):
 		from app.DatabaseServices.DeviceService import DeviceService
 		__deviceService = DeviceService.Instance()
-		self.__deviceService.SetProperty(property, value)
-		raise NotImplemented
+		__deviceService.SetProperty(property, value)
 
 	def ExecuteTask(self, task):
 		self.Execute(task.Property, task.Value)
 
 	def ExecuteTasksOfControl(self, control):
-		for task in control.Tasks:
+		for task in control.Tasks.all():
 			self.ExecuteTask(task)
 
 	def ExecuteTasksOfCondition(self, condition):
