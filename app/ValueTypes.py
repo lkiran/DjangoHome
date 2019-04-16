@@ -15,3 +15,6 @@ class Color(object):
 
 	def __unicode__(self):
 		return u'rgba({0},{1},{2},{3})'.format(self.Red, self.Green, self.Blue, self.Alpha)
+
+	def toList(self):
+		return [self.Red, self.Green, self.Blue, self.Alpha]

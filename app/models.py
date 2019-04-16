@@ -31,6 +31,10 @@ class Property(models.Model):
 	def Device(self):
 		return Device.objects.filter(Functions__Properties=self).first()
 
+	@property
+	def Parser(self):
+		return  ValueParser().Get(self.Class)
+
 	def __str__(self):
 		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
 

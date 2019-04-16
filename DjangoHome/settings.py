@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost',
                  '127.0.0.1',
                  '10.0.0.31',
+                 '10.0.0.51',
                  '192.168.2.31',
                  '78.191.40.59']
 
@@ -55,7 +56,8 @@ MIDDLEWARE_CLASSES = ['django.middleware.security.SecurityMiddleware',
                       'django.middleware.common.CommonMiddleware',
                       ]
 
-CORS_ORIGIN_WHITELIST = 'http://localhost:4200'
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = 'http://localhost:4200'
 
 ROOT_URLCONF = 'DjangoHome.urls'
 

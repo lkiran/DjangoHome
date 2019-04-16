@@ -52,7 +52,8 @@ class DeviceService(object):
 		functionName = property.CallFunction
 		deviceId = property.Device.Id
 		callFunction = self.GetProducedDeviceFunction(deviceId, functionName)
-		property.Parameters[u"Value"] = value
+		parsedValue = property.Parser.ToObject(value)
+		property.Parameters[u"Value"] = parsedValue
 		kwargs = dict(property.Parameters)
 		print(u"Calling '{0}' function of {1} device with arguments {2}".format(functionName, property.Device, kwargs))
 		return callFunction(**kwargs)

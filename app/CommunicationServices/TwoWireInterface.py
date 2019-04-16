@@ -24,19 +24,19 @@ class TwoWireInterface(object):
 	def Read(self, address, dataLength=1):
 		with self.__lock:
 			data = None
-			self.__logger.info("Read from {0} with SMBusWrapper enter".format(data))
+			self.__logger.info("Read from {0} address with SMBusWrapper (begin)".format(hex(address)))
 			with SMBusWrapper(1) as bus:
 				if dataLength > 1:
 					data = bus.read_i2c_block_data(address, 0, dataLength)
 				else:
 					data = bus.read_byte(address, dataLength)
 			# if not works data = bus.read_byte_data(address, 0, dataLength)
-			self.__logger.info("Read from {0} with SMBusWrapper exit".format(data))
+			self.__logger.info("Read from {0} address with SMBusWrapper (end)".format(hex(address)))
 			return data
 
 	def Write(self, address, data):
 		with self.__lock:
-			self.__logger.info("Write from {0} with SMBusWrapper enter".format(data))
+			self.__logger.info("Write {1} data to {0} with SMBusWrapper (begin)".format(hex(address), data))
 			with SMBusWrapper(1) as bus:
 				dataLength = len(data)
 				if dataLength > 1:
@@ -44,4 +44,4 @@ class TwoWireInterface(object):
 				else:
 					bus.write_byte(address, data)
 					# if not works bus.write_byte_data(address, 0, data)
-			self.__logger.info("Write from {0} with SMBusWrapper exit".format(data))
+			self.__logger.info("Write {1} data to {0} with SMBusWrapper (end)".format(hex(address),data))
