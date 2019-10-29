@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="627520f5-a521-4ec3-9690-a0d4bf3a8a1b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/rgb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DjangoHome.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DjangoHome.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoHome/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoHome/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HomeAutomation.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/HomeAutomation.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/CommunicationServices/TwoWireInterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/CommunicationServices/TwoWireInterface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DatabaseServices/DeviceService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DatabaseServices/DeviceService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/HardwareServices/Wallwasher.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/HardwareServices/Wallwasher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifier.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ValueTypes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/ValueTypes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Controllers/InterfaceController.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/InterfaceController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DatabaseServices/TaskService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DatabaseServices/TaskService.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/HardwareServices/BaseDeviceService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/HardwareServices/BaseDeviceService.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/HardwareServices/IOExtender.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/HardwareServices/IOExtender.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +56,7 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="HomeAutomation" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -71,41 +71,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Wallwasher.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/HardwareServices/Wallwasher.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/CommunicationServices/TwoWireInterface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="12" column="28" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="28" />
+            <state relative-caret-position="717">
+              <caret line="44" column="48" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
               <folding>
-                <element signature="e#0#68#0" expanded="true" />
+                <element signature="e#0#14#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/DjangoHome/settings.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/HardwareServices/IOExtender.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="61">
-              <caret line="66" column="21" lean-forward="true" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InterfaceController.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Controllers/InterfaceController.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rgb.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/rgb.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="15" column="16" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="16" />
+            <state relative-caret-position="190">
+              <caret line="73" column="31" lean-forward="true" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#1139#1313#0" />
+                <element signature="e#1348#1510#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -144,6 +131,7 @@
       <find>TaskService</find>
       <find>is Updated</find>
       <find>self.Devices</find>
+      <find>IOPort</find>
     </findStrings>
     <replaceStrings>
       <replace>.CharField()</replace>
@@ -178,7 +166,6 @@
         <option value="$PROJECT_DIR$/app/Controllers/ControlController.py" />
         <option value="$PROJECT_DIR$/app/ModelSerializers.py" />
         <option value="$PROJECT_DIR$/app/Repositories/InterfaceRepository.py" />
-        <option value="$PROJECT_DIR$/app/Controllers/InterfaceController.py" />
         <option value="$PROJECT_DIR$/app/ControlServices/__init__.py" />
         <option value="$PROJECT_DIR$/app/HardwareServices/DeviceFactory.py" />
         <option value="$PROJECT_DIR$/app/ControlServices/ConditionService.py" />
@@ -201,34 +188,26 @@
         <option value="$PROJECT_DIR$/app/HardwareServices/Wallswitch.py" />
         <option value="$PROJECT_DIR$/app/Repositories/ConditionRepository.py" />
         <option value="$PROJECT_DIR$/app/Repositories/TaskRepository.py" />
-        <option value="$PROJECT_DIR$/app/ValueParser.py" />
         <option value="$PROJECT_DIR$/app/ValueComparator.py" />
         <option value="$PROJECT_DIR$/app/DatabaseServices/InterfaceService.py" />
-        <option value="$PROJECT_DIR$/app/HardwareServices/IOExtender.py" />
-        <option value="$PROJECT_DIR$/app/HardwareServices/BaseDeviceService.py" />
         <option value="$PROJECT_DIR$/app/DatabaseServices/PropertyService.py" />
         <option value="$PROJECT_DIR$/app/HardwareServices/BaseFunctionService.py" />
         <option value="$PROJECT_DIR$/app/HardwareServices/__init__.py" />
         <option value="$PROJECT_DIR$/app/DatabaseServices/ConditionService.py" />
-        <option value="$PROJECT_DIR$/app/DatabaseServices/TaskService.py" />
         <option value="$PROJECT_DIR$/app/rgb.py" />
         <option value="$PROJECT_DIR$/app/ValueTypes.py" />
-        <option value="$PROJECT_DIR$/app/CommunicationServices/TwoWireInterface.py" />
         <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/app/DatabaseServices/DeviceService.py" />
-        <option value="$PROJECT_DIR$/app/HardwareServices/Wallwasher.py" />
         <option value="$PROJECT_DIR$/DjangoHome/settings.py" />
+        <option value="$PROJECT_DIR$/app/DatabaseServices/TaskService.py" />
+        <option value="$PROJECT_DIR$/app/Controllers/InterfaceController.py" />
+        <option value="$PROJECT_DIR$/app/HardwareServices/Wallwasher.py" />
+        <option value="$PROJECT_DIR$/app/HardwareServices/BaseDeviceService.py" />
+        <option value="$PROJECT_DIR$/app/CommunicationServices/TwoWireInterface.py" />
+        <option value="$PROJECT_DIR$/app/ValueParser.py" />
+        <option value="$PROJECT_DIR$/app/HardwareServices/IOExtender.py" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
@@ -244,7 +223,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -278,9 +256,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="sqlite" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="setti&#9;ACTION&#9;ShowSettings&#10;opti&#9;ACTION&#9;WebDeployment.Options&#10;sett&#9;ACTION&#9;ShowSettings&#10;livecon&#9;FILE&#9;file://C:/Users/leven/Documents/GitHub/DjangoHome/app/ControlServices/LiveCondition.py&#10;color&#9;null&#9;null&#10;Colo&#9;null&#9;null&#10;urls&#9;FILE&#9;file://C:/Users/leven/Documents/GitHub/DjangoHome/DjangoHome/urls.py&#10;compar&#9;null&#9;null&#10;enum&#9;FILE&#9;file://C:/Users/leven/Documents/GitHub/DjangoHome/app/enums.py&#10;mo&#9;FILE&#9;file://C:/Users/leven/Documents/GitHub/DjangoHome/app/models.py&#10;adm&#9;FILE&#9;file://C:/Users/leven/Documents/GitHub/DjangoHome/app/admin.py&#10;url&#9;FILE&#9;file://C:/Users/leven/Documents/GitHub/DjangoHome/DjangoHome/urls.py&#10;mode&#9;FILE&#9;file://C:/Users/leven/Documents/GitHub/DjangoHome/app/models.py&#10;livetemp&#9;ACTION&#9;InsertLiveTemplate&#10;live tem&#9;ACTION&#9;InsertLiveTemplate&#10;set&#9;ACTION&#9;ShowSettings&#10;key&#9;ACTION&#9;ChangeKeymap" />
     <property name="ToolWindowSciView.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="true" />
@@ -292,7 +273,13 @@
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="debugger.stepping" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/app/ModelSerializers.py" />
   </component>
   <component name="RecentsManager">
@@ -319,147 +306,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Django server.DjangoHome">
-    <configuration name="Test: " type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
-      <module name="DjangoHome" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="TARGET" value="" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-    </configuration>
-    <configuration name="Notifier" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="DjangoHome" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/Notifier.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="TwoWireInterface" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="DjangoHome" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app/CommunicationServices" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/CommunicationServices/TwoWireInterface.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="ValueParser" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="DjangoHome" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/ValueParser.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="rgb" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="DjangoHome" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/rgb.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="DjangoHome Local" type="Python.DjangoServer" factoryName="Django server">
-      <module name="DjangoHome" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="DJANGO_SETTINGS_MODULE" value="DjangoHome.settings" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\leven\Documents\GitHub\DjangoHome\venv\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="127.0.0.1" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="http://127.0.0.1:8000" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="true" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
-    </configuration>
-    <configuration name="DjangoHome" type="Python.DjangoServer" factoryName="Django server">
-      <module name="DjangoHome" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="DJANGO_SETTINGS_MODULE" value="DjangoHome.settings" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="10.0.0.31" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="http://10.0.0.31:8000" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="true" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
-    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -546,6 +392,184 @@
       <predefined_log_file id="idea.log" enabled="true" />
       <method />
     </configuration>
+    <configuration name="Test: " type="DjangoTestsConfigurationType" temporary="true">
+      <module name="DjangoHome" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Notifier" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="DjangoHome" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/Notifier.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TwoWireInterface" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="DjangoHome" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app/CommunicationServices" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/CommunicationServices/TwoWireInterface.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ValueParser" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="DjangoHome" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/ValueParser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="DjangoHome" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="rgb" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="DjangoHome" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/rgb.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="DjangoHome Local" type="Python.DjangoServer" factoryName="Django server">
+      <module name="DjangoHome" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="DjangoHome.settings" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\leven\Documents\GitHub\DjangoHome\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="127.0.0.1" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="http://127.0.0.1:8000" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="true" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="DjangoHome" type="Python.DjangoServer" factoryName="Django server">
+      <module name="DjangoHome" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="DjangoHome.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="10.0.0.31" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Django server.DjangoHome" />
       <item itemvalue="Django server.DjangoHome Local" />
@@ -567,8 +591,8 @@
   </component>
   <component name="SshConsoleOptionsProvider">
     <option name="myEncoding" value="windows-1252" />
-    <option name="myConnectionType" value="REMOTE_SDK" />
-    <option name="myConnectionId" value="sftp://pi@192.168.2.31:22/usr/bin/python2.7" />
+    <option name="myConnectionType" value="NONE" />
+    <option name="myConnectionId" value="" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -580,6 +604,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1515432203320</updated>
+      <workItem from="1567851010456" duration="442000" />
+      <workItem from="1567851482767" duration="3544000" />
+      <workItem from="1567871603821" duration="3463000" />
+      <workItem from="1567944185790" duration="3257000" />
+      <workItem from="1568995904069" duration="169000" />
+      <workItem from="1568996099664" duration="1216000" />
+      <workItem from="1569083644873" duration="624000" />
+      <workItem from="1569773739990" duration="1334000" />
+      <workItem from="1570882792772" duration="7741000" />
+      <workItem from="1572176660968" duration="2718000" />
+      <workItem from="1572275008192" duration="8892000" />
+      <workItem from="1572350657537" duration="7982000" />
     </task>
     <servers />
   </component>
@@ -594,6 +630,9 @@
       <configuration name="Test: " configurationId="DjangoTestsConfigurationType" />
     </history-entry>
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="41382000" />
+  </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
@@ -607,48 +646,43 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="11" weight="0.32890365" />
-      <window_info anchor="bottom" auto_hide="true" id="Event Log" order="2" sideWeight="0.50373137" side_tool="true" weight="0.32890365" />
-      <window_info anchor="bottom" id="Database Changes" order="14" weight="0.32890365" />
-      <window_info anchor="bottom" id="File Transfer" order="15" sideWeight="0.49626866" visible="true" weight="0.32890365" />
-      <window_info anchor="bottom" id="Version Control" order="3" weight="0.32897604" />
-      <window_info anchor="bottom" id="Python Console" order="4" sideWeight="0.4978678" weight="0.32890365" />
-      <window_info anchor="right" id="Run" order="6" weight="0.31876332" />
-      <window_info anchor="bottom" id="Terminal" order="5" weight="0.32890365" />
-      <window_info anchor="right" id="Remote Host" order="8" weight="0.32942432" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18070363" />
-      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="1" weight="0.32942432" />
-      <window_info anchor="right" id="SciView" order="7" weight="0.32995737" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17697228" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" id="Debug" order="0" weight="0.35394457" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="manage.py@DjangoHome" order="0" sideWeight="0.4978678" weight="0.32934782" />
+      <window_info anchor="bottom" id="Tool Output" order="1" />
+      <window_info anchor="bottom" auto_hide="true" id="Event Log" order="2" sideWeight="0.50479746" side_tool="true" weight="0.32827735" />
+      <window_info anchor="bottom" id="Version Control" order="3" weight="0.32897604" />
+      <window_info anchor="bottom" id="Python Console" order="4" sideWeight="0.4978678" weight="0.32887402" />
+      <window_info anchor="bottom" id="Terminal" order="5" weight="0.32887402" />
+      <window_info anchor="bottom" id="ANTLR Preview" order="6" />
+      <window_info anchor="bottom" id="Message" order="7" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.32890365" />
+      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="11" weight="0.32887402" />
+      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32897604" />
+      <window_info anchor="bottom" id="Database Changes" order="14" weight="0.32890365" />
+      <window_info anchor="bottom" id="File Transfer" order="15" sideWeight="0.49520257" weight="0.3277592" />
+      <window_info anchor="bottom" id="Database Console" order="16" weight="0.32897604" />
+      <window_info active="true" anchor="right" id="Debug" order="0" sideWeight="0.49832776" visible="true" weight="0.35341153" />
+      <window_info anchor="right" id="Database" order="1" weight="0.32942432" />
+      <window_info anchor="right" id="Data View" order="2" weight="0.32995737" />
       <window_info anchor="right" id="Commander" order="3" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="manage.py@DjangoHome" order="0" sideWeight="0.4978678" weight="0.32934782" />
-      <window_info anchor="right" id="Data View" order="2" weight="0.32995737" />
-      <window_info anchor="bottom" id="ANTLR Preview" order="6" />
-      <window_info anchor="bottom" id="Database Console" order="15" weight="0.32897604" />
-      <window_info anchor="bottom" id="Tool Output" order="1" />
-      <window_info anchor="bottom" id="Message" order="7" />
-      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="8" weight="0.32890365" />
-      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32897604" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.25" />
+      <window_info anchor="right" id="Run" order="6" weight="0.31876332" />
+      <window_info anchor="right" id="SciView" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Remote Host" order="8" weight="0.32942432" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="9" sideWeight="0.50167227" side_tool="true" weight="0.35341153" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -656,7 +690,6 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="403" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -731,106 +764,53 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>int(float(self._color.Red )/ 255 * self._redMax)</expression-string>
+        <expression-string>state[8]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>int(float(self._color.Red / 255 )* self._redMax)</expression-string>
+        <expression-string>state[7]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>int(float(self._color.Red) / 255 * self._redMax)</expression-string>
+        <expression-string>state[7-0]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>int(self._color.Red / 255 * self._redMax)</expression-string>
+        <expression-string>list(self.Properties)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>u'Address ' (1933196944)</expression-string>
+        <expression-string>self.Properties.all()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.Model.Parameters</expression-string>
+        <expression-string>self.Properties</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.Model.Parameters[u'Address']</expression-string>
+        <expression-string>a</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.Model.Parameters[&quot;Address&quot;]</expression-string>
+        <expression-string>a = 0x20</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.Model.Parameters[0]</expression-string>
+        <expression-string>a = 0x20a</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://f0cf689a-9789-4cd1-81f9-9c460e62bda2/schema/main/table/app_condition_andconditions">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ControlServices/LiveCondition.py" />
-    <entry file="das://f0cf689a-9789-4cd1-81f9-9c460e62bda2/schema/main/table/app_condition">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controllers/ConditionController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/-433928590/-1227933812/django/db/models/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="125" column="12" selection-start-line="125" selection-start-column="12" selection-end-line="125" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/ControlRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ProcessServices/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/app/Repositories/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controllers/PropertyInfoController.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/FunctionRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Controllers/PropertyController.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -862,20 +842,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="423">
           <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/enums.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="18" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/ConditionRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
         </state>
       </provider>
     </entry>
@@ -914,13 +880,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/HardwareServices/BaseDeviceService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="6" column="38" lean-forward="true" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/models/fields/related_descriptors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="621">
@@ -949,50 +908,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/HardwareServices/IOExtender.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1932">
-          <caret line="87" column="82" selection-start-line="72" selection-start-column="4" selection-end-line="87" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DjangoHome/wsgi.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/DatabaseServices/ConditionService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="699">
-          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/HardwareServices/BaseFunctionService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/-433928590/-1227933812/smbus2/smbus2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="467" selection-start-line="467" selection-end-line="467" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/CommunicationServices/TwoWireInterface.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/remote_sources/-433928590/-1227933812/smbus2/smbus2.py" />
     <entry file="file://$PROJECT_DIR$/app/Notifier.py" />
     <entry file="file://$PROJECT_DIR$/app/ValueTypes.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1008,76 +930,226 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DjangoHome/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="802">
+          <caret line="72" column="6" selection-start-line="72" selection-start-column="6" selection-end-line="72" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/DatabaseServices/PropertyService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="33" column="36" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
+        <state relative-caret-position="459">
+          <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models.py">
+    <entry file="file://$PROJECT_DIR$/app/Repositories/ConditionRepository.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="255">
+          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/ValueParser.py">
+    <entry file="file://$PROJECT_DIR$/app/enums.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="785">
-          <caret line="95" selection-start-line="95" selection-end-line="95" />
+        <state relative-caret-position="51">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/DatabaseServices/TaskService.py">
+    <entry file="file://$PROJECT_DIR$/app/DatabaseServices/ConditionService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/DatabaseServices/InterfaceService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/DatabaseServices/DeviceService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="476">
+          <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/rgb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
+        <state relative-caret-position="255">
           <caret line="15" column="16" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/HardwareServices/BaseFunctionService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/HardwareServices/Wallwasher.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="28" />
+        <state relative-caret-position="71">
+          <caret line="7" column="39" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="39" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controllers/InterfaceController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+    <entry file="das://f0cf689a-9789-4cd1-81f9-9c460e62bda2/schema/main/table/app_device">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="f74ddc93-78f4-47e3-99cc-7363c3a88057">
+          <filtering>
+            <filter text="" />
+          </filtering>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoHome/settings.py">
+    <entry file="das://f0cf689a-9789-4cd1-81f9-9c460e62bda2/schema/main/table/app_condition_AndConditions">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="f74ddc93-78f4-47e3-99cc-7363c3a88057">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://f0cf689a-9789-4cd1-81f9-9c460e62bda2/schema/main/table/app_control_Tasks">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="f74ddc93-78f4-47e3-99cc-7363c3a88057">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://f0cf689a-9789-4cd1-81f9-9c460e62bda2/schema/main/table/app_control">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="f74ddc93-78f4-47e3-99cc-7363c3a88057">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://f0cf689a-9789-4cd1-81f9-9c460e62bda2/schema/main/table/app_control_Conditions">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="f74ddc93-78f4-47e3-99cc-7363c3a88057">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://f0cf689a-9789-4cd1-81f9-9c460e62bda2/schema/main/table/app_condition">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="f74ddc93-78f4-47e3-99cc-7363c3a88057">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://f0cf689a-9789-4cd1-81f9-9c460e62bda2/schema/main/table/app_property">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="f74ddc93-78f4-47e3-99cc-7363c3a88057">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://f0cf689a-9789-4cd1-81f9-9c460e62bda2/schema/main/table/app_task">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="f74ddc93-78f4-47e3-99cc-7363c3a88057">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/HardwareServices/BaseDeviceService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="66" column="21" lean-forward="true" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
+        <state relative-caret-position="204">
+          <caret line="15" column="40" lean-forward="true" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/1288844410/-1227933812/rest_framework/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="479" selection-start-line="479" selection-end-line="479" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/1288844410/-1227933812/django/db/models/fields/related.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="724" selection-start-line="724" selection-end-line="724" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DatabaseServices/DeviceService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DatabaseServices/TaskService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DatabaseServices/InterfaceService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controllers/InterfaceController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Repositories/InterfaceRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/CommunicationServices/TwoWireInterface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="717">
+          <caret line="44" column="48" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ValueParser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/HardwareServices/IOExtender.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="73" column="31" lean-forward="true" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#1139#1313#0" />
+            <element signature="e#1348#1510#0" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,5 +1,8 @@
 from datetime import datetime
 
+import numpy as np
+
+from app.CommunicationServices.TwoWireInterface import TwoWireInterface
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.HardwareServices.BaseFunctionService import BaseFunctionService
 
@@ -14,18 +17,15 @@ class IOExtender(BaseDeviceService):
 	def State(self, **kwargs):
 		value = kwargs.get("Value")
 		pin = kwargs.get("Pin")
+		self.__State(pin, value)
+
+	def __State(self, pin, value=None):
 		if value is not None:
 			print ("Set pin {0} value as {1}".format(pin, value))
 			pinObject = self.Pins[pin]
 			pinObject.Status = value
 		print ("Get pin {0} value".format(pin))
 		return self.Pins[pin].Status
-
-	def __State(self, pin, value=None):
-		parameters = dict()
-		parameters['Pin'] = pin
-		parameters['Value'] = value
-		return self.State(**parameters)
 
 	def Toggle(self, **kwargs):
 		pin = kwargs.get("Pin")
@@ -52,23 +52,39 @@ class IOExtender(BaseDeviceService):
 
 	def _InstantiateUsingModel(self):
 		self.Address = self.Model.Parameters.get("Address", "")
-		self._PopulatePins(4)
+		self._PopulatePins(8)
 
 	def _PopulatePins(self, numberOfPins):
 		modelProperties = self.Model.Properties
 		for i in range(0, numberOfPins):
 			pinProperties = modelProperties.filter(Parameters={'Pin': i})
-			pin = Pin(pinProperties)
+			pin = Pin(i, self.Address, pinProperties)
 			self.Pins.append(pin)
 
 
 class Pin(BaseFunctionService):
-	def __init__(self, properties):
+	def __init__(self, id, address, properties):
+		self.__i2c = TwoWireInterface.Instance()
+		self.Id = id
 		self.Properties = properties
+		self.Address = address
 		state = self.Properties.filter(CallFunction='State').first()
 		self._Status = self.GetValue(state, False)
+		self._WriteToDevice(self._Status)
 		self.ActivatedOn = None
 		self.ClosedOn = None
+
+	def _ReadFromDevice(self):
+		stateAsByte = self.__i2c.Read(self.Address)
+		result = [bool(stateAsByte >> (7 - i) & 1) for i in range(0, 8)]
+		return result
+
+	def _WriteToDevice(self, value):
+		state = self._ReadFromDevice()
+		state[7 - self.Id] = not value
+		stateAsByte = np.packbits(np.uint8(state))
+		self.__i2c.Write(self.Address, stateAsByte)
+		return state
 
 	@property
 	def Status(self):
@@ -84,5 +100,6 @@ class Pin(BaseFunctionService):
 			self.ActivatedOn = None
 			self.ClosedOn = datetime.now()
 			print("Turning off the pin")
+		self._WriteToDevice(value)
 		self._Status = value
 		self.SetValue(self.Properties.filter(CallFunction='State').first(), value)

@@ -6,9 +6,10 @@ from app.DatabaseServices.InterfaceService import InterfaceService
 from app.ModelSerializers import InterfaceSerializer
 from app.Repositories.InterfaceRepository import InterfaceRepository
 
+
 class InterfaceController(APIView):
 	__interfaceRepo = InterfaceRepository()
-	__interfaceService= InterfaceService.Instance()
+	__interfaceService = InterfaceService.Instance()
 
 	def get(self, request, format=None):
 		interfaceId = request.query_params.get("interfaceId")
@@ -28,5 +29,5 @@ class InterfaceController(APIView):
 		interfaceId = request.data.get("interfaceId")
 		value = request.data.get("value")
 		interface = self.__interfaceRepo.Get(interfaceId)
-		result = self.__interfaceService.CallEditor(interface,value)
-		return Response(status=status.HTTP_200_OK)
+		result = self.__interfaceService.CallEditor(interface, value)
+		return Response(data=result, status=status.HTTP_200_OK)

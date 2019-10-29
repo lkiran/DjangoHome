@@ -23,7 +23,7 @@ class TaskService(object):
 	def Execute(self, property, value):
 		from app.DatabaseServices.DeviceService import DeviceService
 		__deviceService = DeviceService.Instance()
-		__deviceService.SetProperty(property, value)
+		return __deviceService.SetProperty(property, value)
 
 	def ExecuteTask(self, task):
 		self.Execute(task.Property, task.Value)

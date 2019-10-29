@@ -4,7 +4,7 @@ from app.HardwareServices.BaseFunctionService import BaseFunctionService
 from app.models import Device
 
 
-class BaseDeviceService(BaseFunctionService):
+class BaseDeviceService(BaseFunctionService): #TODO: Should not be inherited from BaseFunctionService
 
 	def __init__(self, model):
 		if type(model) is not Device:
