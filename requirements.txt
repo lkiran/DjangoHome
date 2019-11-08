@@ -1,6 +1,8 @@
+enum34
+numpy
 shortuuid
 django-shortuuidfield
-django = 1.11.14
+django >= 1.11
 django-filter
 djangorestframework
 django-cors-headers
