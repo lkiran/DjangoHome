@@ -1,7 +1,12 @@
+import os
 import logging
 import threading
 
-from smbus2 import SMBusWrapper
+if os.environ['dev'] is True:
+	print("Importing smbus2 mock")
+	from SmbusMock import SMBusWrapper
+else:
+	from smbus2 import SMBusWrapper
 
 
 class TwoWireInterface(object):
@@ -43,4 +48,4 @@ class TwoWireInterface(object):
 					bus.write_i2c_block_data(address, 0, data)
 				else:
 					bus.write_byte(address, data)
-			self.__logger.info("Write {1} data to {0} with SMBusWrapper (end)".format(hex(address),data))
+			self.__logger.info("Write {1} data to {0} with SMBusWrapper (end)".format(hex(address), data))

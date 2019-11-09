@@ -20,7 +20,10 @@ class DeviceFactory:
 
 	def Produce(self, device):
 		self.__logger.info(u'Producing {0} device'.format(device))
-		type = device.CallClass
-		return self.devices[type](device)
-		#self.__logger.exception(u'Device "{0}" could not be produced!'.format(device), e)
+		try:
+			type = device.CallClass
+			return self.devices[type](device)
+		except Exception as e:
+			print(u'Can not produce the device {0}'.format(device))
+			self.__logger.exception(u'Device "{0}" could not be produced!'.format(device), e)
 
