@@ -35,6 +35,10 @@ class Property(models.Model):
 	def Parser(self):
 		return  ValueParser().Get(self.Class)
 
+	@property
+	def Object(self):
+		return  self.Parser.ToObject(self.Value)
+
 	def __str__(self):
 		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
 
@@ -84,6 +88,29 @@ class Device(models.Model):
 	@property
 	def Properties(self):
 		return Property.objects.filter(function__device=self)
+
+	def __str__(self):
+		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+
+	def __unicode__(self):
+		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+
+
+class Group(models.Model):
+	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
+	Name = models.CharField(max_length=50)
+	Properties = models.ManyToManyField(Property, blank=True)
+	SubGroups = models.ManyToManyField("self", blank=True, symmetrical=False)
+	CreatedOn = models.DateTimeField()
+	ModifiedOn = models.DateTimeField()
+
+	def save(self, *args, **kwargs):
+		if not self.Id:
+			self.CreatedOn = timezone.now()
+		else:
+			del self.CreatedOn
+		self.ModifiedOn = timezone.now()
+		return super(Group, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
