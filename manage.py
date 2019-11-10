@@ -24,13 +24,15 @@ if __name__ == "__main__":
 	#   D - Days
 	#   midnight - roll over at midnight
 	#   W{0-6} - roll over on a certain day; 0 - Monday
-	log_file_name = 'Logs\Log'
+	log_file_name = 'Logs/Log'
 	logging_level = logging.DEBUG
-
 	formatter = logging.Formatter(
 		fmt='%(asctime)s,%(msecs)d - %(name)s - %(levelname)s - %(message)s',
 		datefmt='%b %d, %a %H:%M:%S'
 	)
+
+	if not os.path.exists("/Logs"):
+		os.makedirs("/Logs")
 
 	handler = logging.handlers.TimedRotatingFileHandler(log_file_name, when="midnight", interval=1)
 	handler.setFormatter(formatter)

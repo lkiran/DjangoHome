@@ -30,3 +30,6 @@ class SMBusWrapper:
 	def __enter__(self):
 		self.bus = SMBus(bus=self.bus_number, force=self.force)
 		return self.bus
+
+	def __exit__(self, exc_type, exc_val, exc_tb):
+		pass
