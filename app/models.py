@@ -7,6 +7,27 @@ from app.ValueParser import ValueParser
 from app.enums import TypeEnum, ClassEnum, ComparerEnum
 
 
+class Category(models.Model):
+	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
+	Name = models.CharField(max_length=50)
+	CreatedOn = models.DateTimeField()
+	ModifiedOn = models.DateTimeField()
+
+	def save(self, *args, **kwargs):
+		if not self.Id:
+			self.CreatedOn = timezone.now()
+		else:
+			del self.CreatedOn
+		self.ModifiedOn = timezone.now()
+		return super(Category, self).save(*args, **kwargs)
+
+	def __str__(self):
+		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+
+	def __unicode__(self):
+		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+
+
 class Property(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
@@ -16,6 +37,7 @@ class Property(models.Model):
 	Type = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in TypeEnum])
 	Class = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in ClassEnum])
 	Comparable = models.BooleanField(default=True)
+	Category = models.ForeignKey(Category, blank=True)
 	CreatedOn = models.DateTimeField()
 	ModifiedOn = models.DateTimeField()
 
@@ -33,11 +55,11 @@ class Property(models.Model):
 
 	@property
 	def Parser(self):
-		return  ValueParser().Get(self.Class)
+		return ValueParser().Get(self.Class)
 
 	@property
 	def Object(self):
-		return  self.Parser.ToObject(self.Value)
+		return self.Parser.ToObject(self.Value)
 
 	def __str__(self):
 		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
@@ -96,13 +118,21 @@ class Device(models.Model):
 		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
 
 
+class GroupDevice(Device):
+	Group = models.ForeignKey(Group, blank=False)
+
+
 class Group(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
 	Properties = models.ManyToManyField(Property, blank=True)
-	SubGroups = models.ManyToManyField("self", blank=True, symmetrical=False)
+	ParentGroup = models.ForeignKey("self", blank=True, symmetrical=False)
 	CreatedOn = models.DateTimeField()
 	ModifiedOn = models.DateTimeField()
+
+	@property
+	def SubGroups(self):
+		return Group.objects.filter(ParentGroup=self)
 
 	def save(self, *args, **kwargs):
 		if not self.Id:
