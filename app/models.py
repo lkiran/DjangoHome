@@ -44,6 +44,7 @@ class Property(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.Id:
 			self.CreatedOn = timezone.now()
+
 		else:
 			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
@@ -129,6 +130,10 @@ class Group(models.Model):
 	ParentGroup = models.ForeignKey("self", blank=True, symmetrical=False)
 	CreatedOn = models.DateTimeField()
 	ModifiedOn = models.DateTimeField()
+
+	@property
+	def Device(self):
+		return GroupDevice.objects.find(Group=self)
 
 	@property
 	def SubGroups(self):

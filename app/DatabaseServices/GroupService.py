@@ -1,9 +1,11 @@
 import logging
 
+from app.BatchValueOperations import BatchValueOperations
 from app.DatabaseServices.DeviceService import DeviceService
 from app.Repositories.GroupRepository import GroupRepository
 from app.Repositories.PropertyRepository import PropertyRepository
 from app.enums import TypeEnum
+from app.models import GroupDevice, Function
 
 
 class GroupService:
@@ -34,7 +36,15 @@ class GroupService:
 		return DeviceService.Devices.filter(CallClass=GroupService.DEFAULT_CALL_CLASS_NAME)
 
 	def createGroup(self, group):
-		raise NotImplementedError()
+		group.save()  # TODO: use _groupRepository instead
+		functions = self._createGroupDeviceFunctions(group)
+		groupDevice = GroupDevice()
+		groupDevice.Name = group.Name
+		groupDevice.CallClass = "Group"
+		groupDevice.Functions = functions
+		groupDevice.Group = group
+		groupDevice.save()
+		return group
 
 	def removeGroup(self):
 		raise NotImplementedError()
@@ -70,3 +80,21 @@ class GroupService:
 	def _addReadOrWritePropertyToGroup(self, property, group):
 		self._addReadOnlyPropertyToGroup(property, group)
 		self._addWriteOnlyPropertyToGroup(property, group)
+
+	def _createGroupDeviceFunctions(self, group):
+		categories = group.Properties.values_list("Category", flat=True).distinct()
+		functions = []
+		for category in categories:
+			categoryProperties = group.Properties.filter(Category=category)
+			categoryGroupProperties = self._createGroupDeviceProperties(categoryProperties)
+			function = Function()
+			function.Name = category.Name
+			function.Properties = categoryGroupProperties
+			function.save()  # TODO: use _functionRepository here
+			functions.append(function)
+		return functions
+
+	def _createGroupDeviceProperties(self, categoryProperties):
+		_class = categoryProperties.first().Class
+		batchProperties = BatchValueOperations.convertToGroupProperty(categoryProperties)
+		return batchProperties

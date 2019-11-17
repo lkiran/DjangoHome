@@ -19,6 +19,10 @@ class BaseBatchValueOperations(object):
 		return self.properties.first().Category
 
 	@property
+	def Type(self):
+		return self.properties.first().Type
+
+	@property
 	def _baseProperty(self):
 		baseProperty = Property()
 		baseProperty.Category = self.Category
@@ -56,6 +60,8 @@ class BatchValueOperations:
 		_class = properties.first().Class  # TODO: do this w/o 'first()'
 		operation = self.operations.get(_class)(properties)
 		result = operation.convertToGroupProperty()
+		if operation.Type is not TypeEnum.Read_Or_Write:
+			result = result.filter(Type=operation.Type)
 		return result
 
 
