@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Django default" uuid="13e9ca30-915b-44db-8057-7b6e15f39c44">
+    <data-source source="LOCAL" name="HomeAutomation.sqlite3" uuid="857b507b-1b3d-40d6-ae9c-2dbb5a12360c">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/DjangoHome/settings.py</remarks>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\leven\OneDrive\Documents\GitHub\DjangoHome\HomeAutomation.sqlite3</jdbc-url>
-      <driver-properties>
-        <property name="enable_load_extension" value="true" />
-      </driver-properties>
-    </data-source>
-    <data-source source="LOCAL" name="HomeAutomation" uuid="f0cf689a-9789-4cd1-81f9-9c460e62bda2">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>SQLite</remarks>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\leven\Documents\GitHub\DjangoHome\HomeAutomation.sqlite3</jdbc-url>
       <driver-properties>

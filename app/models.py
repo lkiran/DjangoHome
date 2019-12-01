@@ -1,6 +1,6 @@
 from django.db import models
-from jsonfield import JSONField
 from django.utils import timezone
+from jsonfield import JSONField
 from shortuuidfield import ShortUUIDField
 
 from app.ValueParser import ValueParser
@@ -10,8 +10,11 @@ from app.enums import TypeEnum, ClassEnum, ComparerEnum
 class Category(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
-	CreatedOn = models.DateTimeField()
-	ModifiedOn = models.DateTimeField()
+	CreatedOn = models.DateTimeField(auto_now_add=True)
+	ModifiedOn = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-ModifiedOn']
 
 	def save(self, *args, **kwargs):
 		if not self.Id:
@@ -37,9 +40,12 @@ class Property(models.Model):
 	Type = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in TypeEnum])
 	Class = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in ClassEnum])
 	Comparable = models.BooleanField(default=True)
-	Category = models.ForeignKey(Category, blank=True)
-	CreatedOn = models.DateTimeField()
-	ModifiedOn = models.DateTimeField()
+	Category = models.ForeignKey(Category, blank=True, null=True, default=None)
+	CreatedOn = models.DateTimeField(auto_now_add=True)
+	ModifiedOn = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-ModifiedOn']
 
 	def save(self, *args, **kwargs):
 		if not self.Id:
@@ -73,8 +79,11 @@ class Function(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
 	Properties = models.ManyToManyField(Property, blank=True)
-	CreatedOn = models.DateTimeField()
-	ModifiedOn = models.DateTimeField()
+	CreatedOn = models.DateTimeField(auto_now_add=True)
+	ModifiedOn = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-ModifiedOn']
 
 	def save(self, *args, **kwargs):
 		if not self.Id:
@@ -97,8 +106,11 @@ class Device(models.Model):
 	CallClass = models.CharField(max_length=50)
 	Parameters = JSONField(default="{}")
 	Functions = models.ManyToManyField(Function, blank=True)
-	CreatedOn = models.DateTimeField()
-	ModifiedOn = models.DateTimeField()
+	CreatedOn = models.DateTimeField(auto_now_add=True)
+	ModifiedOn = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-ModifiedOn']
 
 	def save(self, *args, **kwargs):
 		if not self.Id:
@@ -119,25 +131,24 @@ class Device(models.Model):
 		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
 
 
-class GroupDevice(Device):
-	Group = models.ForeignKey(Group, blank=False)
-
-
 class Group(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
 	Properties = models.ManyToManyField(Property, blank=True)
-	ParentGroup = models.ForeignKey("self", blank=True, symmetrical=False)
-	CreatedOn = models.DateTimeField()
-	ModifiedOn = models.DateTimeField()
+	ParentGroup = models.ForeignKey("self", blank=True, null=True)
+	CreatedOn = models.DateTimeField(auto_now_add=True)
+	ModifiedOn = models.DateTimeField(auto_now_add=True)
 
 	@property
 	def Device(self):
-		return GroupDevice.objects.find(Group=self)
+		return GroupDevice.objects.filter(Group=self).first()
 
 	@property
 	def SubGroups(self):
 		return Group.objects.filter(ParentGroup=self)
+
+	class Meta:
+		ordering = ['-ModifiedOn']
 
 	def save(self, *args, **kwargs):
 		if not self.Id:
@@ -154,13 +165,20 @@ class Group(models.Model):
 		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
 
 
+class GroupDevice(Device):
+	Group = models.ForeignKey(Group, blank=False)
+
+
 class Task(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Property = models.ForeignKey(Property, blank=True)
 	Value = models.CharField(max_length=50)
-	CreatedOn = models.DateTimeField()
-	ModifiedOn = models.DateTimeField()
+	CreatedOn = models.DateTimeField(auto_now_add=True)
+	ModifiedOn = models.DateTimeField(auto_now_add=True)
 	_Parser = None
+
+	class Meta:
+		ordering = ['-ModifiedOn']
 
 	def save(self, *args, **kwargs):
 		if not self.Id:
@@ -184,7 +202,10 @@ class Condition(models.Model):
 	Value = models.CharField(max_length=50)
 	AndConditions = models.ManyToManyField("self", blank=True, symmetrical=False)
 	CreatedOn = models.DateTimeField(editable=False)
-	ModifiedOn = models.DateTimeField()
+	ModifiedOn = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-ModifiedOn']
 
 	def save(self, *args, **kwargs):
 		if not self.Id:
@@ -208,8 +229,11 @@ class Control(models.Model):
 	Name = models.CharField(max_length=50)
 	Tasks = models.ManyToManyField(Task, blank=True)
 	Conditions = models.ManyToManyField(Condition, blank=True)
-	CreatedOn = models.DateTimeField()
-	ModifiedOn = models.DateTimeField()
+	CreatedOn = models.DateTimeField(auto_now_add=True)
+	ModifiedOn = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-ModifiedOn']
 
 	def save(self, *args, **kwargs):
 		if not self.Id:
@@ -231,8 +255,11 @@ class Interface(models.Model):
 	Name = models.CharField(max_length=50)
 	Editor = models.ForeignKey(Property, null=True, related_name="editor")
 	Monitor = models.ForeignKey(Property, null=True)
-	CreatedOn = models.DateTimeField()
-	ModifiedOn = models.DateTimeField()
+	CreatedOn = models.DateTimeField(auto_now_add=True)
+	ModifiedOn = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-ModifiedOn']
 
 	def save(self, *args, **kwargs):
 		if not self.Id:
@@ -253,8 +280,11 @@ class Prefab(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
 	Template = JSONField(default="{}")
-	CreatedOn = models.DateTimeField()
-	ModifiedOn = models.DateTimeField()
+	CreatedOn = models.DateTimeField(auto_now_add=True)
+	ModifiedOn = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ['-ModifiedOn']
 
 	def save(self, *args, **kwargs):
 		if not self.Id:

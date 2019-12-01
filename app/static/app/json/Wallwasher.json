@@ -1,0 +1,32 @@
+{
+  "CallClass": "Wallwasher",
+  "Functions": [
+    {
+      "Name": "Renk Ge\u00e7i\u015fi",
+      "Properties": [
+        {
+          "Comparable": false,
+          "Name": "Renk",
+          "Parameters": {},
+          "Value": "rgba(0,0,0,0)",
+          "CallFunction": "Color",
+          "Type": 3,
+          "Class": 4
+        },
+        {
+          "Comparable": false,
+          "Name": "S\u00fcre",
+          "Parameters": {},
+          "Value": "0",
+          "CallFunction": "TransitionTime",
+          "Type": 3,
+          "Class": 1
+        }
+      ]
+    }
+  ],
+  "Name": "Wallwasher",
+  "Parameters": {
+    "Address ": 20
+  }
+}

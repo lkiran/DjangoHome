@@ -5,11 +5,14 @@ from app.models import *
 
 
 class PropertySerializer(serializers.ModelSerializer):
-	Id = serializers.CharField()
+	Id = serializers.CharField(required=False)
 
 	class Meta:
 		model = Property
 		fields = '__all__'
+
+	def create(self):
+		return Property(**self.validated_data)
 
 
 class PropertyInfoSerializer(serializers.ModelSerializer):
@@ -137,3 +140,33 @@ class InterfaceSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Interface
 		fields = '__all__'
+
+
+class GroupSerializer(serializers.ModelSerializer):
+	Id = serializers.CharField(required=False)
+	ParentGroup = SerializerMethodField(read_only=True)
+	Properties = PropertySerializer(required=True, many=True)
+	Device = SerializerMethodField(read_only=True)
+
+	class Meta:
+		model = Group
+		fields = '__all__'
+
+	def get_ParentGroup(self, obj):
+		if obj.ParentGroup is not None:
+			return GroupSerializer(obj.ParentGroup).data
+		else:
+			return None
+
+	def get_Device(self, obj):
+		if obj.Device is not None:
+			return DeviceSerializer(obj.Device).data
+		else:
+			return None
+
+	def create(self):
+		properties = self.validated_data.pop("Properties")
+		group = Group(**self.validated_data)
+		for property in properties:
+			group.Properties.add(Property(**property))
+		return group

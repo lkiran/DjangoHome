@@ -1,4 +1,3 @@
-# coding=utf-8
 import sys
 from inspect import getmembers, isclass, isabstract
 
@@ -26,8 +25,7 @@ class BaseBatchValueOperations(object):
 	def _baseProperty(self):
 		baseProperty = Property()
 		baseProperty.Category = self.Category
-		baseProperty.Parameters = {"propertyIds": [property.id for property in self.properties]}
-		baseProperty.Class = self.TemplateClass
+		baseProperty.Class = self.TemplateClass.value
 		return baseProperty
 
 	def convertToGroupProperty(self):
@@ -46,8 +44,8 @@ class BatchValueOperations:
 		batchOperationClasses = getmembers(sys.modules[__name__], lambda o: isclass(o) and not isabstract(o))
 		for name, _type in batchOperationClasses:
 			if isclass(_type) and issubclass(_type, BaseBatchValueOperations) and not isabstract(_type):
-				key = _type().TemplateClass
-				BatchValueOperations.operations[key] = _type()
+				key = _type(None).TemplateClass
+				BatchValueOperations.operations[key] = _type
 
 	def evaluateProperties(self, properties, operation):
 		_class = properties.first().Class  # TODO: do this w/o 'first()'
@@ -58,10 +56,10 @@ class BatchValueOperations:
 
 	def convertToGroupProperty(self, properties):
 		_class = properties.first().Class  # TODO: do this w/o 'first()'
-		operation = self.operations.get(_class)(properties)
+		operation =  self.operations.get(ClassEnum(_class))(properties)
 		result = operation.convertToGroupProperty()
-		if operation.Type is not TypeEnum.Read_Or_Write:
-			result = result.filter(Type=operation.Type)
+		if TypeEnum(operation.Type) is not TypeEnum.Read_Or_Write:
+			result = [r for r in result if r.Type is TypeEnum(operation.Type)]
 		return result
 
 
@@ -81,17 +79,17 @@ class BooleanBatchValueOperations(BaseBatchValueOperations):
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
-		setProperty.Name = u"Eşitle"
+		setProperty.Name = u"Esitle"
 		setProperty.CallFunction = "set"
-		setProperty.Type = TypeEnum.Write_Only
+		setProperty.Type = TypeEnum.Write_Only.value
 		orProperty = self._baseProperty
 		orProperty.Name = u"Herhangi biri"
 		orProperty.CallFunction = "calculateOr"
-		orProperty.Type = TypeEnum.Read_Only
+		orProperty.Type = TypeEnum.Read_Only.value
 		andProperty = self._baseProperty
 		andProperty.Name = u"Hepsi"
 		andProperty.CallFunction = "calculateAnd"
-		andProperty.Type = TypeEnum.Read_Only
+		andProperty.Type = TypeEnum.Read_Only.value
 		return [setProperty, orProperty, andProperty]
 
 
@@ -105,9 +103,9 @@ class ColorBatchValueOperations(BaseBatchValueOperations):
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
-		setProperty.Name = u"Eşitle"
+		setProperty.Name = u"Esitle"
 		setProperty.CallFunction = "set"
-		setProperty.Type = TypeEnum.Write_Only
+		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
 
@@ -121,9 +119,9 @@ class DateBatchValueOperations(BaseBatchValueOperations):
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
-		setProperty.Name = u"Eşitle"
+		setProperty.Name = u"Esitle"
 		setProperty.CallFunction = "set"
-		setProperty.Type = TypeEnum.Write_Only
+		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
 
@@ -137,9 +135,9 @@ class TimeBatchValueOperations(BaseBatchValueOperations):
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
-		setProperty.Name = u"Eşitle"
+		setProperty.Name = u"Esitle"
 		setProperty.CallFunction = "set"
-		setProperty.Type = TypeEnum.Write_Only
+		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
 
@@ -153,9 +151,9 @@ class DayOfWeekBatchValueOperations(BaseBatchValueOperations):
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
-		setProperty.Name = u"Eşitle"
+		setProperty.Name = u"Esitle"
 		setProperty.CallFunction = "set"
-		setProperty.Type = TypeEnum.Write_Only
+		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
 
@@ -169,9 +167,9 @@ class StringBatchValueOperations(BaseBatchValueOperations):
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
-		setProperty.Name = u"Eşitle"
+		setProperty.Name = u"Esitle"
 		setProperty.CallFunction = "set"
-		setProperty.Type = TypeEnum.Write_Only
+		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
 
@@ -185,9 +183,9 @@ class DateTimeBatchValueOperations(BaseBatchValueOperations):
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
-		setProperty.Name = u"Eşitle"
+		setProperty.Name = u"Esitle"
 		setProperty.CallFunction = "set"
-		setProperty.Type = TypeEnum.Write_Only
+		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
 
@@ -207,17 +205,17 @@ class IntegerBatchValueOperations(BaseBatchValueOperations):
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
-		setProperty.Name = u"Eşitle"
+		setProperty.Name = u"Esitle"
 		setProperty.CallFunction = "set"
-		setProperty.Type = TypeEnum.Write_Only
+		setProperty.Type = TypeEnum.Write_Only.value
 		sumProperty = self._baseProperty
-		sumProperty.Name = u"Toplamı"
+		sumProperty.Name = u"Toplami"
 		sumProperty.CallFunction = "sum"
-		sumProperty.Type = TypeEnum.Read_Only
+		sumProperty.Type = TypeEnum.Read_Only.value
 		averageProperty = self._baseProperty
-		averageProperty.Name = u"Ortalaması"
+		averageProperty.Name = u"Ortalamasi"
 		averageProperty.CallFunction = "average"
-		averageProperty.Type = TypeEnum.Read_Only
+		averageProperty.Type = TypeEnum.Read_Only.value
 		return [setProperty, sumProperty, averageProperty]
 
 
@@ -231,7 +229,7 @@ class EmptyBatchValueOperations(BaseBatchValueOperations):
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
-		setProperty.Name = u"Eşitle"
+		setProperty.Name = u"Esitle"
 		setProperty.CallFunction = "set"
-		setProperty.Type = TypeEnum.Write_Only
+		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]

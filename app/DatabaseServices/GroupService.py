@@ -1,10 +1,13 @@
 import logging
 
+from django.db.models import QuerySet
+
 from app.BatchValueOperations import BatchValueOperations
 from app.DatabaseServices.DeviceService import DeviceService
+from app.Repositories.DeviceRepository import DeviceRepository
+from app.Repositories.FunctionRepository import FunctionRepository
 from app.Repositories.GroupRepository import GroupRepository
 from app.Repositories.PropertyRepository import PropertyRepository
-from app.enums import TypeEnum
 from app.models import GroupDevice, Function
 
 
@@ -13,9 +16,11 @@ class GroupService:
 
 	__instance = None
 	__logger = logging.getLogger('GroupService')
-	__deviceRepository = GroupRepository()
+	__deviceRepository = DeviceRepository()
 	__propertyRepository = PropertyRepository()
 	__deviceService = DeviceService()
+	__groupRepository= GroupRepository()
+	__functionRepository= FunctionRepository()
 
 	@staticmethod
 	def Instance():
@@ -28,22 +33,23 @@ class GroupService:
 			raise Exception("GroupService is a singleton, use 'GroupService.Instance()'")
 		else:
 			self.__logger.info("Init")
-			self._populateProducedGroups()
+			self._populateProducedGroups
 			GroupService.__instance = self
 
 	@property
 	def _populateProducedGroups(self):
-		return DeviceService.Devices.filter(CallClass=GroupService.DEFAULT_CALL_CLASS_NAME)
+		return [d for d in DeviceService.Devices if d.CallClass is GroupService.DEFAULT_CALL_CLASS_NAME]
 
 	def createGroup(self, group):
-		group.save()  # TODO: use _groupRepository instead
-		functions = self._createGroupDeviceFunctions(group)
+		group = self.__groupRepository.Save(group)
+		functions = self._createGroupDeviceFunctions(group.Properties)
 		groupDevice = GroupDevice()
 		groupDevice.Name = group.Name
+		groupDevice.Parameters = {}
 		groupDevice.CallClass = "Group"
-		groupDevice.Functions = functions
 		groupDevice.Group = group
 		groupDevice.save()
+		groupDevice.Functions.add(*functions)
 		return group
 
 	def removeGroup(self):
@@ -56,13 +62,13 @@ class GroupService:
 		raise NotImplementedError()
 
 	def addProperty(self, property, group):
-		type = property.Type
-		if type is TypeEnum.Read_Only:
-			self._addReadOnlyPropertyToGroup(property, group)
-		elif type is TypeEnum.Write_Only:
-			self._addWriteOnlyPropertyToGroup(property, group)
-		elif type is TypeEnum.Read_Or_Write:
-			self._addReadOrWritePropertyToGroup(property, group)
+		hasCategory = group.Properties.filter(Category=property.Category).exists()
+		group.Properties.append(property)
+		group.save()
+		if not hasCategory:
+			functions = self._createGroupDeviceFunctions(QuerySet(property))
+			group.Device.Functions += functions
+			group.Device.save()  # TODO: use __groupDeviceService here
 		return group
 
 	def removeProperty(self, property, group):
@@ -71,30 +77,22 @@ class GroupService:
 	def notifyPropertyValueChange(self, property):
 		raise NotImplementedError()
 
-	def _addReadOnlyPropertyToGroup(self, property, group):
-		raise NotImplementedError()
-
-	def _addWriteOnlyPropertyToGroup(self, property, group):
-		raise NotImplementedError()
-
-	def _addReadOrWritePropertyToGroup(self, property, group):
-		self._addReadOnlyPropertyToGroup(property, group)
-		self._addWriteOnlyPropertyToGroup(property, group)
-
-	def _createGroupDeviceFunctions(self, group):
-		categories = group.Properties.values_list("Category", flat=True).distinct()
+	def _createGroupDeviceFunctions(self, properties):
+		categories = set(p.Category for p in properties.all())
 		functions = []
 		for category in categories:
-			categoryProperties = group.Properties.filter(Category=category)
+			categoryProperties = properties.filter(Category=category)
 			categoryGroupProperties = self._createGroupDeviceProperties(categoryProperties)
 			function = Function()
 			function.Name = category.Name
-			function.Properties = categoryGroupProperties
-			function.save()  # TODO: use _functionRepository here
+			function = self.__functionRepository.Save(function)
+			for categoryGroupProperty in categoryGroupProperties:
+				categoryGroupProperty = self.__propertyRepository.Save(categoryGroupProperty)
+				function.Properties.add(categoryGroupProperty)
+			self.__functionRepository.Save(function)
 			functions.append(function)
 		return functions
 
 	def _createGroupDeviceProperties(self, categoryProperties):
-		_class = categoryProperties.first().Class
-		batchProperties = BatchValueOperations.convertToGroupProperty(categoryProperties)
+		batchProperties = BatchValueOperations().convertToGroupProperty(categoryProperties)
 		return batchProperties

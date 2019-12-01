@@ -3,11 +3,9 @@
 Command-line utility for administrative tasks.
 """
 
+import logging.handlers
 import os
 import sys
-
-import logging
-import logging.handlers
 
 if __name__ == "__main__":
 	os.environ.setdefault(

@@ -1,50 +1,49 @@
 from app.Repositories.FunctionRepository import FunctionRepository
+from app.Repositories.PropertyRepository import PropertyRepository
 from app.enums import ModelStatus
-from app.models import Device
+from app.models import Device, Group
+
 
 class GroupRepository(object):
-	__functionRepo = FunctionRepository()
+	__propertyRepo = PropertyRepository()
 
 	def Get(self, id=None):
 		if id is None:
-			return Device.objects.all()
+			return Group.objects.all()
 		try:
-			return Device.objects.get(Id=id)
-		except Device.DoesNotExist:
+			return Group.objects.get(Id=id)
+		except Group.DoesNotExist:
 			return None
 
 
 	def Save(self, data):
-		model = Device()
-		model.Id = data.get("Id", "")
-		model.Name = data.get("Name", "")
-		model.CallClass = data.get("CallClass", "")
-		model.Parameters = data.get("Parameters", None)
+		model = Group()
+		model.Id = data.Id
+		model.Name = data.Name
 
-		device = self.Get(model.Id)
-		status = self.Status(model, device)
+		group = self.Get(model.Id)
+		status = self.Status(model, group)
 		if status is ModelStatus.New:
 			model.Id = None
 			model.save()
 		elif status is ModelStatus.Modified:
 			model.save()
 
-		Functions = data.get("Functions", None)
-		for functionDict in Functions:
-			function = self.__functionRepo.Save(functionDict)
-			model.Functions.add(function.Id)
+		for property in  data.Properties.all():
+			property = self.__propertyRepo.Get(property.Id)
+			model.Properties.add(property)
 
 		return model
 
 
-	def Status(self, model, device=None):
-		if device is None:
-			device = self.Get(model.Id)
+	def Status(self, model, group=None):
+		if group is None:
+			group = self.Get(model.Id)
 
-		if not device:
+		if not group:
 			return ModelStatus.New
 
-		if device.Name is model.Name:
+		if group.Name is model.Name:
 			return ModelStatus.Modified
 
 		return ModelStatus.Same

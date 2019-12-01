@@ -1,0 +1,205 @@
+{
+  "CallClass": "IOExtender",
+  "Functions": [
+    {
+      "Name": "Role 1",
+      "Properties": [
+        {
+          "Comparable": false,
+          "Name": "Durum",
+          "Parameters": {
+            "Pin": 0
+          },
+          "Value": "0",
+          "CallFunction": "State",
+          "Type": 3,
+          "Class": 3
+        },
+        {
+          "Comparable": true,
+          "Name": "A\u00e7\u0131k S\u00fcre",
+          "Parameters": {
+            "Pin": 0
+          },
+          "Value": "0",
+          "CallFunction": "UpTime",
+          "Type": 1,
+          "Class": 1
+        },
+        {
+          "Comparable": true,
+          "Name": "Kapal\u0131 S\u00fcre",
+          "Parameters": {
+            "Pin": 0
+          },
+          "Value": "0",
+          "CallFunction": "DownTime",
+          "Type": 1,
+          "Class": 1
+        },
+        {
+          "Comparable": false,
+          "Name": "Tersine \u00c7evir",
+          "Parameters": {
+            "Pin": 0
+          },
+          "Value": "",
+          "CallFunction": "Toggle",
+          "Type": 2,
+          "Class": 8
+        }
+      ]
+    },
+    {
+      "Name": "Role 2",
+      "Properties": [
+        {
+          "Comparable": false,
+          "Name": "Durum",
+          "Parameters": {
+            "Pin": 1
+          },
+          "Value": "0",
+          "CallFunction": "State",
+          "Type": 3,
+          "Class": 3
+        },
+        {
+          "Comparable": true,
+          "Name": "A\u00e7\u0131k S\u00fcre",
+          "Parameters": {
+            "Pin": 1
+          },
+          "Value": "0",
+          "CallFunction": "UpTime",
+          "Type": 1,
+          "Class": 1
+        },
+        {
+          "Comparable": true,
+          "Name": "Kapal\u0131 S\u00fcre",
+          "Parameters": {
+            "Pin": 1
+          },
+          "Value": "0",
+          "CallFunction": "DownTime",
+          "Type": 1,
+          "Class": 1
+        },
+        {
+          "Comparable": false,
+          "Name": "Tersine \u00c7evir",
+          "Parameters": {
+            "Pin": 1
+          },
+          "Value": "",
+          "CallFunction": "Toggle",
+          "Type": 2,
+          "Class": 8
+        }
+      ]
+    },
+    {
+      "Name": "Role 3",
+      "Properties": [
+        {
+          "Comparable": false,
+          "Name": "Durum",
+          "Parameters": {
+            "Pin": 2
+          },
+          "Value": "0",
+          "CallFunction": "State",
+          "Type": 3,
+          "Class": 3
+        },
+        {
+          "Comparable": true,
+          "Name": "A\u00e7\u0131k S\u00fcre",
+          "Parameters": {
+            "Pin": 2
+          },
+          "Value": "0",
+          "CallFunction": "UpTime",
+          "Type": 1,
+          "Class": 1
+        },
+        {
+          "Comparable": true,
+          "Name": "Kapal\u0131 S\u00fcre",
+          "Parameters": {
+            "Pin": 2
+          },
+          "Value": "0",
+          "CallFunction": "DownTime",
+          "Type": 1,
+          "Class": 1
+        },
+        {
+          "Comparable": false,
+          "Name": "Tersine \u00c7evir",
+          "Parameters": {
+            "Pin": 2
+          },
+          "Value": "",
+          "CallFunction": "Toggle",
+          "Type": 2,
+          "Class": 8
+        }
+      ]
+    },
+    {
+      "Name": "Role 4",
+      "Properties": [
+        {
+          "Comparable": false,
+          "Name": "Durum",
+          "Parameters": {
+            "Pin": 3
+          },
+          "Value": "0",
+          "CallFunction": "State",
+          "Type": 3,
+          "Class": 3
+        },
+        {
+          "Comparable": true,
+          "Name": "A\u00e7\u0131k S\u00fcre",
+          "Parameters": {
+            "Pin": 3
+          },
+          "Value": "0",
+          "CallFunction": "UpTime",
+          "Type": 1,
+          "Class": 1
+        },
+        {
+          "Comparable": true,
+          "Name": "Kapal\u0131 S\u00fcre",
+          "Parameters": {
+            "Pin": 3
+          },
+          "Value": "0",
+          "CallFunction": "DownTime",
+          "Type": 1,
+          "Class": 1
+        },
+        {
+          "Comparable": false,
+          "Name": "Tersine \u00c7evir",
+          "Parameters": {
+            "Pin": 3
+          },
+          "Value": "",
+          "CallFunction": "Toggle",
+          "Type": 2,
+          "Class": 8
+        }
+      ]
+    }
+  ],
+  "Name": "Role Mod\u00fcl\u00fc",
+  "Parameters": {
+    "Address ": 35
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "CallClass": "Button",
+  "Functions": [
+    {
+      "Name": "Anahtar 1",
+      "Properties": [
+        {
+          "Comparable": false,
+          "Name": "Bas\u0131ld\u0131",
+          "Parameters": {
+            "Button": 1
+          },
+          "Value": "false",
+          "CallFunction": "Clicked",
+          "Type": 1,
+          "Class": 3
+        },
+        {
+          "Comparable": false,
+          "Name": "Bas\u0131l Tutuldu",
+          "Parameters": {
+            "Button": 1
+          },
+          "Value": "false",
+          "CallFunction": "LongPressed",
+          "Type": 1,
+          "Class": 3
+        },
+        {
+          "Comparable": false,
+          "Name": "\u00c7ift Bas\u0131ld\u0131",
+          "Parameters": {
+            "Button": 1
+          },
+          "Value": "false",
+          "CallFunction": "DoublePressed",
+          "Type": 1,
+          "Class": 3
+        }
+      ]
+    },
+    {
+      "Name": "Anahtar 2",
+      "Properties": [
+        {
+          "Comparable": false,
+          "Name": "Bas\u0131ld\u0131",
+          "Parameters": {
+            "Button": 1
+          },
+          "Value": "false",
+          "CallFunction": "Clicked",
+          "Type": 1,
+          "Class": 3
+        },
+        {
+          "Comparable": false,
+          "Name": "Bas\u0131l Tutuldu",
+          "Parameters": {
+            "Button": 2
+          },
+          "Value": "false",
+          "CallFunction": "LongPressed",
+          "Type": 1,
+          "Class": 3
+        },
+        {
+          "Comparable": false,
+          "Name": "\u00c7ift Bas\u0131ld\u0131",
+          "Parameters": {
+            "Button": 2
+          },
+          "Value": "false",
+          "CallFunction": "DoublePressed",
+          "Type": 1,
+          "Class": 3
+        }
+      ]
+    },
+    {
+      "Name": "Anahtar 3",
+      "Properties": [
+        {
+          "Comparable": false,
+          "Name": "Bas\u0131ld\u0131",
+          "Parameters": {
+            "Button": 3
+          },
+          "Value": "false",
+          "CallFunction": "Clicked",
+          "Type": 1,
+          "Class": 3
+        },
+        {
+          "Comparable": false,
+          "Name": "Bas\u0131l Tutuldu",
+          "Parameters": {
+            "Button": 3
+          },
+          "Value": "false",
+          "CallFunction": "LongPressed",
+          "Type": 1,
+          "Class": 3
+        },
+        {
+          "Comparable": false,
+          "Name": "\u00c7ift Bas\u0131ld\u0131",
+          "Parameters": {
+            "Button": 3
+          },
+          "Value": "false",
+          "CallFunction": "DoublePressed",
+          "Type": 1,
+          "Class": 3
+        }
+      ]
+    },
+    {
+      "Name": "Anahtar 4",
+      "Properties": [
+        {
+          "Comparable": false,
+          "Name": "Bas\u0131ld\u0131",
+          "Parameters": {
+            "Button": 4
+          },
+          "Value": "false",
+          "CallFunction": "Clicked",
+          "Type": 1,
+          "Class": 3
+        },
+        {
+          "Comparable": false,
+          "Name": "Bas\u0131l Tutuldu",
+          "Parameters": {
+            "Button": 4
+          },
+          "Value": "false",
+          "CallFunction": "LongPressed",
+          "Type": 1,
+          "Class": 3
+        },
+        {
+          "Comparable": false,
+          "Name": "\u00c7ift Bas\u0131ld\u0131",
+          "Parameters": {
+            "Button": 4
+          },
+          "Value": "false",
+          "CallFunction": "DoublePressed",
+          "Type": 1,
+          "Class": 3
+        }
+      ]
+    }
+  ],
+  "Name": "Anahtar Grubu",
+  "Parameters": {
+    "RefreshPeriodInSec": 2,
+    "Address": 8
+  }
+}
