@@ -31,7 +31,7 @@ class DeviceService(object):
 		devices = self.__deviceRepository.Get()
 		factory = DeviceFactory()
 		DeviceService.Devices = [(lambda d: factory.Produce(d))(d) for d in devices]
-		print u"All {0} devices are produced".format(len(DeviceService.Devices))
+		print(u"All {0} devices are produced".format(len(DeviceService.Devices)))
 
 	def GetProducedDeviceById(self, id):
 		return next((d for d in DeviceService.Devices if d.Model.Id == id), None)

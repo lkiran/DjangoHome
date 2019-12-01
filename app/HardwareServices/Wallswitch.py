@@ -69,10 +69,10 @@ class Wallswitch(BaseDeviceService):
 		value = kwargs.get("Value")
 		button = kwargs.get("Button")
 		if value is not None:
-			print ("Set button {0} light as {1}".format(button, value))
+			print("Set button {0} light as {1}".format(button, value))
 			pinObject = self.Buttons[button]
 			pinObject.Status = value
-		print ("Get button {0} light status".format(button))
+		print("Get button {0} light status".format(button))
 		return self.Buttons[button].Status
 
 	def __checkDevice(self):

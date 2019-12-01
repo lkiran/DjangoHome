@@ -21,10 +21,10 @@ class IOExtender(BaseDeviceService):
 
 	def __State(self, pin, value=None):
 		if value is not None:
-			print ("Set pin {0} value as {1}".format(pin, value))
+			print("Set pin {0} value as {1}".format(pin, value))
 			pinObject = self.Pins[pin]
 			pinObject.Status = value
-		print ("Get pin {0} value".format(pin))
+		print("Get pin {0} value".format(pin))
 		return self.Pins[pin].Status
 
 	def Toggle(self, **kwargs):
