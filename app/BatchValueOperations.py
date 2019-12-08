@@ -6,7 +6,10 @@ from app.models import Property
 
 
 class BaseBatchValueOperations(object):
+
 	def __init__(self, properties):
+		from app.DatabaseServices.DeviceService import DeviceService
+		self._deviceService = DeviceService.Instance()
 		self.properties = properties
 
 	@property
@@ -26,6 +29,8 @@ class BaseBatchValueOperations(object):
 		baseProperty = Property()
 		baseProperty.Category = self.Category
 		baseProperty.Class = self.TemplateClass.value
+		baseProperty.CallFunction = "execute"
+		baseProperty.Parameters = {}
 		return baseProperty
 
 	def convertToGroupProperty(self):
@@ -47,16 +52,16 @@ class BatchValueOperations:
 				key = _type(None).TemplateClass
 				BatchValueOperations.operations[key] = _type
 
-	def evaluateProperties(self, properties, operation):
-		_class = properties.first().Class  # TODO: do this w/o 'first()'
-		operations = self.operations.get(_class)(properties)
+	def evaluateProperties(self, properties, operation, value=None):
+		_class = ClassEnum(properties.first().Class)  # TODO: do this w/o 'first()'
+		operations = self.operations.get(ClassEnum(_class))(properties)
 		operate = getattr(operations, operation)
-		result = operate(properties)
+		result = operate(value)
 		return result
 
 	def convertToGroupProperty(self, properties):
-		_class = properties.first().Class  # TODO: do this w/o 'first()'
-		operation =  self.operations.get(ClassEnum(_class))(properties)
+		_class = ClassEnum(properties.first().Class)  # TODO: do this w/o 'first()'
+		operation = self.operations.get(_class)(properties)
 		result = operation.convertToGroupProperty()
 		if TypeEnum(operation.Type) is not TypeEnum.Read_Or_Write:
 			result = [r for r in result if r.Type is TypeEnum(operation.Type)]
@@ -69,7 +74,9 @@ class BooleanBatchValueOperations(BaseBatchValueOperations):
 		return ClassEnum.Boolean
 
 	def set(self, value):
-		raise NotImplementedError()
+		for property in self.properties:
+			self._deviceService.SetProperty(property, value)
+		return value
 
 	def calculateOr(self):
 		raise NotImplementedError()
@@ -80,15 +87,15 @@ class BooleanBatchValueOperations(BaseBatchValueOperations):
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
 		setProperty.Name = u"Esitle"
-		setProperty.CallFunction = "set"
+		setProperty.Parameters["operation"] = "set"
 		setProperty.Type = TypeEnum.Write_Only.value
 		orProperty = self._baseProperty
 		orProperty.Name = u"Herhangi biri"
-		orProperty.CallFunction = "calculateOr"
+		orProperty.Parameters["operation"] = "calculateOr"
 		orProperty.Type = TypeEnum.Read_Only.value
 		andProperty = self._baseProperty
 		andProperty.Name = u"Hepsi"
-		andProperty.CallFunction = "calculateAnd"
+		andProperty.Parameters["operation"] = "calculateAnd"
 		andProperty.Type = TypeEnum.Read_Only.value
 		return [setProperty, orProperty, andProperty]
 
@@ -99,12 +106,14 @@ class ColorBatchValueOperations(BaseBatchValueOperations):
 		return ClassEnum.Color
 
 	def set(self, value):
-		raise NotImplementedError()
+		for property in self.properties:
+			self._deviceService.SetProperty(property, value)
+		return value
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
 		setProperty.Name = u"Esitle"
-		setProperty.CallFunction = "set"
+		setProperty.Parameters["operation"] = "set"
 		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
@@ -115,12 +124,14 @@ class DateBatchValueOperations(BaseBatchValueOperations):
 		return ClassEnum.Date
 
 	def set(self, value):
-		raise NotImplementedError()
+		for property in self.properties:
+			self._deviceService.SetProperty(property, value)
+		return value
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
 		setProperty.Name = u"Esitle"
-		setProperty.CallFunction = "set"
+		setProperty.Parameters["operation"] = "set"
 		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
@@ -131,12 +142,14 @@ class TimeBatchValueOperations(BaseBatchValueOperations):
 		return ClassEnum.Time
 
 	def set(self, value):
-		raise NotImplementedError()
+		for property in self.properties:
+			self._deviceService.SetProperty(property, value)
+		return value
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
 		setProperty.Name = u"Esitle"
-		setProperty.CallFunction = "set"
+		setProperty.Parameters["operation"] = "set"
 		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
@@ -147,12 +160,14 @@ class DayOfWeekBatchValueOperations(BaseBatchValueOperations):
 		return ClassEnum.DayOfWeek
 
 	def set(self, value):
-		raise NotImplementedError()
+		for property in self.properties:
+			self._deviceService.SetProperty(property, value)
+		return value
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
 		setProperty.Name = u"Esitle"
-		setProperty.CallFunction = "set"
+		setProperty.Parameters["operation"] = "set"
 		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
@@ -163,12 +178,14 @@ class StringBatchValueOperations(BaseBatchValueOperations):
 		return ClassEnum.String
 
 	def set(self, value):
-		raise NotImplementedError()
+		for property in self.properties:
+			self._deviceService.SetProperty(property, value)
+		return value
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
 		setProperty.Name = u"Esitle"
-		setProperty.CallFunction = "set"
+		setProperty.Parameters["operation"] = "set"
 		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
@@ -179,12 +196,14 @@ class DateTimeBatchValueOperations(BaseBatchValueOperations):
 		return ClassEnum.DateTime
 
 	def set(self, value):
-		raise NotImplementedError()
+		for property in self.properties:
+			self._deviceService.SetProperty(property, value)
+		return value
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
 		setProperty.Name = u"Esitle"
-		setProperty.CallFunction = "set"
+		setProperty.Parameters["operation"] = "set"
 		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]
 
@@ -195,7 +214,9 @@ class IntegerBatchValueOperations(BaseBatchValueOperations):
 		return ClassEnum.Integer
 
 	def set(self, value):
-		raise NotImplementedError()
+		for property in self.properties:
+			self._deviceService.SetProperty(property, value)
+		return value
 
 	def sum(self, properties):
 		return sum(self.Objects(properties))
@@ -206,15 +227,15 @@ class IntegerBatchValueOperations(BaseBatchValueOperations):
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
 		setProperty.Name = u"Esitle"
-		setProperty.CallFunction = "set"
+		setProperty.Parameters["operation"] = "set"
 		setProperty.Type = TypeEnum.Write_Only.value
 		sumProperty = self._baseProperty
 		sumProperty.Name = u"Toplami"
-		sumProperty.CallFunction = "sum"
+		sumProperty.Parameters["operation"] = "sum"
 		sumProperty.Type = TypeEnum.Read_Only.value
 		averageProperty = self._baseProperty
 		averageProperty.Name = u"Ortalamasi"
-		averageProperty.CallFunction = "average"
+		averageProperty.Parameters["operation"] = "average"
 		averageProperty.Type = TypeEnum.Read_Only.value
 		return [setProperty, sumProperty, averageProperty]
 
@@ -225,11 +246,13 @@ class EmptyBatchValueOperations(BaseBatchValueOperations):
 		return ClassEnum.Empty
 
 	def call(self, value):
-		raise NotImplementedError()
+		for property in self.properties:
+			self._deviceService.SetProperty(property, value)
+		return value
 
 	def convertToGroupProperty(self):
 		setProperty = self._baseProperty
 		setProperty.Name = u"Esitle"
-		setProperty.CallFunction = "set"
+		setProperty.Parameters["operation"] = "set"
 		setProperty.Type = TypeEnum.Write_Only.value
 		return [setProperty]

@@ -32,11 +32,17 @@ if __name__ == "__main__":
 	if not os.path.exists("/Logs"):
 		os.makedirs("/Logs")
 
-	handler = logging.handlers.TimedRotatingFileHandler(log_file_name, when="midnight", interval=1)
-	handler.setFormatter(formatter)
-	handler.suffix = "%d.%B.%Y.log"
 	logger = logging.getLogger()
-	logger.addHandler(handler)
 	logger.setLevel(logging_level)
+
+	fileHandler = logging.handlers.TimedRotatingFileHandler(log_file_name, when="midnight", interval=1)
+	fileHandler.setFormatter(formatter)
+	fileHandler.suffix = "%d.%B.%Y.log"
+	logger.addHandler(fileHandler)
+
+	consoleHandler = logging.StreamHandler()
+	consoleHandler.setFormatter(formatter)
+	logger.addHandler(consoleHandler)
+
 
 	execute_from_command_line(sys.argv)

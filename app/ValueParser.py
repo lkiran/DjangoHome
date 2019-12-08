@@ -66,11 +66,14 @@ class BooleanValueParser(AbsValueParser):
 		return ClassEnum.Boolean
 
 	def ToObject(self, value):
-		value = value.lower()
-		if value == 'true':
-			return True
-		elif value == 'false':
-			return False
+		if isinstance(value, bool):
+			return value
+		if isinstance(value, str):
+			value = value.lower()
+			if value == 'true':
+				return True
+			elif value == 'false':
+				return False
 
 	def ToString(self, value):
 		if value:
