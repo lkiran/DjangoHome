@@ -1,4 +1,3 @@
-six >= 1.7.0
 dependency_injector
 enum34
 numpy
@@ -9,5 +8,5 @@ django-filter
 djangorestframework
 django-cors-headers
 Markdown
-jsonfield
+jsonfield2
 smbus2
