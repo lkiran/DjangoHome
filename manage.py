@@ -35,7 +35,7 @@ if __name__ == "__main__":
 	logger = logging.getLogger()
 	logger.setLevel(logging_level)
 
-	fileHandler = logging.handlers.TimedRotatingFileHandler(log_file_name, when="midnight", interval=1)
+	fileHandler = logging.handlers.TimedRotatingFileHandler(log_file_name, when="midnight", interval=1,encoding='utf-8')
 	fileHandler.setFormatter(formatter)
 	fileHandler.suffix = "%d.%B.%Y.log"
 	logger.addHandler(fileHandler)

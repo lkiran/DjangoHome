@@ -4,7 +4,7 @@ import threading
 
 if os.environ['dev'] == 'True':
 	print("Importing smbus2 mock")
-	from SmbusMock import SMBusWrapper
+	from .SmbusMock import SMBusWrapper
 else:
 	from smbus2 import SMBusWrapper
 

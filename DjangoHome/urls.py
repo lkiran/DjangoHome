@@ -18,16 +18,16 @@ router = routers.DefaultRouter()
 urlpatterns = [
 	url(r'^', include(router.urls)),
 	url(r'^admin/', admin.site.urls),
-	url(r'^(?i)andConditions', AndConditionController.as_view()),
-	url(r'^(?i)propertyInfo', PropertyInfoController.as_view()),
-	url(r'^(?i)conditions', ConditionController.as_view()),
-	url(r'^(?i)controls', ControlController.as_view()),
-	url(r'^(?i)interfaces', InterfaceController.as_view()),
-	url(r'^(?i)functions', FunctionController.as_view()),
-	url(r'^(?i)properties', PropertyController.as_view()),
-	url(r'^(?i)devices', DeviceController.as_view()),
-	url(r'^(?i)tasks', TaskController.as_view()),
-	url(r'^(?i)groups', GroupController.as_view()),
+	url(r'^andConditions', AndConditionController.as_view()),
+	url(r'^propertyInfo', PropertyInfoController.as_view()),
+	url(r'^conditions', ConditionController.as_view()),
+	url(r'^controls', ControlController.as_view()),
+	url(r'^interfaces', InterfaceController.as_view()),
+	url(r'^functions', FunctionController.as_view()),
+	url(r'^properties', PropertyController.as_view()),
+	url(r'^devices', DeviceController.as_view()),
+	url(r'^tasks', TaskController.as_view()),
+	url(r'^groups', GroupController.as_view()),
 ]
 
 deviceService = DeviceService.Instance()

@@ -25,10 +25,10 @@ class Category(models.Model):
 		return super(Category, self).save(*args, **kwargs)
 
 	def __str__(self):
-		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+		return u'{0} ({1})'.format(self.Name, self.Id)
 
 	def __unicode__(self):
-		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+		return u'{0} ({1})'.format(self.Name, self.Id)
 
 
 class Property(models.Model):
@@ -40,7 +40,7 @@ class Property(models.Model):
 	Type = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in TypeEnum])
 	Class = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in ClassEnum])
 	Comparable = models.BooleanField(default=True)
-	Category = models.ForeignKey(Category, blank=True, null=True, default=None)
+	Category = models.ForeignKey(Category, blank=True, null=True, default=None, on_delete=models.DO_NOTHING)
 	CreatedOn = models.DateTimeField(auto_now_add=True)
 	ModifiedOn = models.DateTimeField(auto_now_add=True)
 
@@ -69,10 +69,10 @@ class Property(models.Model):
 		return self.Parser.ToObject(self.Value)
 
 	def __str__(self):
-		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+		return u'{0} ({1})'.format(self.Name, self.Id)
 
 	def __unicode__(self):
-		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+		return u'{0} ({1})'.format(self.Name, self.Id)
 
 
 class Function(models.Model):
@@ -94,10 +94,10 @@ class Function(models.Model):
 		return super(Function, self).save(*args, **kwargs)
 
 	def __str__(self):
-		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+		return u'{0} ({1})'.format(self.Name, self.Id)
 
 	def __unicode__(self):
-		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+		return u'{0} ({1})'.format(self.Name, self.Id)
 
 
 class Device(models.Model):
@@ -125,17 +125,17 @@ class Device(models.Model):
 		return Property.objects.filter(function__device=self)
 
 	def __str__(self):
-		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+		return u'{0} ({1})'.format(self.Name, self.Id)
 
 	def __unicode__(self):
-		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+		return u'{0} ({1})'.format(self.Name, self.Id)
 
 
 class Group(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
 	Properties = models.ManyToManyField(Property, blank=True)
-	ParentGroup = models.ForeignKey("self", blank=True, null=True)
+	ParentGroup = models.ForeignKey("self", blank=True, null=True, on_delete=models.DO_NOTHING)
 	CreatedOn = models.DateTimeField(auto_now_add=True)
 	ModifiedOn = models.DateTimeField(auto_now_add=True)
 
@@ -159,19 +159,19 @@ class Group(models.Model):
 		return super(Group, self).save(*args, **kwargs)
 
 	def __str__(self):
-		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+		return u'{0} ({1})'.format(self.Name, self.Id)
 
 	def __unicode__(self):
-		return u'{0} ({1})'.format(unicode(self.Name), self.Id)
+		return u'{0} ({1})'.format(self.Name, self.Id)
 
 
 class GroupDevice(Device):
-	Group = models.ForeignKey(Group, blank=False)
+	Group = models.ForeignKey(Group, blank=False, on_delete=models.DO_NOTHING)
 
 
 class Task(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
-	Property = models.ForeignKey(Property, blank=True)
+	Property = models.ForeignKey(Property, blank=True, on_delete=models.DO_NOTHING)
 	Value = models.CharField(max_length=50)
 	CreatedOn = models.DateTimeField(auto_now_add=True)
 	ModifiedOn = models.DateTimeField(auto_now_add=True)
@@ -197,7 +197,7 @@ class Task(models.Model):
 
 class Condition(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
-	Property = models.ForeignKey(Property, blank=True)
+	Property = models.ForeignKey(Property, blank=True, on_delete=models.DO_NOTHING)
 	Operator = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in ComparerEnum])
 	Value = models.CharField(max_length=50)
 	AndConditions = models.ManyToManyField("self", blank=True, symmetrical=False)
@@ -244,17 +244,17 @@ class Control(models.Model):
 		return super(Control, self).save(*args, **kwargs)
 
 	def __str__(self):
-		return "Task " + unicode(self.Name)
+		return "Task " + self.Name
 
 	def __unicode__(self):
-		return "Task " + unicode(self.Name)
+		return "Task " + self.Name
 
 
 class Interface(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
 	Name = models.CharField(max_length=50)
-	Editor = models.ForeignKey(Property, null=True, related_name="editor")
-	Monitor = models.ForeignKey(Property, null=True)
+	Editor = models.ForeignKey(Property, null=True, related_name="editor", on_delete=models.DO_NOTHING)
+	Monitor = models.ForeignKey(Property, null=True, on_delete=models.DO_NOTHING)
 	CreatedOn = models.DateTimeField(auto_now_add=True)
 	ModifiedOn = models.DateTimeField(auto_now_add=True)
 
@@ -270,10 +270,10 @@ class Interface(models.Model):
 		return super(Interface, self).save(*args, **kwargs)
 
 	def __str__(self):
-		return "Interface " + unicode(self.Name)
+		return "Interface " + self.Name
 
 	def __unicode__(self):
-		return "Interface " + unicode(self.Name)
+		return "Interface " + self.Name
 
 
 class Prefab(models.Model):
@@ -295,10 +295,10 @@ class Prefab(models.Model):
 		return super(Prefab, self).save(*args, **kwargs)
 
 	def __str__(self):
-		return unicode(self.Name)
+		return self.Name
 
 	def __unicode__(self):
-		return unicode(self.Name)
+		return self.Name
 
 
 class PropertyInfo(Property):

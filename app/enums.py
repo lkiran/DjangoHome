@@ -28,6 +28,7 @@ class TypeEnum(Enum):
 	Read_Only = 1
 	Write_Only = 2
 	Read_Or_Write = 3
+	Event = 4
 
 
 class ModelStatus(Enum):
