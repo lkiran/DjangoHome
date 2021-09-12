@@ -19,8 +19,6 @@ class Category(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.Id:
 			self.CreatedOn = timezone.now()
-		else:
-			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Category, self).save(*args, **kwargs)
 
@@ -51,8 +49,6 @@ class Property(models.Model):
 		if not self.Id:
 			self.CreatedOn = timezone.now()
 
-		else:
-			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Property, self).save(*args, **kwargs)
 
@@ -88,8 +84,6 @@ class Function(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.Id:
 			self.CreatedOn = timezone.now()
-		else:
-			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Function, self).save(*args, **kwargs)
 
@@ -115,8 +109,6 @@ class Device(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.Id:
 			self.CreatedOn = timezone.now()
-		else:
-			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Device, self).save(*args, **kwargs)
 
@@ -153,8 +145,6 @@ class Group(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.Id:
 			self.CreatedOn = timezone.now()
-		else:
-			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Group, self).save(*args, **kwargs)
 
@@ -183,8 +173,6 @@ class Task(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.Id:
 			self.CreatedOn = timezone.now()
-		else:
-			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Task, self).save(*args, **kwargs)
 
@@ -210,8 +198,6 @@ class Condition(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.Id:
 			self.CreatedOn = timezone.now()
-		else:
-			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Condition, self).save(*args, **kwargs)
 
@@ -238,8 +224,6 @@ class Control(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.Id:
 			self.CreatedOn = timezone.now()
-		else:
-			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Control, self).save(*args, **kwargs)
 
@@ -264,8 +248,6 @@ class Interface(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.Id:
 			self.CreatedOn = timezone.now()
-		else:
-			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Interface, self).save(*args, **kwargs)
 
@@ -289,8 +271,6 @@ class Prefab(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.Id:
 			self.CreatedOn = timezone.now()
-		else:
-			del self.CreatedOn
 		self.ModifiedOn = timezone.now()
 		return super(Prefab, self).save(*args, **kwargs)
 

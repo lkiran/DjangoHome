@@ -5,6 +5,7 @@ from app.Repositories.PropertyRepository import PropertyRepository
 
 from app.ValueParser import ValueParser
 from app.enums import TypeEnum
+from app.models import Property
 
 
 class PropertyService(object):
@@ -31,9 +32,9 @@ class PropertyService(object):
 		parser = self.GetParser(object)
 		return parser.ToObject(object.Value)
 
-	def SaveObject(self, object, value):
-		self.__logger.info(u"SaveObject is called with object={0}; value={1}".format(object, value))
-		parser = self.GetParser(object)
-		object.Value = parser.ToString(value)
-		object.save()
-		return object
+	def SaveObject(self, property: Property, value: any):
+		self.__logger.info(u"SaveObject is called with object={0}; value={1}".format(property, value))
+		parser = self.GetParser(property)
+		property.Value = parser.ToString(value)
+		property.save()
+		return property

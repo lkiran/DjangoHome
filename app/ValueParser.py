@@ -53,10 +53,10 @@ class IntegerValueParser(AbsValueParser):
 	def TemplateClass(self):
 		return ClassEnum.Integer
 
-	def ToObject(self, value):
+	def ToObject(self, value: any):
 		return int(value)
 
-	def ToString(self, value):
+	def ToString(self, value: int):
 		return str(value)
 
 
@@ -65,7 +65,7 @@ class BooleanValueParser(AbsValueParser):
 	def TemplateClass(self):
 		return ClassEnum.Boolean
 
-	def ToObject(self, value):
+	def ToObject(self, value: any):
 		if isinstance(value, bool):
 			return value
 		if isinstance(value, str):
@@ -75,7 +75,7 @@ class BooleanValueParser(AbsValueParser):
 			elif value == 'false':
 				return False
 
-	def ToString(self, value):
+	def ToString(self, value: bool):
 		if value:
 			return 'true'
 		else:
@@ -87,7 +87,7 @@ class ColorValueParser(AbsValueParser):
 	def TemplateClass(self):
 		return ClassEnum.Color
 
-	def ToObject(self, value):
+	def ToObject(self, value: str):
 		colorsOnly = value[value.find("(") + 1:value.find(")")].split(',')
 		red = int(colorsOnly[0])
 		green = int(colorsOnly[1])
@@ -98,7 +98,7 @@ class ColorValueParser(AbsValueParser):
 			alpha = 1.0
 		return Color(red, green, blue, alpha)
 
-	def ToString(self, value):
+	def ToString(self, value: Color):
 		return str(value)
 
 
@@ -143,11 +143,11 @@ class StringValueParser(AbsValueParser):
 	def TemplateClass(self):
 		return ClassEnum.String
 
-	def ToObject(self, value):
-		pass
+	def ToObject(self, value: any):
+		return str(value)
 
-	def ToString(self, value):
-		pass
+	def ToString(self, value: str):
+		return str(value)
 
 
 class DateTimeValueParser(AbsValueParser):
@@ -155,10 +155,10 @@ class DateTimeValueParser(AbsValueParser):
 	def TemplateClass(self):
 		return ClassEnum.DateTime
 
-	def ToObject(self, value):
+	def ToObject(self, value: any):
 		return datetime.now()
 
-	def ToString(self, value):
+	def ToString(self, value: datetime):
 		return str(datetime.now())
 
 
@@ -167,8 +167,8 @@ class EmptyValueParser(AbsValueParser):
 	def TemplateClass(self):
 		return ClassEnum.Empty
 
-	def ToObject(self, value):
+	def ToObject(self, value: any):
 		return None
 
-	def ToString(self, value):
+	def ToString(self, value: any):
 		return u''

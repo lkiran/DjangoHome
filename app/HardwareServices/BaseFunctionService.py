@@ -1,5 +1,6 @@
 from app.DatabaseServices.ConditionService import ConditionService
 from app.DatabaseServices.PropertyService import PropertyService
+from app.models import Property
 
 
 class BaseFunctionService(object):
@@ -11,9 +12,9 @@ class BaseFunctionService(object):
 			return self._propertyService.GetObject(property)
 		return default
 
-	def SetValue(self, property, value):
+	def SetValue(self, property: Property, value):
 		if not property:
 			return None
-		object = self._propertyService.SaveObject(property, value)
-		self.__conditionService.NotifyConditionsOfProperty(object)
-		return object
+		property = self._propertyService.SaveObject(property, value)
+		self.__conditionService.NotifyConditionsOfProperty(property)
+		return property
