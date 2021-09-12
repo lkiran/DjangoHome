@@ -5,25 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="627520f5-a521-4ec3-9690-a0d4bf3a8a1b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Logs/Log.18.August.2021.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DjangoHome.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DjangoHome.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logs/Log.11.September.2021.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoHome/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoHome/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoHome/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoHome/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HomeAutomation.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/HomeAutomation.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/Log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/Log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CommunicationServices/TwoWireInterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/CommunicationServices/TwoWireInterface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DatabaseServices/PropertyService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DatabaseServices/PropertyService.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/HardwareServices/BaseFunctionService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/HardwareServices/BaseFunctionService.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/HardwareServices/Wallswitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/HardwareServices/Wallswitch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/HardwareServices/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/HardwareServices/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/0002_auto_20191130_1824.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ValueParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/ValueParser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ValueTypes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/ValueTypes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -253,19 +245,19 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/app/ModelSerializers.py" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app\DatabaseServices" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app\Controllers" />
       <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app" />
       <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app\Repositories" />
       <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app\DatabaseServices" />
       <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app\HardwareServices" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app\DatabaseServices" />
     </key>
   </component>
   <component name="RunManager" selected="Django Server.DjangoHome Local">
@@ -603,7 +595,10 @@
       <workItem from="1575802895832" duration="14479000" />
       <workItem from="1631356601366" duration="209000" />
       <workItem from="1631356823646" duration="418000" />
-      <workItem from="1631357261215" duration="8018000" />
+      <workItem from="1631357261215" duration="16998000" />
+      <workItem from="1631445564386" duration="3828000" />
+      <workItem from="1631449420672" duration="3000" />
+      <workItem from="1631449597372" duration="8820000" />
     </task>
     <servers />
   </component>
@@ -696,6 +691,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/DatabaseServices/ConditionService.py</url>
+          <line>42</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
