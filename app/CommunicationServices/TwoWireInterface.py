@@ -2,7 +2,8 @@ import os
 import logging
 import threading
 
-if os.environ['dev'] == 'True':
+isDev = os.environ.get('dev')
+if isDev is None or isDev == 'True':
 	print("Importing smbus2 mock")
 	from .SmbusMock import SMBusWrapper
 else:
