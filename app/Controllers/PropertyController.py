@@ -2,14 +2,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from app.ModelSerializers import PropertySerializer
-from app.Repositories.FunctionRepository import FunctionRepository
-from app.Repositories.PropertyRepository import PropertyRepository
 from app.enums import TypeEnum
 
 
 class PropertyController(APIView):
-	__propertyRepo = PropertyRepository()
-	__functionRepo = FunctionRepository()
+	def __init__(self, propertyRepository, functionRepository, **kwargs):
+		super().__init__(**kwargs)
+		self.__propertyRepo = propertyRepository
+		self.__functionRepo = functionRepository
 
 	def get(self, request, format=None):
 		functionId = request.query_params.get("functionId")

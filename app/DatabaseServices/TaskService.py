@@ -1,24 +1,12 @@
 import logging
 
-from app.Repositories.TaskRepository import TaskRepository
 from app.models import Control
 
 
 class TaskService(object):
-	__instance = None
-	__logger = logging.getLogger('TaskService')
-	__taskRepository = TaskRepository()
-
-	@staticmethod
-	def Instance():
-		if TaskService.__instance is None:
-			TaskService()
-		return TaskService.__instance
-
-	def __init__(self):
-		if TaskService.__instance is not None:
-			raise Exception("TaskService is a singleton, use 'TaskService.Instance()'")
-		TaskService.__instance = self
+	def __init__(self, taskRepository):
+		self.__taskRepository = taskRepository
+		self.__logger = logging.getLogger('TaskService')
 
 	def Execute(self, property, value):
 		from app.DatabaseServices.DeviceService import DeviceService

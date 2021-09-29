@@ -4,37 +4,25 @@ from app.HardwareServices.DeviceFactory import DeviceFactory
 from app.Repositories.DeviceRepository import DeviceRepository
 from app.Repositories.PropertyRepository import PropertyRepository
 from app.enums import TypeEnum
+from app.models import Property
 
 
 class DeviceService(object):
 	Devices = []
 
-	__instance = None
-	__logger = logging.getLogger('DeviceService')
-	__deviceRepository = DeviceRepository()
-	__propertyRepository = PropertyRepository()
-
-	@staticmethod
-	def Instance():
-		if DeviceService.__instance is None:
-			DeviceService()
-		return DeviceService.__instance
-
-	def __init__(self):
-		if DeviceService.__instance is not None:
-			raise Exception("DeviceService is a singleton, use 'DeviceService.Instance()'")
-		else:
-			self.__logger.info("Init")
-			DeviceService.__instance = self
+	def __init__(self, deviceRepository: DeviceRepository, propertyRepository: PropertyRepository):
+		self.__deviceRepository = deviceRepository
+		self.__propertyRepository = propertyRepository
+		self.__logger = logging.getLogger('DeviceService')
 
 	def ProduceDevices(self):
 		devices = self.__deviceRepository.Get()
 		factory = DeviceFactory()
 		DeviceService.Devices = [(lambda d: factory.Produce(d))(d) for d in devices]
-		print(u"All {0} devices are produced".format(len(DeviceService.Devices)))
+		self.__logger.info(u"All {0} devices are produced".format(len(DeviceService.Devices)))
 
 	def GetProducedDeviceById(self, id):
-		return next((d for d in DeviceService.Devices if d.Model.Id == id), None)
+		return next((d for d in DeviceService.Devices if d and d.Model.Id == id), None)
 
 	def GetProducedDeviceFunction(self, id, functionName):
 		producedDevice = self.GetProducedDeviceById(id)
@@ -55,16 +43,20 @@ class DeviceService(object):
 		parsedValue = property.Parser.ToObject(value)
 		property.Parameters[u"Value"] = parsedValue
 		kwargs = dict(property.Parameters)
-		print(u"Calling '{0}' function of {1} device with arguments {2}".format(functionName, property.Device, kwargs))
+		self.__logger.info(
+			u"Calling '{0}' function of {1} device with arguments {2}".format(functionName, property.Device, kwargs))
 		return callFunction(**kwargs)
 
-	def GetProperty(self, propertyId):
+	def getPropertyValueByPropertyId(self, propertyId: str):
 		model = self.__propertyRepository.Get(propertyId)
-		if model.Type == TypeEnum.Write_Only:
-			raise Exception(u"Property '{0}' is write-only".format(model))
-		functionName = model.CallFunction
-		deviceId = model.Device.Id
+		return self.getPropertyValue(model)
+
+	def getPropertyValue(self, property: Property) -> any:
+		if property.Type == TypeEnum.Write_Only:
+			raise Exception(u"Property '{0}' is write-only".format(property))
+		functionName: str = property.CallFunction
+		deviceId: str = property.Device.Id
 		callFunction = self.GetProducedDeviceFunction(deviceId, functionName)
-		kwargs = dict(model.Parameters)
-		print(u"Calling {0} function of {1}".format(callFunction, model.Device))
+		kwargs = dict(property.Parameters)
+		self.__logger.info(u"Calling {0} function of {1}".format(callFunction, property.Device))
 		return callFunction(**kwargs)

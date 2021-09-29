@@ -14,27 +14,12 @@ from app.models import GroupDevice, Function
 class GroupService:
 	DEFAULT_CALL_CLASS_NAME = "Group"
 
-	__instance = None
-	__logger = logging.getLogger('GroupService')
-	__deviceRepository = DeviceRepository()
-	__propertyRepository = PropertyRepository()
-	__deviceService = DeviceService()
-	__groupRepository= GroupRepository()
-	__functionRepository= FunctionRepository()
-
-	@staticmethod
-	def Instance():
-		if GroupService.__instance is None:
-			GroupService()
-		return GroupService.__instance
-
-	def __init__(self):
-		if GroupService.__instance is not None:
-			raise Exception("GroupService is a singleton, use 'GroupService.Instance()'")
-		else:
-			self.__logger.info("Init")
-			self._populateProducedGroups
-			GroupService.__instance = self
+	def __init__(self, propertyRepository: PropertyRepository, functionRepository: FunctionRepository,
+				 groupRepository: GroupRepository):
+		self.__propertyRepository = propertyRepository
+		self.__groupRepository = groupRepository
+		self.__functionRepository = functionRepository
+		self.__logger = logging.getLogger('GroupService')
 
 	@property
 	def _populateProducedGroups(self):

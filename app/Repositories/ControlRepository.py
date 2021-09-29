@@ -10,10 +10,10 @@ from app.models import Control, Task
 
 
 class ControlRepository:
-	def __init__(self):
+	def __init__(self, taskRepository: TaskRepository, conditionRepository: ConditionRepository):
+		self.__taskRepo = taskRepository
+		self.__conditionRepo = conditionRepository
 		self.__logger = logging.getLogger('ControlRepository')
-		self.__taskRepo = TaskRepository()
-		self.__conditionRepo = ConditionRepository()
 
 	def Get(self, id=None):
 		if id is None:

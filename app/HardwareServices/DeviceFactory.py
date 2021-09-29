@@ -22,11 +22,10 @@ class DeviceFactory:
 		self.__logger.info(u'Producing {0} device'.format(device))
 		try:
 			type = device.CallClass
-			deviceClass = self.devices.get(type,None)
-			if not deviceClass :
+			deviceClass = self.devices.get(type, None)
+			if not deviceClass:
 				raise Exception(u"Cannot find a device class with name {0}".format(type))
-			return	deviceClass(device)
+			return deviceClass(device)
 		except Exception as e:
 			e = Exception(u'Can not produce the device {0}'.format(device), e)
 			self.__logger.exception(e)
-

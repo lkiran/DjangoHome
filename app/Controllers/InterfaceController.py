@@ -1,15 +1,15 @@
 from rest_framework import status
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from app.DatabaseServices.InterfaceService import InterfaceService
 from app.ModelSerializers import InterfaceSerializer
-from app.Repositories.InterfaceRepository import InterfaceRepository
 
 
 class InterfaceController(APIView):
-	__interfaceRepo = InterfaceRepository()
-	__interfaceService = InterfaceService.Instance()
+	def __init__(self, interfaceRepository, interfaceService, **kwargs):
+		super().__init__(**kwargs)
+		self.__interfaceRepo = interfaceRepository
+		self.__interfaceService = interfaceService
 
 	def get(self, request, format=None):
 		interfaceId = request.query_params.get("interfaceId")

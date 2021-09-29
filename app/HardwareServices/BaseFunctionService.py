@@ -4,8 +4,10 @@ from app.models import Property
 
 
 class BaseFunctionService(object):
-	_propertyService = PropertyService.Instance()
-	__conditionService = ConditionService.Instance()
+
+	def __init__(self, propertyService: PropertyService, conditionService: ConditionService):
+		self._propertyService = propertyService
+		self.__conditionService = conditionService
 
 	def GetValue(self, property, default=None):
 		if property:

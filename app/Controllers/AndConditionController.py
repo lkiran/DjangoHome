@@ -1,13 +1,14 @@
-from rest_framework.exceptions import NotFound
+from dependency_injector.wiring import inject
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from app.ModelSerializers import ConditionSerializer, BaseConditionSerializer
-from app.Repositories.ConditionRepository import ConditionRepository
-
+from app.ModelSerializers import BaseConditionSerializer
 
 class AndConditionController(APIView):
-	__conditionRepo = ConditionRepository()
+	@inject
+	def __init__(self, conditionRepository, **kwargs):
+		super().__init__(**kwargs)
+		self.__conditionRepo = conditionRepository
 
 	def get(self, request, format=None):
 		conditionId = request.query_params["conditionId"]

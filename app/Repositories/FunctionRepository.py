@@ -4,7 +4,8 @@ from app.models import Function
 
 
 class FunctionRepository:
-	__propertyRepo = PropertyRepository()
+	def __init__(self, propertyRepository: PropertyRepository):
+		self.__propertyRepo = propertyRepository
 
 	def Get(self, id=None):
 		if id is None:

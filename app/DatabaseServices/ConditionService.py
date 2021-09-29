@@ -1,28 +1,15 @@
 import logging
 
-from app.DatabaseServices.TaskService import TaskService
-from app.Repositories.ConditionRepository import ConditionRepository
-from app.Repositories.PropertyRepository import PropertyRepository
 from app.ValueComparator import ValueComparator
 from app.models import Condition
 
 
 class ConditionService(object):
-	__instance = None
-	__logger = logging.getLogger('ConditionService')
-	__conditionRepository = ConditionRepository()
-	__propertyRepository = PropertyRepository()
-
-	@staticmethod
-	def Instance():
-		if ConditionService.__instance is None:
-			ConditionService()
-		return ConditionService.__instance
-
-	def __init__(self):
-		if ConditionService.__instance is not None:
-			raise Exception("ConditionService is a singleton, use 'ConditionService.Instance()'")
-		ConditionService.__instance = self
+	def __init__(self, conditionRepository, propertyRepository, taskService):
+		__conditionRepository = conditionRepository
+		__propertyRepository = propertyRepository
+		__taskService = taskService
+		__logger = logging.getLogger('ConditionService')
 
 	def NotifyConditionsOfProperty(self, property):
 		conditions = self.__conditionRepository.GetAllByProperty(property)
@@ -32,7 +19,7 @@ class ConditionService(object):
 	def NotifyConditions(self, condition):
 		if not self.__isSatisfied(condition):
 			return
-		TaskService.Instance().ExecuteTasksOfCondition(condition)
+		self.__taskService.ExecuteTasksOfCondition(condition)
 		parentConditions = Condition.objects.filter(AndConditions__condition=condition)
 		for parentCondition in parentConditions:
 			self.NotifyConditions(parentCondition)

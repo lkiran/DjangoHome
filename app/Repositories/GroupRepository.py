@@ -5,7 +5,8 @@ from app.models import Device, Group
 
 
 class GroupRepository(object):
-	__propertyRepo = PropertyRepository()
+	def __init__(self, propertyRepository: PropertyRepository):
+		self.__propertyRepo = propertyRepository
 
 	def Get(self, id=None):
 		if id is None:
@@ -14,7 +15,6 @@ class GroupRepository(object):
 			return Group.objects.get(Id=id)
 		except Group.DoesNotExist:
 			return None
-
 
 	def Save(self, data):
 		model = Group()
@@ -29,12 +29,11 @@ class GroupRepository(object):
 		elif status is ModelStatus.Modified:
 			model.save()
 
-		for property in  data.Properties.all():
+		for property in data.Properties.all():
 			property = self.__propertyRepo.Get(property.Id)
 			model.Properties.add(property)
 
 		return model
-
 
 	def Status(self, model, group=None):
 		if group is None:

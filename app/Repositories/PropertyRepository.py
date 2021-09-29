@@ -3,6 +3,9 @@ from app.models import Property, PropertyInfo
 
 
 class PropertyRepository:
+	def __init__(self):
+		pass
+
 	def Get(self, id=None):
 		if id is not None:
 			try:

@@ -2,13 +2,13 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from app.ModelSerializers import BaseConditionSerializer
-from app.Repositories.ConditionRepository import ConditionRepository
-from app.Repositories.ControlRepository import ControlRepository
 
 
 class ConditionController(APIView):
-	__conditionRepo = ConditionRepository()
-	__controlRepo = ControlRepository()
+	def __init__(self, conditionRepository, controlRepository, **kwargs):
+		super().__init__(**kwargs)
+		self.__conditionRepo = conditionRepository
+		self.__controlRepo = controlRepository
 
 	def get(self, request, format=None):
 		controlId = request.query_params["controlId"]

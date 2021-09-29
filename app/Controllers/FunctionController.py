@@ -2,14 +2,14 @@ from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from app.ModelSerializers import FunctionSerializer, BaseFunctionSerializer
-from app.Repositories.DeviceRepository import DeviceRepository
-from app.Repositories.TaskRepository import TaskRepository
+from app.ModelSerializers import FunctionSerializer
 
 
 class FunctionController(APIView):
-	__taskRepo = TaskRepository()
-	__deviceRepo = DeviceRepository()
+	def __init__(self, taskRepository, deviceRepository, **kwargs):
+		super().__init__(**kwargs)
+		self.__taskRepo = taskRepository
+		self.__deviceRepo = deviceRepository
 
 	def get(self, request, format=None):
 		deviceId = request.query_params["deviceId"]

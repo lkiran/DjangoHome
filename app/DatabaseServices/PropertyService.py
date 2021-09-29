@@ -1,6 +1,5 @@
 import logging
 
-from app.DatabaseServices.ConditionService import ConditionService
 from app.Repositories.PropertyRepository import PropertyRepository
 
 from app.ValueParser import ValueParser

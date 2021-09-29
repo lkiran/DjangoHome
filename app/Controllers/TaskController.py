@@ -1,14 +1,14 @@
-from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from app.ModelSerializers import TaskSerializer, BaseTaskSerializer
-from app.Repositories.ControlRepository import ControlRepository
-from app.Repositories.TaskRepository import TaskRepository
+
+from app.ModelSerializers import BaseTaskSerializer
 
 
 class TaskController(APIView):
-	__taskRepo = TaskRepository()
-	__controlRepo = ControlRepository()
+	def __init__(self, taskRepository, controlRepository, **kwargs):
+		super().__init__(**kwargs)
+		self__taskRepo = taskRepository
+		self__controlRepo = controlRepository
 
 	def get(self, request, format=None):
 		controlId = request.query_params.get("controlId")

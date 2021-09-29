@@ -2,8 +2,10 @@ from app.Repositories.FunctionRepository import FunctionRepository
 from app.enums import ModelStatus
 from app.models import Device
 
+
 class DeviceRepository:
-	__functionRepo = FunctionRepository()
+	def __init__(self, functionRepository: FunctionRepository):
+		self.__functionRepo = functionRepository
 
 	def Get(self, id=None):
 		if id is None:
@@ -12,7 +14,6 @@ class DeviceRepository:
 			return Device.objects.get(Id=id)
 		except Device.DoesNotExist:
 			return None
-
 
 	def Save(self, data):
 		model = Device()
@@ -35,7 +36,6 @@ class DeviceRepository:
 			model.Functions.add(function.Id)
 
 		return model
-
 
 	def Status(self, model, device=None):
 		if device is None:
