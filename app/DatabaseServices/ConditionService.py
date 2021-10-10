@@ -5,11 +5,11 @@ from app.models import Condition
 
 
 class ConditionService(object):
-	def __init__(self, conditionRepository, propertyRepository, taskService):
-		__conditionRepository = conditionRepository
-		__propertyRepository = propertyRepository
-		__taskService = taskService
-		__logger = logging.getLogger('ConditionService')
+	def __init__(self, conditionRepository, taskService, deviceService):
+		self.__conditionRepository = conditionRepository
+		self.__deviceService = deviceService
+		self.__taskService = taskService
+		self.__logger = logging.getLogger('ConditionService')
 
 	def NotifyConditionsOfProperty(self, property):
 		conditions = self.__conditionRepository.GetAllByProperty(property)
@@ -25,9 +25,9 @@ class ConditionService(object):
 			self.NotifyConditions(parentCondition)
 
 	def __isSatisfied(self, condition):
-		property = self.__propertyRepository.Get(condition.Property.Id)
+		propertyValue = self.__deviceService.getPropertyValueByPropertyId(condition.Property.Id)
 		comparator = ValueComparator()
-		satisfied = comparator.CompareCondition(condition, property.Value)
+		satisfied = comparator.CompareCondition(condition, propertyValue)
 		if not satisfied:
 			return False
 		for andCondition in condition.AndConditions.all():

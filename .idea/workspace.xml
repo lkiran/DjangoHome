@@ -5,38 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="627520f5-a521-4ec3-9690-a0d4bf3a8a1b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/Logs/Log.29.September.2021.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bulders/DeviceBulider.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bulders/FunctionBulider.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bulders/PropertyBulider.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/bulders/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/test/DatabaseServices/testConditionService.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoHome/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoHome/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoHome/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoHome/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DjangoHome/containers.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoHome/containers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/Log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/Log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/AndConditionController.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/AndConditionController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/ConditionController.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/ConditionController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/ControlController.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/ControlController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/DeviceController.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/DeviceController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/FunctionController.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/FunctionController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/GroupController.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/GroupController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/InterfaceController.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/InterfaceController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/PropertyController.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/PropertyController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/PropertyInfoController.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/PropertyInfoController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/TaskController.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/TaskController.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/DatabaseServices/ConditionService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DatabaseServices/ConditionService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DatabaseServices/ControlService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DatabaseServices/ControlService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DatabaseServices/DeviceService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DatabaseServices/DeviceService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DatabaseServices/GroupService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DatabaseServices/GroupService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DatabaseServices/InterfaceService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DatabaseServices/InterfaceService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DatabaseServices/PropertyService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DatabaseServices/PropertyService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DatabaseServices/TaskService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/DatabaseServices/TaskService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/HardwareServices/BaseDeviceService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/HardwareServices/BaseDeviceService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/HardwareServices/BaseFunctionService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/HardwareServices/BaseFunctionService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/HardwareServices/DeviceFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/HardwareServices/DeviceFactory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/HardwareServices/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/HardwareServices/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/ControlRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/ControlRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/DeviceRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/DeviceRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/FunctionRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/FunctionRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/GroupRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/GroupRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/PropertyRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/PropertyRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/TaskRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/TaskRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ValueComparator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/ValueComparator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/rgb.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,7 +239,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/manage.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/bulders" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -270,19 +252,20 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kiran\Documents\GitHub\DjangoHome\app\bulders" />
+      <recent name="C:\Users\kiran\Documents\GitHub\DjangoHome\app\test\DatabaseServices" />
       <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app\Controllers" />
       <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app" />
       <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app\Repositories" />
-      <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app\DatabaseServices" />
-      <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app\HardwareServices" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kiran\Documents\GitHub\DjangoHome\app\test" />
       <recent name="C:\Users\kiran\Documents\GitHub\DjangoHome\DjangoHome" />
       <recent name="C:\Users\kiran\Documents\GitHub\DjangoHome\app" />
       <recent name="C:\Users\leven\Documents\GitHub\DjangoHome\app\DatabaseServices" />
     </key>
   </component>
-  <component name="RunManager" selected="Django tests.Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest">
+  <component name="RunManager" selected="Django tests.Test: app.test.DatabaseServices.testConditionService.ConditionServiceTest.test_notifyConditionsOfProperty_shouldPass">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -369,6 +352,66 @@
       <predefined_log_file id="idea.log" enabled="true" />
       <method />
     </configuration>
+    <configuration name="Test: app.test.DatabaseServices.testConditionService.ConditionServiceTest" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="DjangoHome" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="app.test.DatabaseServices.testConditionService.ConditionServiceTest" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test: app.test.DatabaseServices.testConditionService.ConditionServiceTest.test_notifyConditionsOfProperty_shouldPass" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="DjangoHome" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="app.test.DatabaseServices.testConditionService.ConditionServiceTest.test_notifyConditionsOfProperty_shouldPass" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test: app.test.DatabaseServices.testConditionService.DeviceServiceTest.test_notifyConditionsOfProperty_shouldPass" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="DjangoHome" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="app.test.DatabaseServices.testConditionService.DeviceServiceTest.test_notifyConditionsOfProperty_shouldPass" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest" type="DjangoTestsConfigurationType" temporary="true">
       <module name="DjangoHome" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -389,26 +432,6 @@
       <option name="OPTIONS" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest.test_getDevice" type="DjangoTestsConfigurationType" temporary="true">
-      <module name="DjangoHome" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="TARGET" value="app.test.DatabaseServices.testDeviceService.DeviceServiceTest.test_getDevice" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest.test_getPropertyValue_shouldReturnValue" type="DjangoTestsConfigurationType" temporary="true">
       <module name="DjangoHome" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -423,26 +446,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="TARGET" value="app.test.DatabaseServices.testDeviceService.DeviceServiceTest.test_getPropertyValue_shouldReturnValue" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Test: " type="DjangoTestsConfigurationType" temporary="true">
-      <module name="DjangoHome" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="TARGET" value="" />
       <option name="SETTINGS_FILE" value="" />
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
@@ -622,20 +625,22 @@
     <list>
       <item itemvalue="Django Server.DjangoHome" />
       <item itemvalue="Django Server.DjangoHome Local" />
-      <item itemvalue="Django tests.Test: " />
       <item itemvalue="Django tests.Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest" />
-      <item itemvalue="Django tests.Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest.test_getDevice" />
       <item itemvalue="Django tests.Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest.test_getPropertyValue_shouldReturnValue" />
+      <item itemvalue="Django tests.Test: app.test.DatabaseServices.testConditionService.DeviceServiceTest.test_notifyConditionsOfProperty_shouldPass" />
+      <item itemvalue="Django tests.Test: app.test.DatabaseServices.testConditionService.ConditionServiceTest" />
+      <item itemvalue="Django tests.Test: app.test.DatabaseServices.testConditionService.ConditionServiceTest.test_notifyConditionsOfProperty_shouldPass" />
       <item itemvalue="Python.make migrations" />
       <item itemvalue="Python.migrate" />
       <item itemvalue="Python.createsuperuser" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Django tests.Test: app.test.DatabaseServices.testConditionService.ConditionServiceTest.test_notifyConditionsOfProperty_shouldPass" />
+        <item itemvalue="Django tests.Test: app.test.DatabaseServices.testConditionService.ConditionServiceTest" />
+        <item itemvalue="Django tests.Test: app.test.DatabaseServices.testConditionService.DeviceServiceTest.test_notifyConditionsOfProperty_shouldPass" />
         <item itemvalue="Django tests.Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest" />
         <item itemvalue="Django tests.Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest.test_getPropertyValue_shouldReturnValue" />
-        <item itemvalue="Django tests.Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest.test_getDevice" />
-        <item itemvalue="Django tests.Test: " />
       </list>
     </recent_temporary>
   </component>
@@ -689,7 +694,10 @@
       <workItem from="1631449597372" duration="9498000" />
       <workItem from="1632327164431" duration="3568000" />
       <workItem from="1632577741819" duration="16223000" />
-      <workItem from="1632930263965" duration="5773000" />
+      <workItem from="1632930263965" duration="6287000" />
+      <workItem from="1633019131338" duration="3351000" />
+      <workItem from="1633173844853" duration="8414000" />
+      <workItem from="1633875283426" duration="2978000" />
     </task>
     <servers />
   </component>
@@ -782,6 +790,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/DatabaseServices/ConditionService.py</url>
+          <line>14</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -793,12 +808,15 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DjangoHome$0003_auto_20210911_1433.coverage" NAME="0003_auto_20210911_1433 Coverage Results" MODIFIED="1631360050990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/migrations" />
+    <SUITE FILE_PATH="coverage/DjangoHome$Test__app_test_DatabaseServices_testConditionService_ConditionServiceTest.coverage" NAME="Test: app.test.DatabaseServices.testConditionService.ConditionServiceTest Coverage Results" MODIFIED="1633182215315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/DjangoHome$createsuperuser.coverage" NAME="createsuperuser Coverage Results" MODIFIED="1631363957362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DjangoHome$Test__app_test_DatabaseServices_testConditionService_DeviceServiceTest_test_notifyConditionsOfProperty_shouldPass.coverage" NAME="Test: app.test.DatabaseServices.testConditionService.DeviceServiceTest.test_notifyConditionsOfProperty_shouldPass Coverage Results" MODIFIED="1633021306408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/DjangoHome$Test__app_test_DatabaseServices_testConditionService_ConditionServiceTest_test_notifyConditionsOfProperty_shouldPass.coverage" NAME="Test: app.test.DatabaseServices.testConditionService.ConditionServiceTest.test_notifyConditionsOfProperty_shouldPass Coverage Results" MODIFIED="1633878141101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/DjangoHome$Test__app_test_DatabaseServices_testDeviceService_DeviceServiceTest_test_getDevice.coverage" NAME="Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest.test_getDevice Coverage Results" MODIFIED="1632329698177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/DjangoHome$make_migrations.coverage" NAME="make migrations Coverage Results" MODIFIED="1631361529454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DjangoHome$migrate.coverage" NAME="migrate Coverage Results" MODIFIED="1631361550724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DjangoHome$Test__app_test_DatabaseServices_testDeviceService_DeviceServiceTest_test_getPropertyValue_shouldReturnValue.coverage" NAME="Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest.test_getPropertyValue_shouldReturnValue Coverage Results" MODIFIED="1632586538945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/DjangoHome$Test__app_test_DatabaseServices_testDeviceService_DeviceServiceTest.coverage" NAME="Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest Coverage Results" MODIFIED="1632935998868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/DjangoHome$Test__app_test_DatabaseServices_testDeviceService_DeviceServiceTest.coverage" NAME="Test: app.test.DatabaseServices.testDeviceService.DeviceServiceTest Coverage Results" MODIFIED="1633019343921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">

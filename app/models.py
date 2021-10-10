@@ -189,7 +189,7 @@ class Condition(models.Model):
 	Operator = models.IntegerField(choices=[(choice.value, choice.name.replace("_", " ")) for choice in ComparerEnum])
 	Value = models.CharField(max_length=50)
 	AndConditions = models.ManyToManyField("self", blank=True, symmetrical=False)
-	CreatedOn = models.DateTimeField(editable=False)
+	CreatedOn = models.DateTimeField(auto_now_add=True, editable=False)
 	ModifiedOn = models.DateTimeField(auto_now_add=True)
 
 	class Meta:

@@ -73,8 +73,8 @@ class Container(containers.DeclarativeContainer):
 	)
 	conditionService: ConditionService = providers.Singleton(
 		ConditionService,
-		conditionRepository,
-		propertyRepository,
+		conditionRepository=conditionRepository,
+		deviceService=deviceService,
 		taskService=taskService
 	)
 	controlService: ControlService = providers.Singleton(

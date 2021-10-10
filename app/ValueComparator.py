@@ -36,7 +36,7 @@ class ValueComparator:
 				key = _type().TemplateClass
 				ValueComparator.comparators[key] = _type()
 
-	def CompareValue(self, _class, value, operator, otherValue):
+	def CompareValue(self, _class, value, operator, otherValue)-> bool:
 		_class = ClassEnum(_class)
 		comparator = self.comparators.get(_class)
 		operator = ComparerEnum(operator)
