@@ -4,14 +4,13 @@ from app.models import Control
 
 
 class TaskService(object):
-	def __init__(self, taskRepository):
+	def __init__(self, taskRepository, deviceService):
 		self.__taskRepository = taskRepository
+		self.__deviceService = deviceService
 		self.__logger = logging.getLogger('TaskService')
 
 	def Execute(self, property, value):
-		from app.DatabaseServices.DeviceService import DeviceService
-		__deviceService = DeviceService.Instance()
-		return __deviceService.SetProperty(property, value)
+		return self.__deviceService.SetProperty(property, value)
 
 	def ExecuteTask(self, task):
 		self.Execute(task.Property, task.Value)

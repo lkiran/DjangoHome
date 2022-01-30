@@ -70,9 +70,9 @@ class BooleanValueParser(AbsValueParser):
 			return value
 		if isinstance(value, str):
 			value = value.lower()
-			if value == 'true':
+			if value == 'true' or value == '1':
 				return True
-			elif value == 'false':
+			elif value == 'false' or value == '0':
 				return False
 
 	def ToString(self, value: bool):

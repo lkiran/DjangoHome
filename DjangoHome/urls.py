@@ -26,5 +26,7 @@ urlpatterns = [
 ]
 
 deviceService = container.deviceService()
+container.propertyService()
+container.conditionService()
 deviceService.ProduceDevices()
 print("----------------------------------------")

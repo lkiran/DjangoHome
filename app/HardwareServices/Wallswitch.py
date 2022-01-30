@@ -26,7 +26,7 @@ class Wallswitch(BaseDeviceService):
 
         for function in self.Model.Functions.all():
             properties = function.Properties.all()
-            button = Button(self.macAddress, self.client, properties)
+            button = Button(self.macAddress, self, properties)
             self.buttons[button.id] = button
 
     def lightColor(self, **kwargs):
@@ -46,23 +46,23 @@ class Wallswitch(BaseDeviceService):
 
 class Button(BaseFunctionService):
 
-    def __init__(self, deviceId: str, client: mqtt.Client, properties):
+    def __init__(self, deviceId: str, device: Wallswitch, properties):
         self.deviceId = deviceId
-        self.client = client
+        self.device = device
         self.properties = properties
         self.lightColorProperty = properties.filter(CallFunction='lightColor').first()
         self.statusProperty = properties.filter(CallFunction='status').first()
         self.id = self.statusProperty.Parameters.get("id", None)
         self._lightColor = self.GetValue(self.lightColorProperty)
         self.initializeButton()
-        self.client.subscribe("{0}/button/{1}".format(self.deviceId, self.id))
-        self.client.message_callback_add("{0}/button/{1}".format(self.deviceId, self.id), self.handleStatus)
+        self.device.client.subscribe("{0}/button/{1}".format(self.deviceId, self.id))
+        self.device.client.message_callback_add("{0}/button/{1}".format(self.deviceId, self.id), self.handleStatus)
 
     def initializeButton(self):
         self.publishLightColor(self._lightColor)
 
     def publishLightColor(self, color: Color):
-        self.client.publish("{0}/led/{1}".format(self.deviceId, self.id), color.toHex(withHashPrefix=False))
+        self.device.client.publish("{0}/led/{1}".format(self.deviceId, self.id), color.toHex(withHashPrefix=False))
 
     @property
     def lightColor(self):
@@ -71,12 +71,12 @@ class Button(BaseFunctionService):
     @lightColor.setter
     def lightColor(self, value: Color):
         self.publishLightColor(value)
-        self.SetValue(self.lightColorProperty, value)
+        self.device.SetValue(self.lightColorProperty, value)
 
     def handleStatus(self, client, userdata, message):
         try:
             print("Received message '" + str(message.payload) + "' on topic '" + message.topic + "' with QoS " + str(
                 message.qos))
-            self.SetValue(self.statusProperty, message.payload.decode("utf-8"))
+            self.device.SetValue(self.statusProperty, message.payload.decode("utf-8"))
         except Exception as e:
             print("error ", e)

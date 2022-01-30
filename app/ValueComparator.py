@@ -1,11 +1,7 @@
-import abc
 import sys
 from inspect import getmembers, isclass, isabstract
 
-from django.utils.datetime_safe import datetime
-
 from app.ValueParser import ValueParser
-from app.ValueTypes import Color
 from app.enums import ClassEnum, ComparerEnum
 
 
@@ -36,7 +32,7 @@ class ValueComparator:
 				key = _type().TemplateClass
 				ValueComparator.comparators[key] = _type()
 
-	def CompareValue(self, _class, value, operator, otherValue)-> bool:
+	def CompareValue(self, _class, value, operator, otherValue) -> bool:
 		_class = ClassEnum(_class)
 		comparator = self.comparators.get(_class)
 		operator = ComparerEnum(operator)
@@ -166,7 +162,7 @@ class StringValueComparator(BaseValueComparator):
 		return ClassEnum.String
 
 	def Equal(self, value, otherValue):
-		pass
+		return value == otherValue
 
 	def NotEqual(self, value, otherValue):
 		pass

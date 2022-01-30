@@ -15,7 +15,10 @@ from app.DatabaseServices.ControlService import ControlService
 from app.DatabaseServices.DeviceService import DeviceService
 from app.DatabaseServices.GroupService import GroupService
 from app.DatabaseServices.InterfaceService import InterfaceService
+from app.DatabaseServices.PropertyService import PropertyService
+from app.DatabaseServices.ServiceBus import ServiceBus
 from app.DatabaseServices.TaskService import TaskService
+from app.HardwareServices.DeviceFactory import DeviceFactory
 from app.Repositories.ConditionRepository import ConditionRepository
 from app.Repositories.ControlRepository import ControlRepository
 from app.Repositories.DeviceRepository import DeviceRepository
@@ -45,16 +48,16 @@ class Container(containers.DeclarativeContainer):
 	)
 	groupRepository: GroupRepository = providers.Singleton(
 		GroupRepository,
-		propertyRepository
+		propertyRepository=propertyRepository
 	)
 	taskRepository: TaskRepository = providers.Singleton(
 		TaskRepository,
-		propertyRepository
+		propertyRepository=propertyRepository
 	)
 	controlRepository: ControlRepository = providers.Singleton(
 		ControlRepository,
-		taskRepository,
-		conditionRepository
+		taskRepository=taskRepository,
+		conditionRepository=conditionRepository
 	)
 	prefabRepository: PropertyRepository = providers.Singleton(
 		PropertyRepository
@@ -62,33 +65,47 @@ class Container(containers.DeclarativeContainer):
 	interfaceRepository: InterfaceRepository = providers.Singleton(
 		InterfaceRepository
 	)
+	serviceBus: ServiceBus = providers.Singleton(
+		ServiceBus
+	)
+	deviceFactory: DeviceFactory = providers.Singleton(
+		DeviceFactory,
+		serviceBus=serviceBus
+	)
 	deviceService: DeviceService = providers.Singleton(
 		DeviceService,
-		deviceRepository,
-		propertyRepository
+		deviceRepository=deviceRepository,
+		deviceFactory=deviceFactory
 	)
 	taskService: TaskService = providers.Singleton(
 		TaskService,
-		taskRepository
+		taskRepository=taskRepository,
+		deviceService=deviceService
+	)
+	propertyService: PropertyService = providers.Singleton(
+		PropertyService,
+		propertyRepository=propertyRepository,
+		serviceBus=serviceBus
 	)
 	conditionService: ConditionService = providers.Singleton(
 		ConditionService,
 		conditionRepository=conditionRepository,
 		deviceService=deviceService,
-		taskService=taskService
+		taskService=taskService,
+		serviceBus=serviceBus
 	)
 	controlService: ControlService = providers.Singleton(
 		ControlService
 	)
 	groupService: GroupService = providers.Singleton(
 		GroupService,
-		propertyRepository,
-		functionRepository,
-		groupRepository
+		propertyRepository=propertyRepository,
+		functionRepository=functionRepository,
+		groupRepository=groupRepository
 	)
 	interfaceService: InterfaceService = providers.Singleton(
 		InterfaceService,
-		taskService
+		taskService=taskService
 	)
 	andConditionController: AndConditionController = providers.Factory(
 		AndConditionController,

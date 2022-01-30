@@ -7,6 +7,7 @@ from app.models import Device
 class BaseDeviceService(BaseFunctionService):  # TODO: Should not be inherited from BaseFunctionService
 
 	def __init__(self, model):
+		BaseFunctionService.__init__(self)
 		if type(model) is not Device:
 			raise Exception("Device model should be passed to constructor")
 		self.Model = model

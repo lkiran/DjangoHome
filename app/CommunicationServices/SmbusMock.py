@@ -7,18 +7,20 @@ class SMBus(object):
 		self._force_last = None
 
 	def read_byte(self, i2c_addr, force=None):
-		print("read_byte", i2c_addr, force)
+		# print("read_byte", i2c_addr, force)
 		return 1
 
 	def write_byte(self, i2c_addr, value, force=None):
-		print("write_byte", i2c_addr, value, force)
+		# print("write_byte", i2c_addr, value, force)
+		pass
 
 	def read_i2c_block_data(self, i2c_addr, register, length, force=None):
-		print("read_i2c_block_data", i2c_addr, register, length, force)
+		# print("read_i2c_block_data", i2c_addr, register, length, force)
 		return [a for a in range(length)]
 
 	def write_i2c_block_data(self, i2c_addr, register, data, force=None):
-		print("write_i2c_block_data", i2c_addr, register, data, force)
+		# print("write_i2c_block_data", i2c_addr, register, data, force)
+		pass
 
 
 class SMBusWrapper:
