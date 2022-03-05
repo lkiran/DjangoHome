@@ -89,7 +89,7 @@ class Pin(BaseFunctionService):
 
 	def _writeToDevice(self, value):
 		state = self._readFromDevice()
-		state[7 - self.Id] = not value
+		state[self.Id] = not value
 		stateAsByte = np.packbits(np.uint8(state))
 		topic: str = "{0}/i2c/{1}".format(self.ioExtender.macAddress, self.ioExtender.Address)
 		self.ioExtender.client.publish(topic, int(stateAsByte))
