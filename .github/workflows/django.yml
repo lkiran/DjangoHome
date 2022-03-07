@@ -1,6 +1,11 @@
 name: Django CI
 
-on: [ push, pull_request ]
+on: 
+  push:
+      branches: 
+        - '*' 
+        - '!master'
+  pull_request:
 
 jobs:
   build:
@@ -22,4 +27,5 @@ jobs:
         
     - name: Run Tests
       run: |
+        chmod +x manage.py
         python manage.py test
