@@ -14,7 +14,9 @@ WORKDIR /DjangoHome
 # Copy the current directory contents into the container at /DjangoHome
 ADD . /DjangoHome/
 
+RUN pip install --upgrade pip
+
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 
-RUN sudo python manage.py runserver 0.0.0.0:8000
+RUN python manage.py runserver 0.0.0.0:8000
