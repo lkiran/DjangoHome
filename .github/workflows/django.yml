@@ -29,5 +29,6 @@ jobs:
         
     - name: Run Tests
       run: |
+        mkdir /Logs
         chmod 777 manage.py
         python manage.py test
