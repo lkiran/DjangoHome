@@ -29,5 +29,5 @@ jobs:
         
     - name: Run Tests
       run: |
-        chmod +x manage.py
+        chmod 777 manage.py
         python manage.py test
