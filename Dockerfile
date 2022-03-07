@@ -19,4 +19,5 @@ RUN pip install --upgrade pip
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 
-RUN python manage.py runserver 0.0.0.0:8000
+# Create static files
+RUN python manage.py collectstatic
