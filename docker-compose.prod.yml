@@ -10,5 +10,6 @@ services:
         volumes:
             - .:/docker_remote_interpreter
         environment:
+            - START_DEVICES=1
             - SECRET_KEY=aa59e3e2-b398-4170-85d8-ef91c2315514
-            - DEBUG=1
+            - DEBUG=0

@@ -7,9 +7,9 @@ from app.DatabaseServices.ConditionService import ConditionService
 from app.DatabaseServices.DeviceService import DeviceService
 from app.DatabaseServices.TaskService import TaskService
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
-from app.bulders.DeviceBulider import DeviceBuilder
-from app.bulders.FunctionBulider import FunctionBuilder
-from app.bulders.PropertyBulider import PropertyBuilder
+from app.builders.DeviceBulider import DeviceBuilder
+from app.builders.FunctionBulider import FunctionBuilder
+from app.builders.PropertyBulider import PropertyBuilder
 from app.enums import ClassEnum, TypeEnum, ComparerEnum
 from app.models import Device, Function, Property, Condition
 
