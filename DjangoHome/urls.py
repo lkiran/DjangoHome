@@ -1,3 +1,5 @@
+import os
+
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
@@ -25,8 +27,12 @@ urlpatterns = [
 	url(r'^groups', container.groupController().as_view()),
 ]
 
-deviceService = container.deviceService()
-container.propertyService()
-container.conditionService()
-deviceService.ProduceDevices()
-print("----------------------------------------")
+isStartDevices = bool(os.environ.get('START_DEVICES', 0))
+if isStartDevices:
+	print("Starting devices up...")
+	deviceService = container.deviceService()
+	container.propertyService()
+	container.conditionService()
+	deviceService.ProduceDevices()
+else:
+	print("Skipping device startup. To enable set environment variable START_DEVICES=True")
