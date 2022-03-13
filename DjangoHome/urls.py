@@ -33,6 +33,6 @@ if isStartDevices:
 	deviceService = container.deviceService()
 	container.propertyService()
 	container.conditionService()
-	deviceService.ProduceDevices()
+	deviceService.produceDevices()
 else:
 	print("Skipping device startup. To enable set environment variable START_DEVICES=True")

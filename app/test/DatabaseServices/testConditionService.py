@@ -7,6 +7,7 @@ from app.DatabaseServices.ConditionService import ConditionService
 from app.DatabaseServices.DeviceService import DeviceService
 from app.DatabaseServices.TaskService import TaskService
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
+from app.builders.ConditionBulider import ConditionBuilder
 from app.builders.DeviceBulider import DeviceBuilder
 from app.builders.FunctionBulider import FunctionBuilder
 from app.builders.PropertyBulider import PropertyBuilder
@@ -54,17 +55,15 @@ class ConditionServiceTest(TestCase):
 			.function(self.function) \
 			.build()
 
-		self.condition = Condition(
-			Id="condition-1",
-			Property=self.property,
-			Operator=ComparerEnum.Equal.value,
-			Value="False"
-		)
-		self.condition.save()
+		self.condition = ConditionBuilder(self.property) \
+			.id("condition-1") \
+			.operator(ComparerEnum.Equal) \
+			.value(True) \
+			.build()
 
 	def test_notifyConditionsOfProperty_shouldPass(self):
-		testDevice = TestDevice(self.device)
-		DeviceService.Devices.append(testDevice)
+		testDevice: BaseDeviceService = TestDevice(self.device)
+		self.deviceService.appendDevice(testDevice)
 		self.taskServiceMock.ExecuteTasksOfCondition = mock.Mock(return_value=None)
 
 		self.conditionService.NotifyConditionsOfProperty(self.property)

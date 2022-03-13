@@ -10,7 +10,7 @@ class TaskService(object):
 		self.__logger = logging.getLogger('TaskService')
 
 	def Execute(self, property, value):
-		return self.__deviceService.SetProperty(property, value)
+		return self.__deviceService.setProperty(property, value)
 
 	def ExecuteTask(self, task):
 		self.Execute(task.Property, task.Value)

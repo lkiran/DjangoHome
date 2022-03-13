@@ -3,13 +3,20 @@ from django.test import TestCase
 from DjangoHome.urls import container
 from app.DatabaseServices.DeviceService import DeviceService
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
+from app.builders.DeviceBulider import DeviceBuilder
+from app.builders.FunctionBulider import FunctionBuilder
+from app.builders.PropertyBulider import PropertyBuilder
 from app.enums import ClassEnum, TypeEnum
 from app.models import Device, Function, Property
 
 
 class TestDevice(BaseDeviceService):
+	def __init__(self, model):
+		super().__init__(model)
+		self._status: bool = False
+
 	def status(self):
-		return False
+		return self._status
 
 
 class DeviceServiceTest(TestCase):
@@ -19,44 +26,35 @@ class DeviceServiceTest(TestCase):
 	device: Device = None
 
 	def setUp(self):
-		self.property = Property(Id="prop-1",
-								 Name="status",
-								 CallFunction="status",
-								 Parameters={},
-								 Value="True",
-								 Type=TypeEnum.Read_Only.value,
-								 Class=ClassEnum.Boolean.value,
-								 Comparable=False,
-								 Category=None)
-		self.property.save()
+		self.property = PropertyBuilder(ClassEnum.Boolean) \
+			.id("prop-1") \
+			.name("status") \
+			.callFunction("status") \
+			.type(TypeEnum.Read_Only) \
+			.value(True) \
+			.build()
 
-		self.function = Function(
-			Id="function-1",
-			Name="function 1")
-		self.function.save()
-		self.function.Properties.add(self.property)
+		self.function = FunctionBuilder() \
+			.id("function-1") \
+			.name("function 1") \
+			.property(self.property) \
+			.build()
 
-		self.device = Device(
-			Id="test-device",
-			Name="test device",
-			CallClass="TestDevice",
-			Parameters={},
-		)
-		self.device.save()
-		self.device.Functions.add(self.function)
+		self.device = DeviceBuilder() \
+			.id("test-device") \
+			.name("test device") \
+			.callClass(TestDevice) \
+			.function(self.function) \
+			.build()
 
 	def test_getPropertyValue_shouldReturnValue(self):
 		testDevice = TestDevice(self.device)
-		DeviceService.Devices.append(testDevice)
-
+		self.deviceService.appendDevice(testDevice)
 		value: bool = self.deviceService.getPropertyValue(self.property)
-
 		self.assertEquals(False, value)
 
 	def test_getPropertyValueByPropertyId_shouldReturnValue(self):
-		testDevice = TestDevice(self.device)
-		DeviceService.Devices.append(testDevice)
-
-		value: bool = self.deviceService.getPropertyValueByPropertyId(self.property.Id)
-
+		testDevice: BaseDeviceService = TestDevice(self.device)
+		self.deviceService.appendDevice(testDevice)
+		value: bool = self.deviceService.getPropertyValue(self.property)
 		self.assertEquals(False, value)

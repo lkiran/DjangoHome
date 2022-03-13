@@ -60,7 +60,7 @@ class PropertyBuilder(Generic[T]):
 		property = Property(Id=self._id,
 							Name=self._name,
 							CallFunction=self._callFunction,
-							Parameters={}, # TODO: fix this
+							Parameters={},  # TODO: fix this
 							Value=self._value,
 							Type=self._type,
 							Class=self._class,

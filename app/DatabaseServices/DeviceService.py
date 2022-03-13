@@ -1,11 +1,9 @@
 import logging
-
 from typing import List
 
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.HardwareServices.DeviceFactory import DeviceFactory
 from app.Repositories.DeviceRepository import DeviceRepository
-from app.Repositories.PropertyRepository import PropertyRepository
 from app.enums import TypeEnum
 from app.models import Property
 
@@ -18,26 +16,29 @@ class DeviceService(object):
 		self.__factory = deviceFactory
 		self.__logger = logging.getLogger('DeviceService')
 
-	def ProduceDevices(self):
+	def appendDevice(self, device: BaseDeviceService) -> None:
+		self.Devices.append(device)
+
+	def produceDevices(self):
 		devices = self.__deviceRepository.Get()
 		DeviceService.Devices = [(lambda d: self.__factory.Produce(d))(d) for d in devices]
 		self.__logger.info(u"All {0} devices are produced".format(len(DeviceService.Devices)))
 
-	def GetProducedDeviceById(self, id):
-		return next((d for d in DeviceService.Devices if d and d.Model.Id == id), None)
+	def getProducedDeviceById(self, id: str) -> BaseDeviceService:
+		return next((d for d in self.Devices if d and d.Model.Id == id), None)
 
-	def GetProducedDeviceFunction(self, id, functionName):
-		producedDevice = self.GetProducedDeviceById(id)
+	def getProducedDeviceFunction(self, id, functionName):
+		producedDevice = self.getProducedDeviceById(id)
 		if producedDevice is None:
 			raise Exception("Device is not alive!")
 		return getattr(producedDevice, functionName)
 
-	def SetProperty(self, property, value=None):
+	def setProperty(self, property: Property, value=None) -> any:
 		if property.Type == TypeEnum.Read_Only:
 			raise Exception(u"Property '{0}' is read-only".format(property))
 		functionName = property.CallFunction
 		deviceId = property.Device.Id
-		callFunction = self.GetProducedDeviceFunction(deviceId, functionName)
+		callFunction = self.getProducedDeviceFunction(deviceId, functionName)
 		parsedValue = property.Parser.ToObject(value)
 		property.Parameters[u"Value"] = parsedValue
 		kwargs = dict(property.Parameters)
@@ -50,7 +51,7 @@ class DeviceService(object):
 			raise Exception(u"Property '{0}' is write-only".format(property))
 		functionName: str = property.CallFunction
 		deviceId: str = property.Device.Id
-		callFunction = self.GetProducedDeviceFunction(deviceId, functionName)
+		callFunction = self.getProducedDeviceFunction(deviceId, functionName)
 		kwargs = dict(property.Parameters)
 		self.__logger.info(u"Calling {0} function of {1}".format(callFunction, property.Device))
 		return callFunction(**kwargs)

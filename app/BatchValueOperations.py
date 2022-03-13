@@ -75,7 +75,7 @@ class BooleanBatchValueOperations(BaseBatchValueOperations):
 
 	def set(self, value):
 		for property in self.properties:
-			self._deviceService.SetProperty(property, value)
+			self._deviceService.setProperty(property, value)
 		return value
 
 	def calculateOr(self):
@@ -107,7 +107,7 @@ class ColorBatchValueOperations(BaseBatchValueOperations):
 
 	def set(self, value):
 		for property in self.properties:
-			self._deviceService.SetProperty(property, value)
+			self._deviceService.setProperty(property, value)
 		return value
 
 	def convertToGroupProperty(self):
@@ -125,7 +125,7 @@ class DateBatchValueOperations(BaseBatchValueOperations):
 
 	def set(self, value):
 		for property in self.properties:
-			self._deviceService.SetProperty(property, value)
+			self._deviceService.setProperty(property, value)
 		return value
 
 	def convertToGroupProperty(self):
@@ -143,7 +143,7 @@ class TimeBatchValueOperations(BaseBatchValueOperations):
 
 	def set(self, value):
 		for property in self.properties:
-			self._deviceService.SetProperty(property, value)
+			self._deviceService.setProperty(property, value)
 		return value
 
 	def convertToGroupProperty(self):
@@ -161,7 +161,7 @@ class DayOfWeekBatchValueOperations(BaseBatchValueOperations):
 
 	def set(self, value):
 		for property in self.properties:
-			self._deviceService.SetProperty(property, value)
+			self._deviceService.setProperty(property, value)
 		return value
 
 	def convertToGroupProperty(self):
@@ -179,7 +179,7 @@ class StringBatchValueOperations(BaseBatchValueOperations):
 
 	def set(self, value):
 		for property in self.properties:
-			self._deviceService.SetProperty(property, value)
+			self._deviceService.setProperty(property, value)
 		return value
 
 	def convertToGroupProperty(self):
@@ -197,7 +197,7 @@ class DateTimeBatchValueOperations(BaseBatchValueOperations):
 
 	def set(self, value):
 		for property in self.properties:
-			self._deviceService.SetProperty(property, value)
+			self._deviceService.setProperty(property, value)
 		return value
 
 	def convertToGroupProperty(self):
@@ -215,7 +215,7 @@ class IntegerBatchValueOperations(BaseBatchValueOperations):
 
 	def set(self, value):
 		for property in self.properties:
-			self._deviceService.SetProperty(property, value)
+			self._deviceService.setProperty(property, value)
 		return value
 
 	def sum(self, properties):
@@ -247,7 +247,7 @@ class EmptyBatchValueOperations(BaseBatchValueOperations):
 
 	def call(self, value):
 		for property in self.properties:
-			self._deviceService.SetProperty(property, value)
+			self._deviceService.setProperty(property, value)
 		return value
 
 	def convertToGroupProperty(self):
