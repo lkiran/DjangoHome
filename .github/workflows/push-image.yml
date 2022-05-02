@@ -30,6 +30,6 @@ jobs:
           image: lkiran/django-home
           tags: latest
           registry: docker.io
-          # dockerfile: Dockerfile.ci
+          dockerfile: prod.Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
