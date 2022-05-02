@@ -12,10 +12,7 @@ services:
     depends_on:
       - api
   api:
-      build:
-        context: .
-        dockerfile: ./prod.Dockerfile
-      # command: gunicorn DjangoHome.wsgi:application --bind 0.0.0.0:8000
+    image: lkiran/django-home:latest
     command: bash -c "python manage.py runserver 0.0.0.0:8000"
     volumes:
       - api_static:/DjangoHome/static
