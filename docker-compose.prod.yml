@@ -1,15 +1,35 @@
 version: '3'
 services:
-    app:
-        build:
-            context: .
-        command: bash -c "python manage.py runserver 0.0.0.0:8000"
-        restart: always
-        ports:
-            - 8000:8000
-        volumes:
-            - .:/docker_remote_interpreter
-        environment:
-            - START_DEVICES=1
-            - SECRET_KEY=aa59e3e2-b398-4170-85d8-ef91c2315514
-            - DEBUG=0
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: ./nginx.Dockerfile
+    volumes:
+      - api_static:/DjangoHome/static
+    restart: always
+    ports:
+      - 1337:80
+    depends_on:
+      - api
+  api:
+      build:
+        context: .
+        dockerfile: ./prod.Dockerfile
+      # command: gunicorn DjangoHome.wsgi:application --bind 0.0.0.0:8000
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - api_static:/DjangoHome/static
+      - api_logs:/DjangoHome/Logs
+      - api_db:/DjangoHome/data
+    restart: always
+    expose:
+      - 8000
+    environment:
+      - SECRET_KEY=aa59e3e2-b398-4170-85d8-ef91c2315514
+      - ENABLE_FILE_LOGGING=1
+      - START_DEVICES=1
+      - DEBUG=0
+volumes:
+  api_static:
+  api_logs:
+  api_db:
