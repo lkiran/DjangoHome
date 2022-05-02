@@ -23,5 +23,5 @@ jobs:
         stack_file_name: docker-compose.prod.yaml
         deployment_mode: docker-compose
         args: up -d
-        copy_stack_file: true
+        copy_stack_file: false
         pull_images_first: true
