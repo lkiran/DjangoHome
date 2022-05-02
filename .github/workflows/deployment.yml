@@ -22,5 +22,4 @@ jobs:
         ssh_port: ${{ secrets.SSH_PORT }}
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
         ssh_user: ${{ secrets.SSH_USER }}
-        docker_compose_prefix: prod
-        docker_compose_filename: /docker-compose.prod.yml
+        docker_compose_filename: /DjangoHome/docker-compose.prod.yml
