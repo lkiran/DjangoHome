@@ -19,6 +19,7 @@ jobs:
       name: Docker-Compose Remote Deployment
       with:
         ssh_host: ${{ secrets.SSH_HOST }}
+        ssh_port: ${{ secrets.SSH_PORT }}
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
         ssh_user: ${{ secrets.SSH_USER }}
         docker_compose_prefix: prod
