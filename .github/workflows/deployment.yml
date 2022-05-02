@@ -1,11 +1,6 @@
 name: Deploy
 
 on:
-  workflow_run:
-    workflows:
-      - push-image
-    types:
-      - completed
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
@@ -13,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-
-    - uses: alex-ac/github-action-ssh-docker-compose@master
-      name: Docker-Compose Remote Deployment
+    - name: Deploy to Docker Host
+      uses: wshihadeh/docker-deployment-action@v1
       with:
-        ssh_host: ${{ secrets.SSH_HOST }}
-        ssh_port: ${{ secrets.SSH_PORT }}
+        remote_docker_host: ${{ secrets.SSH_HOST }}
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-        ssh_user: ${{ secrets.SSH_USER }}
-        docker_compose_filename: /DjangoHome/docker-compose.prod.yml
+        ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+        stack_file_name: docker-compose.prod.yaml
+        deployment_mode: docker-compose
+        args: up -d
+        pull_images_first: 'true'
