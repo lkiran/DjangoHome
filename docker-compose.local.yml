@@ -1,0 +1,13 @@
+version: '3'
+services:
+    api:
+        build:
+            context: .
+        restart: always
+        ports:
+            - 8000:8000
+        volumes:
+            - .:/docker_remote_interpreter
+        environment:
+            - SECRET_KEY=aa59e3e2-b398-4170-85d8-ef91c2315514
+            - DEBUG=1
