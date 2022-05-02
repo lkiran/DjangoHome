@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Deploy to Docker Host
-      uses: wshihadeh/docker-deployment-action@v1
+      uses: wshihadeh/docker-deployment-action@v2
       with:
         remote_docker_host: ${{ secrets.SSH_HOST }}
         remote_docker_port: ${{ secrets.SSH_PORT }}
