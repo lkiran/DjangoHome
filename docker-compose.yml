@@ -8,11 +8,26 @@ services:
       - api_static:/DjangoHome/static
     restart: always
     ports:
-      - 1337:80
+      - "1337:80"
     depends_on:
       - api
+      - rabbitmq
+  rabbitmq:
+    image: lkiran/rabbit-home
+    restart: always
+    hostname: pi
+    ports:
+      - "1883:1883"
+      - "15672:15672"
+      - "15692:15692"
+    volumes:
+      - rabbit_data:/var/lib/rabbitmq/
+      - rabbit_log:/var/log/rabbitmq/
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
   api:
-    image: lkiran/django-home:latest
+    image: lkiran/django-home
     command: bash -c "python manage.py runserver 0.0.0.0:8000"
     volumes:
       - api_static:/DjangoHome/static
@@ -20,13 +35,17 @@ services:
       - api_db:/DjangoHome/data
     restart: always
     expose:
-      - 8000
+      - "8000"
     environment:
       - SECRET_KEY=aa59e3e2-b398-4170-85d8-ef91c2315514
       - ENABLE_FILE_LOGGING=1
       - START_DEVICES=1
       - DEBUG=0
+    depends_on:
+      - rabbitmq
 volumes:
   api_static:
   api_logs:
   api_db:
+  rabbit_data:
+  rabbit_log:
