@@ -6,10 +6,12 @@ services:
       dockerfile: ./nginx.Dockerfile
     volumes:
       - api_static:/DjangoHome/static
+      - ui_static:/usr/share/nginx/html
     restart: always
     ports:
       - "1337:80"
     depends_on:
+      - ui
       - api
       - rabbitmq
   rabbitmq:
@@ -22,13 +24,16 @@ services:
       - "15692:15692"
     volumes:
       - rabbit_data:/var/lib/rabbitmq/
-      - rabbit_log:/var/log/rabbitmq/
+      - rabbit_logs:/var/log/rabbitmq/
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
   api:
     image: lkiran/django-home
-    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+#   build:
+#     context: .
+#   command: gunicorn DjangoHome.wsgi:application --bind 0.0.0.0:8000 --workers 1 --threads 1
+    command: python manage.py runserver 0.0.0.0:8000 --noreload
     volumes:
       - api_static:/DjangoHome/static
       - api_logs:/DjangoHome/Logs
@@ -43,9 +48,16 @@ services:
       - DEBUG=0
     depends_on:
       - rabbitmq
+  ui:
+    image: lkiran/ng-home
+    ports:
+      - "8080:80"
+    volumes:
+      - ui_static:/usr/share/nginx/html
 volumes:
   api_static:
   api_logs:
   api_db:
   rabbit_data:
-  rabbit_log:
+  rabbit_logs:
+  ui_static:

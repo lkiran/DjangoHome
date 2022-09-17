@@ -1,9 +1,20 @@
 # Git
 .git
 .gitignore
+.github
+.gitattributes
 
 # Docker
-.docker
+.dockerignore
+Dockerfile
+prod.Dockerfile
+docker-compose.yml
+docker-compose.local.yml
+nginx
+rabbitmq
+
+# Other
+.idea
 
 # Python
 __pycache__/
