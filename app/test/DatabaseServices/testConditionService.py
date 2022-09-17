@@ -34,6 +34,8 @@ class ConditionServiceTest(TestCase):
 		containers.taskService.override(self.taskServiceMock)
 		containers.serviceBus.override(self.serviceBusMock)
 
+		containers.deviceService.reset()
+		containers.conditionService.reset()
 		self.deviceService = containers.deviceService()
 		self.conditionService = containers.conditionService()
 
