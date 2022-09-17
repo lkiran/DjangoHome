@@ -1,16 +1,20 @@
-from dependency_injector.wiring import inject
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from app.ModelSerializers import DeviceSerializer, BaseDeviceSerializer
+from DjangoHome.Controllers.ModelSerializers import DeviceSerializer, BaseDeviceSerializer
+from DjangoHome import containers
+from app.Repositories.DeviceRepository import DeviceRepository
+from app.Repositories.PrefabRepository import PrefabRepository
 
 
 class DeviceController(APIView):
-	@inject
-	def __init__(self, deviceRepository, prefabRepository, **kwargs):
-		super().__init__(**kwargs)
-		self.__deviceRepo = deviceRepository
-		self.__prefabRepo = prefabRepository
+	__deviceRepo: DeviceRepository
+	__prefabRepo: PrefabRepository
+
+	def initial(self, request, *args, **kwargs):
+		super(DeviceController, self).initial(request, *args, **kwargs)
+		self.__deviceRepo = containers.containers.deviceRepository()
+		self.__prefabRepo = containers.containers.prefabRepository()
 
 	def get(self, request, format=None):
 		devices = self.__deviceRepo.Get()

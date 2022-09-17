@@ -1,15 +1,5 @@
 from dependency_injector import containers, providers
 
-from app.Controllers.AndConditionController import AndConditionController
-from app.Controllers.ConditionController import ConditionController
-from app.Controllers.ControlController import ControlController
-from app.Controllers.DeviceController import DeviceController
-from app.Controllers.FunctionController import FunctionController
-from app.Controllers.GroupController import GroupController
-from app.Controllers.InterfaceController import InterfaceController
-from app.Controllers.PropertyController import PropertyController
-from app.Controllers.PropertyInfoController import PropertyInfoController
-from app.Controllers.TaskController import TaskController
 from app.DatabaseServices.ConditionService import ConditionService
 from app.DatabaseServices.ControlService import ControlService
 from app.DatabaseServices.DeviceService import DeviceService
@@ -32,124 +22,84 @@ from app.Repositories.TaskRepository import TaskRepository
 class Container(containers.DeclarativeContainer):
 	config = providers.Configuration()
 
-	propertyRepository: PropertyRepository = providers.Singleton(
+	propertyRepository: PropertyRepository = providers.ThreadSafeSingleton(
 		PropertyRepository
 	)
-	functionRepository: FunctionRepository = providers.Singleton(
+	functionRepository: FunctionRepository = providers.ThreadSafeSingleton(
 		FunctionRepository,
 		propertyRepository
 	)
-	deviceRepository: DeviceRepository = providers.Singleton(
+	deviceRepository: DeviceRepository = providers.ThreadSafeSingleton(
 		DeviceRepository,
 		functionRepository
 	)
-	conditionRepository: ConditionRepository = providers.Singleton(
+	conditionRepository: ConditionRepository = providers.ThreadSafeSingleton(
 		ConditionRepository
 	)
-	groupRepository: GroupRepository = providers.Singleton(
+	groupRepository: GroupRepository = providers.ThreadSafeSingleton(
 		GroupRepository,
 		propertyRepository=propertyRepository
 	)
-	taskRepository: TaskRepository = providers.Singleton(
+	taskRepository: TaskRepository = providers.ThreadSafeSingleton(
 		TaskRepository,
 		propertyRepository=propertyRepository
 	)
-	controlRepository: ControlRepository = providers.Singleton(
+	controlRepository: ControlRepository = providers.ThreadSafeSingleton(
 		ControlRepository,
 		taskRepository=taskRepository,
 		conditionRepository=conditionRepository
 	)
-	prefabRepository: PropertyRepository = providers.Singleton(
+	prefabRepository: PropertyRepository = providers.ThreadSafeSingleton(
 		PropertyRepository
 	)
-	interfaceRepository: InterfaceRepository = providers.Singleton(
+	interfaceRepository: InterfaceRepository = providers.ThreadSafeSingleton(
 		InterfaceRepository
 	)
-	serviceBus: ServiceBus = providers.Singleton(
+	serviceBus: ServiceBus = providers.ThreadSafeSingleton(
 		ServiceBus
 	)
-	deviceFactory: DeviceFactory = providers.Singleton(
+	deviceFactory: DeviceFactory = providers.ThreadSafeSingleton(
 		DeviceFactory,
 		serviceBus=serviceBus
 	)
-	deviceService: DeviceService = providers.Singleton(
-		DeviceService,
-		deviceRepository=deviceRepository,
-		deviceFactory=deviceFactory
-	)
-	taskService: TaskService = providers.Singleton(
-		TaskService,
-		taskRepository=taskRepository,
-		deviceService=deviceService
-	)
-	propertyService: PropertyService = providers.Singleton(
+	propertyService: PropertyService = providers.ThreadSafeSingleton(
 		PropertyService,
 		propertyRepository=propertyRepository,
 		serviceBus=serviceBus
 	)
-	conditionService: ConditionService = providers.Singleton(
+	deviceService: DeviceService = providers.ThreadSafeSingleton(
+		DeviceService,
+		deviceRepository=deviceRepository,
+		deviceFactory=deviceFactory
+	)
+	taskService: TaskService = providers.ThreadSafeSingleton(
+		TaskService,
+		taskRepository=taskRepository,
+		deviceService=deviceService
+	)
+	conditionService: ConditionService = providers.ThreadSafeSingleton(
 		ConditionService,
 		conditionRepository=conditionRepository,
 		deviceService=deviceService,
 		taskService=taskService,
 		serviceBus=serviceBus
 	)
-	controlService: ControlService = providers.Singleton(
+	controlService: ControlService = providers.ThreadSafeSingleton(
 		ControlService
 	)
-	groupService: GroupService = providers.Singleton(
+	groupService: GroupService = providers.ThreadSafeSingleton(
 		GroupService,
 		propertyRepository=propertyRepository,
 		functionRepository=functionRepository,
 		groupRepository=groupRepository
 	)
-	interfaceService: InterfaceService = providers.Singleton(
+	interfaceService: InterfaceService = providers.ThreadSafeSingleton(
 		InterfaceService,
 		taskService=taskService
 	)
-	andConditionController: AndConditionController = providers.Factory(
-		AndConditionController,
-		conditionRepository=conditionRepository
-	)
-	propertyInfoController: PropertyInfoController = providers.Factory(
-		PropertyInfoController,
-		propertyRepository=propertyRepository
-	)
-	conditionController: ConditionController = providers.Factory(
-		ConditionController,
-		conditionRepository=conditionRepository,
-		controlRepository=controlRepository
-	)
-	controlController: ControlController = providers.Factory(
-		ControlController,
-		controlRepository=controlRepository
-	)
-	interfaceController: InterfaceController = providers.Factory(
-		InterfaceController,
-		interfaceRepository=interfaceRepository,
-		interfaceService=interfaceService
-	)
-	functionController: FunctionController = providers.Factory(
-		FunctionController,
-		taskRepository=taskRepository,
-		deviceRepository=deviceRepository
-	)
-	propertyController: PropertyController = providers.Factory(
-		PropertyController,
-		propertyRepository=propertyRepository,
-		functionRepository=functionRepository
-	)
-	deviceController: DeviceController = providers.Factory(
-		DeviceController,
-		deviceRepository=deviceRepository,
-		prefabRepository=prefabRepository
-	)
-	taskController: TaskController = providers.Factory(
-		TaskController,
-		taskRepository=taskRepository,
-		controlRepository=controlRepository
-	)
-	groupController: GroupController = providers.Factory(
-		GroupController,
-		groupService=groupService
-	)
+
+
+containers = Container()
+containers.config.from_dict({})
+for provider in [p for (k, p) in containers.providers.items() if p.kwargs.get('serviceBus')]:
+	provider()  # instantiate services that depends on the bus

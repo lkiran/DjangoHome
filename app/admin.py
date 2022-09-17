@@ -1,16 +1,13 @@
 from django.contrib import admin
 
-from DjangoHome.containers import Container
-from app.Repositories import DeviceRepository
+from DjangoHome import containers
 from app.models import *
-
-container = Container()
 
 
 def generate(modeladmin, request, queryset):
 	generate.short_description = "Generates prefab contents"
 
-	__deviceRepo = container.deviceRepository()
+	__deviceRepo = containers.containers.deviceRepository()
 	for prefab in queryset.all():
 		__deviceRepo.Save(prefab.Template)
 

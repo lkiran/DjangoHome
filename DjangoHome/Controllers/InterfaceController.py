@@ -2,14 +2,20 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from app.ModelSerializers import InterfaceSerializer
+from DjangoHome.Controllers.ModelSerializers import InterfaceSerializer
+from DjangoHome import containers
+from app.DatabaseServices.InterfaceService import InterfaceService
+from app.Repositories.InterfaceRepository import InterfaceRepository
 
 
 class InterfaceController(APIView):
-	def __init__(self, interfaceRepository, interfaceService, **kwargs):
-		super().__init__(**kwargs)
-		self.__interfaceRepo = interfaceRepository
-		self.__interfaceService = interfaceService
+	__interfaceRepo: InterfaceRepository
+	__interfaceService: InterfaceService
+
+	def initial(self, request, *args, **kwargs):
+		super(InterfaceController, self).initial(request, *args, **kwargs)
+		self.__interfaceRepo = containers.containers.interfaceRepository()
+		self.__interfaceService = containers.containers.interfaceService()
 
 	def get(self, request, format=None):
 		interfaceId = request.query_params.get("interfaceId")

@@ -2,13 +2,17 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from app.ModelSerializers import GroupSerializer
+from DjangoHome.Controllers.ModelSerializers import GroupSerializer
+from DjangoHome import containers
+from app.DatabaseServices.GroupService import GroupService
 
 
 class GroupController(APIView):
-	def __init__(self, groupService, **kwargs):
-		super().__init__(**kwargs)
-		self.__groupService = groupService
+	__groupService: GroupService
+
+	def initial(self, request, *args, **kwargs):
+		super(GroupController, self).initial(request, *args, **kwargs)
+		self.__groupService = containers.containers.groupService()
 
 	def post(self, request, format=None):
 		serializer = GroupSerializer(data=request.data)

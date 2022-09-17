@@ -29,26 +29,50 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = ['app',
-                  'rest_framework',
-                  'django.contrib.admin',
-                  'django.contrib.auth',
-                  'django.contrib.contenttypes',
-                  'django.contrib.sessions',
-                  'django.contrib.messages',
-                  'django.contrib.staticfiles',
-                  'corsheaders',
-                  ]
+				  'executor',
+				  'rest_framework',
+				  'django.contrib.admin',
+				  'django.contrib.auth',
+				  'django.contrib.contenttypes',
+				  'django.contrib.sessions',
+				  'django.contrib.messages',
+				  'django.contrib.staticfiles',
+				  'corsheaders',
+				  ]
 
 MIDDLEWARE = ['django.middleware.security.SecurityMiddleware',
-                      'django.contrib.sessions.middleware.SessionMiddleware',
-                      'django.middleware.common.CommonMiddleware',
-                      'django.middleware.csrf.CsrfViewMiddleware',
-                      'django.contrib.auth.middleware.AuthenticationMiddleware',
-                      'django.contrib.messages.middleware.MessageMiddleware',
-                      'django.middleware.clickjacking.XFrameOptionsMiddleware',
-                      'corsheaders.middleware.CorsMiddleware',
-                      'django.middleware.common.CommonMiddleware',
-                      ]
+			  'django.contrib.sessions.middleware.SessionMiddleware',
+			  'django.middleware.common.CommonMiddleware',
+			  'django.middleware.csrf.CsrfViewMiddleware',
+			  'django.contrib.auth.middleware.AuthenticationMiddleware',
+			  'django.contrib.messages.middleware.MessageMiddleware',
+			  'django.middleware.clickjacking.XFrameOptionsMiddleware',
+			  'corsheaders.middleware.CorsMiddleware',
+			  'django.middleware.common.CommonMiddleware',
+			  ]
+
+LOGGING = {
+	'version': 1,
+	'disable_existing_loggers': False,  # will use the loggers in manage.py as well
+	'filters': {
+		'require_debug_true': {
+			'()': 'django.utils.log.RequireDebugTrue',
+		}
+	},
+	'handlers': {
+		'console': {
+			'level': 'DEBUG',
+			'filters': ['require_debug_true'],
+			'class': 'logging.StreamHandler',
+		}
+	},
+	'loggers': {
+		'django.db.backends': {
+			'level': 'DEBUG',
+			'handlers': ['console'],
+		}
+	}
+}
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -60,9 +84,9 @@ TEMPLATES = [{
 	'APP_DIRS': True,
 	'OPTIONS': {
 		'context_processors': ['django.template.context_processors.debug',
-		                       'django.template.context_processors.request',
-		                       'django.contrib.auth.context_processors.auth',
-		                       'django.contrib.messages.context_processors.messages', ],
+							   'django.template.context_processors.request',
+							   'django.contrib.auth.context_processors.auth',
+							   'django.contrib.messages.context_processors.messages', ],
 	},
 }, ]
 
