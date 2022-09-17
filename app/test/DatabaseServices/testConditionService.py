@@ -2,9 +2,10 @@ from unittest import mock
 
 from django.test import TestCase
 
-from DjangoHome.urls import container
+from DjangoHome.containers import containers
 from app.DatabaseServices.ConditionService import ConditionService
 from app.DatabaseServices.DeviceService import DeviceService
+from app.DatabaseServices.ServiceBus import ServiceBus
 from app.DatabaseServices.TaskService import TaskService
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.builders.ConditionBulider import ConditionBuilder
@@ -12,7 +13,7 @@ from app.builders.DeviceBulider import DeviceBuilder
 from app.builders.FunctionBulider import FunctionBuilder
 from app.builders.PropertyBulider import PropertyBuilder
 from app.enums import ClassEnum, TypeEnum, ComparerEnum
-from app.models import Device, Function, Property, Condition
+from app.models import Device, Function, Property
 
 
 class TestDevice(BaseDeviceService):
@@ -22,6 +23,7 @@ class TestDevice(BaseDeviceService):
 
 class ConditionServiceTest(TestCase):
 	taskServiceMock = mock.Mock(spec=TaskService)
+	serviceBusMock = mock.Mock(spec=ServiceBus)
 	deviceService: DeviceService = None
 	conditionService: ConditionService = None
 	property: Property = None
@@ -29,10 +31,11 @@ class ConditionServiceTest(TestCase):
 	device: Device = None
 
 	def setUp(self):
-		container.taskService.override(self.taskServiceMock)
+		containers.taskService.override(self.taskServiceMock)
+		containers.serviceBus.override(self.serviceBusMock)
 
-		self.deviceService = container.deviceService()
-		self.conditionService = container.conditionService()
+		self.deviceService = containers.deviceService()
+		self.conditionService = containers.conditionService()
 
 		self.property = PropertyBuilder(ClassEnum.Boolean) \
 			.id("prop-1") \
@@ -62,7 +65,7 @@ class ConditionServiceTest(TestCase):
 			.build()
 
 	def test_notifyConditionsOfProperty_shouldPass(self):
-		testDevice: BaseDeviceService = TestDevice(self.device)
+		testDevice: BaseDeviceService = TestDevice(self.device, self.serviceBusMock)
 		self.deviceService.appendDevice(testDevice)
 		self.taskServiceMock.ExecuteTasksOfCondition = mock.Mock(return_value=None)
 

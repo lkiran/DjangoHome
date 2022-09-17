@@ -3,13 +3,14 @@ from datetime import datetime
 import numpy as np
 
 from app.CommunicationServices.TwoWireInterface import TwoWireInterface
+from app.DatabaseServices.ServiceBus import ServiceBus
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
-from app.HardwareServices.BaseFunctionService import BaseFunctionService
+from app.models import Property
 
 
 class IOExtender(BaseDeviceService):
-	def __init__(self, model):
-		BaseDeviceService.__init__(self, model)
+	def __init__(self, model, serviceBus: ServiceBus):
+		BaseDeviceService.__init__(self, model, serviceBus)
 		self.Address = 0
 		self.Pins = []
 		self._InstantiateUsingModel()
@@ -57,19 +58,20 @@ class IOExtender(BaseDeviceService):
 	def _PopulatePins(self, numberOfPins):
 		modelProperties = self.Model.Properties
 		for i in range(0, numberOfPins):
-			pinProperties = modelProperties.filter(Parameters={'Pin': i})
-			pin = Pin(i, self.Address, pinProperties)
+			pinProperties = modelProperties.filter(Parameters__contains='"Pin":{0}'.format(i))
+			pin = Pin(i, pinProperties, self)
 			self.Pins.append(pin)
 
 
-class Pin(BaseFunctionService):
-	def __init__(self, id, address, properties):
+class Pin(object):
+	def __init__(self, id, properties, device: IOExtender):
+		self.device = device
 		self.__i2c = TwoWireInterface.Instance()
 		self.Id = id
 		self.Properties = properties
-		self.Address = address
-		state = self.Properties.filter(CallFunction='State').first()
-		self._Status = self.GetValue(state, False)
+		self.Address = device.Address
+		self.state: Property = self.Properties.filter(CallFunction='State').first()
+		self._Status = self.state.Object
 		self._WriteToDevice(self._Status)
 		self.ActivatedOn = None
 		self.ClosedOn = None
@@ -101,5 +103,5 @@ class Pin(BaseFunctionService):
 			self.ClosedOn = datetime.now()
 			print("Turning off the pin")
 		self._WriteToDevice(value)
-		self._Status = value
-		self.SetValue(self.Properties.filter(CallFunction='State').first(), value)
+		self.state = self.device.SetValue(self.state, value)
+		self._Status = self.state.Object

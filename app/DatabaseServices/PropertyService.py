@@ -17,9 +17,8 @@ class PropertyService(Service):
 
 	def SaveObject(self, property: Property, value: any):
 		self.__logger.info(u"SaveObject is called with object={0}; value={1}".format(property, value))
-		parser = PropertyValueHelper.GetParser(property)
-		property.Value = parser.ToString(value)
-		property.save()
+		property.Value = property.Parser.ToString(value)
+		property.save(update_fields=["Value"])
 		return property
 
 	def register(self):

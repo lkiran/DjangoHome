@@ -1,6 +1,7 @@
 import logging
 from typing import List
 
+from app.DatabaseServices.PropertyService import PropertyService
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.HardwareServices.DeviceFactory import DeviceFactory
 from app.Repositories.DeviceRepository import DeviceRepository
@@ -21,8 +22,8 @@ class DeviceService(object):
 
 	def produceDevices(self):
 		devices = self.__deviceRepository.Get()
-		DeviceService.Devices = [(lambda d: self.__factory.Produce(d))(d) for d in devices]
-		self.__logger.info(u"All {0} devices are produced".format(len(DeviceService.Devices)))
+		self.Devices = [(lambda d: self.__factory.Produce(d))(d) for d in devices]
+		self.__logger.info(u"All {0} devices are produced".format(len(self.Devices)))
 
 	def getProducedDeviceById(self, id: str) -> BaseDeviceService:
 		return next((d for d in self.Devices if d and d.Model.Id == id), None)
@@ -30,7 +31,7 @@ class DeviceService(object):
 	def getProducedDeviceFunction(self, id, functionName):
 		producedDevice = self.getProducedDeviceById(id)
 		if producedDevice is None:
-			raise Exception("Device is not alive!")
+			raise Exception("Device is not alive!", self.Devices)
 		return getattr(producedDevice, functionName)
 
 	def setProperty(self, property: Property, value=None) -> any:

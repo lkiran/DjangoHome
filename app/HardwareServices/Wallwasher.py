@@ -1,7 +1,6 @@
+from app.CommunicationServices.TwoWireInterface import TwoWireInterface
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.ValueTypes import Color
-
-from app.CommunicationServices.TwoWireInterface import TwoWireInterface
 
 
 class Wallwasher(BaseDeviceService):
@@ -46,8 +45,8 @@ class Wallwasher(BaseDeviceService):
 		self._greenMax = self.Model.Parameters.get("GreenMax", 0)
 		self._blueMax = self.Model.Parameters.get("BlueMax", 0)
 
-		self._color = self.GetValue(properties.filter(CallFunction='Color').first())
-		self._transitionTime = self.GetValue(properties.filter(CallFunction='TransitionTime').first())
+		self._color = properties.filter(CallFunction='Color').first().Object
+		self._transitionTime = properties.filter(CallFunction='TransitionTime').first().Object
 
 
 def int_to_bytes(value, length):

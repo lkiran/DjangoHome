@@ -30,8 +30,7 @@ class DeviceFactory:
 			deviceClass = self.devices.get(type, None)
 			if not deviceClass:
 				raise Exception(u"Cannot find a device class with name {0}".format(type))
-			producedDevice: BaseDeviceService = deviceClass(device)
-			producedDevice.setServiceBus(self.__serviceBus)
+			producedDevice: BaseDeviceService = deviceClass(device, self.__serviceBus)
 			return producedDevice
 
 		except Exception as e:

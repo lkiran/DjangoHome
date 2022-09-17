@@ -3,14 +3,14 @@ from datetime import datetime
 import numpy as np
 import paho.mqtt.client as mqtt
 
+from app.DatabaseServices.ServiceBus import ServiceBus
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
-from app.HardwareServices.BaseFunctionService import BaseFunctionService
-from app.models import Device
+from app.models import Device, Property
 
 
 class MqttIOExtender(BaseDeviceService):
-	def __init__(self, model: Device):
-		BaseDeviceService.__init__(self, model)
+	def __init__(self, model: Device, serviceBus: ServiceBus):
+		BaseDeviceService.__init__(self, model, serviceBus)
 		self.Pins = []
 		self.Address = 0
 		self.macAddress = 0
@@ -67,18 +67,18 @@ class MqttIOExtender(BaseDeviceService):
 	def _populatePins(self, numberOfPins):
 		modelProperties = self.Model.Properties
 		for i in range(0, numberOfPins):
-			pin = Pin(i, self)
-			pin.setServiceBus(self.serviceBus)
+			pinProperties = modelProperties.filter(Parameters__contains='"Pin":{0}'.format(i))
+			pin = Pin(i, pinProperties, self)
 			self.Pins.append(pin)
 
 
-class Pin(BaseFunctionService):
-	def __init__(self, id: int, ioExtender: MqttIOExtender):
+class Pin(object):
+	def __init__(self, id: int, properties, device: MqttIOExtender):
 		self.Id = id
-		self.ioExtender: MqttIOExtender = ioExtender
-		self.Properties = pinProperties = ioExtender.Model.Properties.filter(Parameters={'Pin': id})
-		state = self.Properties.filter(CallFunction='State').first()
-		self._Status = self.GetValue(state, False)
+		self.ioExtender: MqttIOExtender = device
+		self.Properties = properties
+		self.state: Property = self.Properties.filter(CallFunction='State').first()
+		self._Status = self.state.Object
 		# self._writeToDevice(self._Status) TODO: fix this
 		self.ActivatedOn = None
 		self.ClosedOn = None
@@ -110,5 +110,5 @@ class Pin(BaseFunctionService):
 			self.ClosedOn = datetime.now()
 			print("Turning off the pin")
 		self._writeToDevice(value)
-		self._Status = value
-		self.ioExtender.SetValue(self.Properties.filter(CallFunction='State').first(), value)
+		self.state = self.device.SetValue(self.state, value)
+		self._Status = self.state.Object

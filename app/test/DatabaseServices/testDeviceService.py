@@ -1,7 +1,10 @@
+from unittest import mock
+
 from django.test import TestCase
 
-from DjangoHome.urls import container
+from DjangoHome.containers import containers
 from app.DatabaseServices.DeviceService import DeviceService
+from app.DatabaseServices.ServiceBus import ServiceBus
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.builders.DeviceBulider import DeviceBuilder
 from app.builders.FunctionBulider import FunctionBuilder
@@ -11,8 +14,8 @@ from app.models import Device, Function, Property
 
 
 class TestDevice(BaseDeviceService):
-	def __init__(self, model):
-		super().__init__(model)
+	def __init__(self, model, serviceBus):
+		super().__init__(model, serviceBus)
 		self._status: bool = False
 
 	def status(self):
@@ -20,7 +23,8 @@ class TestDevice(BaseDeviceService):
 
 
 class DeviceServiceTest(TestCase):
-	deviceService: DeviceService = container.deviceService()
+	deviceService: DeviceService = containers.deviceService()
+	serviceBusMock = mock.Mock(spec=ServiceBus)
 	property: Property = None
 	function: Function = None
 	device: Device = None
@@ -48,13 +52,13 @@ class DeviceServiceTest(TestCase):
 			.build()
 
 	def test_getPropertyValue_shouldReturnValue(self):
-		testDevice = TestDevice(self.device)
+		testDevice = TestDevice(self.device, self.serviceBusMock)
 		self.deviceService.appendDevice(testDevice)
 		value: bool = self.deviceService.getPropertyValue(self.property)
 		self.assertEquals(False, value)
 
 	def test_getPropertyValueByPropertyId_shouldReturnValue(self):
-		testDevice: BaseDeviceService = TestDevice(self.device)
+		testDevice: BaseDeviceService = TestDevice(self.device, self.serviceBusMock)
 		self.deviceService.appendDevice(testDevice)
 		value: bool = self.deviceService.getPropertyValue(self.property)
 		self.assertEquals(False, value)
