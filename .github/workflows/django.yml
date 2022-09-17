@@ -4,7 +4,7 @@ on:
   push:
     branches: 
     - '*' # any branch
-    - '!master' # except master
+    # - '!master' # except master
   pull_request:
     branches: [ master ]
   workflow_dispatch:  # allow manual run
