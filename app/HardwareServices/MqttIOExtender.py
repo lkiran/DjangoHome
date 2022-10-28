@@ -75,24 +75,24 @@ class MqttIOExtender(BaseDeviceService):
 class Pin(object):
 	def __init__(self, id: int, properties, device: MqttIOExtender):
 		self.Id = id
-		self.ioExtender: MqttIOExtender = device
+		self.device: MqttIOExtender = device
 		self.Properties = properties
 		self.state: Property = self.Properties.filter(CallFunction='State').first()
-		self._Status = self.state.Object
+		self._Status = self.state.Object if self.state else None
 		# self._writeToDevice(self._Status) TODO: fix this
 		self.ActivatedOn = None
 		self.ClosedOn = None
 
 	def _readFromDevice(self):
-		result = [not self.ioExtender.Pins[i].Status for i in range(0, len(self.ioExtender.Pins))]
+		result = [not self.device.Pins[i].Status for i in range(0, len(self.device.Pins))]
 		return result
 
 	def _writeToDevice(self, value):
 		state = self._readFromDevice()
 		state[self.Id] = not value
 		stateAsByte = np.packbits(np.uint8(state))
-		topic: str = "{0}/i2c/{1}".format(self.ioExtender.macAddress, self.ioExtender.Address)
-		self.ioExtender.client.publish(topic, int(stateAsByte))
+		topic: str = "{0}/i2c/{1}".format(self.device.macAddress, self.device.Address)
+		self.device.client.publish(topic, int(stateAsByte))
 		return state
 
 	@property
@@ -111,4 +111,4 @@ class Pin(object):
 			print("Turning off the pin")
 		self._writeToDevice(value)
 		self.state = self.device.SetValue(self.state, value)
-		self._Status = self.state.Object
+		self._Status = self.state.Object if self.state else None

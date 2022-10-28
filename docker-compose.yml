@@ -9,7 +9,7 @@ services:
       - ui_static:/usr/share/nginx/html
     restart: always
     ports:
-      - "1337:80"
+      - "80:80"
     depends_on:
       - ui
       - api
@@ -39,8 +39,8 @@ services:
       - api_logs:/DjangoHome/Logs
       - api_db:/DjangoHome/data
     restart: always
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
     environment:
       - SECRET_KEY=aa59e3e2-b398-4170-85d8-ef91c2315514
       - ENABLE_FILE_LOGGING=1

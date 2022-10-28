@@ -51,29 +51,6 @@ MIDDLEWARE = ['django.middleware.security.SecurityMiddleware',
 			  'django.middleware.common.CommonMiddleware',
 			  ]
 
-LOGGING = {
-	'version': 1,
-	'disable_existing_loggers': False,  # will use the loggers in manage.py as well
-	'filters': {
-		'require_debug_true': {
-			'()': 'django.utils.log.RequireDebugTrue',
-		}
-	},
-	'handlers': {
-		'console': {
-			'level': 'DEBUG',
-			'filters': ['require_debug_true'],
-			'class': 'logging.StreamHandler',
-		}
-	},
-	'loggers': {
-		'django.db.backends': {
-			'level': 'DEBUG',
-			'handlers': ['console'],
-		}
-	}
-}
-
 CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'DjangoHome.urls'
