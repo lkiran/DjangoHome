@@ -26,7 +26,8 @@ jobs:
       run: |        
         echo ::set-output name=docker_platform::${DOCKER_TARGET_PLATFORM}        
         echo ::set-output name=docker_image::${DOCKER_IMAGE}        
-        echo ::set-output name=version::${GITHUB_RUN_NUMBER}    
+        echo ::set-output name=version::${GITHUB_RUN_NUMBER}
+        ls
     - name: Docker Login      
       if: success()      
       run: |        
@@ -38,4 +39,4 @@ jobs:
           --platform ${{ steps.prepare.outputs.docker_platform }} \        
           --tag ${{ steps.prepare.outputs.docker_image }}:latest \        
           --file prod.Dockerfile \        
-          --output type=image,push=true .
+          --push .
