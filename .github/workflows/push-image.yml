@@ -36,6 +36,6 @@ jobs:
       run: |        
         docker buildx build \        
           --platform ${{ steps.prepare.outputs.docker_platform }} \        
-          --tag ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }} \        
-          --file ./prod.Dockerfile \        
+          --tag ${{ steps.prepare.outputs.docker_image }}:latest \        
+          --file prod.Dockerfile \        
           --output type=image,push=true .
