@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8
+FROM arm32v7/python:3.8
 LABEL Home Automation Server
 
 # The enviroment variable ensures that the python output is set straight
