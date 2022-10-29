@@ -17,5 +17,5 @@ class ServiceBus(object):
 		self.__logger.debug("Registered '{0}' event by {1}. Total {2} events".format(event, service, len(self.events)))
 
 	def get(self, event: str, payload: any):
-		self.__logger.debug("Handling '{0}' event".format(event))
+		self.__logger.debug("Handling '{0}' event with payload {1}".format(event, str(payload)))
 		return self.events[event].handle(event, payload)

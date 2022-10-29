@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 
 import numpy as np
@@ -11,6 +12,7 @@ from app.models import Device, Property
 class MqttIOExtender(BaseDeviceService):
 	def __init__(self, model: Device, serviceBus: ServiceBus):
 		BaseDeviceService.__init__(self, model, serviceBus)
+		self.__logger = logging.getLogger('MqttIOExtender({0})'.format(model.Id))
 		self.Pins = []
 		self.Address = 0
 		self.macAddress = 0
@@ -26,18 +28,17 @@ class MqttIOExtender(BaseDeviceService):
 
 	def __State(self, pin, value=None):
 		if value is not None:
-			print("Set pin {0} value as {1}".format(pin, value))
+			self.__logger.info("Set pin {0} value as {1}".format(pin, value))
 			pinObject = self.Pins[pin]
 			pinObject.Status = value
-		print("Get pin {0} value".format(pin))
 		return self.Pins[pin].Status
 
 	def Toggle(self, **kwargs):
 		pin = kwargs.get("Pin")
-		print(u"Toggling pin: {0}".format(pin))
+		self.__logger.info(u"Toggling pin: {0}".format(pin))
 		currentState = self.__State(pin)
 		self.__State(pin, not currentState)
-		print("Toggling pin: {0} is completed".format(pin))
+		self.__logger.info("Toggling pin: {0} is completed".format(pin))
 
 	def UpTime(self, **kwargs):
 		pin = kwargs.get("Pin")
@@ -56,7 +57,7 @@ class MqttIOExtender(BaseDeviceService):
 		return span
 
 	def _instantiateUsingModel(self):
-		self.Address = self.Model.Parameters.get("Address", "")
+		self.Address = self.Model.Parameters.get("address", "")
 		self.macAddress = self.Model.Parameters.get("macAddress", "")
 		self.serverIp = self.Model.Parameters.get("serverIp", "localhost")
 		self.serverPort = int(self.Model.Parameters.get("serverPort", "1883"))
@@ -67,19 +68,24 @@ class MqttIOExtender(BaseDeviceService):
 	def _populatePins(self, numberOfPins):
 		modelProperties = self.Model.Properties
 		for i in range(0, numberOfPins):
-			pinProperties = modelProperties.filter(Parameters__contains='"Pin":{0}'.format(i))
+			pinProperties = modelProperties.filter(Parameters__contains='"Pin": {0}'.format(i))
 			pin = Pin(i, pinProperties, self)
 			self.Pins.append(pin)
+		result = [not self.Pins[i].Status for i in range(0, len(self.Pins))]
+		stateAsByte = np.packbits(np.uint8(result))
+		topic: str = "{0}/i2c/{1}".format(self.macAddress, self.Address)
+		self.client.publish(topic, int(stateAsByte))
+		self.__logger.info("Publishing message topic '{0}' with payload {1}".format(topic, int(stateAsByte)))
 
 
 class Pin(object):
 	def __init__(self, id: int, properties, device: MqttIOExtender):
+		self.__logger = logging.getLogger('MqttIOExtender({0}).Pin({1})'.format(device.Model.Id, id))
 		self.Id = id
 		self.device: MqttIOExtender = device
 		self.Properties = properties
-		self.state: Property = self.Properties.filter(CallFunction='State').first()
+		self.state: Property = properties.filter(CallFunction='State').first()
 		self._Status = self.state.Object if self.state else None
-		# self._writeToDevice(self._Status) TODO: fix this
 		self.ActivatedOn = None
 		self.ClosedOn = None
 
@@ -93,6 +99,7 @@ class Pin(object):
 		stateAsByte = np.packbits(np.uint8(state))
 		topic: str = "{0}/i2c/{1}".format(self.device.macAddress, self.device.Address)
 		self.device.client.publish(topic, int(stateAsByte))
+		self.__logger.info("Publishing message topic '{0}' with payload {1}".format(topic, int(stateAsByte)))
 		return state
 
 	@property
@@ -101,14 +108,6 @@ class Pin(object):
 
 	@Status.setter
 	def Status(self, value):
-		if value is True:
-			self.ActivatedOn = datetime.now()
-			self.ClosedOn = None
-			print("Turning on the pin")
-		else:
-			self.ActivatedOn = None
-			self.ClosedOn = datetime.now()
-			print("Turning off the pin")
 		self._writeToDevice(value)
 		self.state = self.device.SetValue(self.state, value)
-		self._Status = self.state.Object if self.state else None
+		self._Status = value
