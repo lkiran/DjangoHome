@@ -58,6 +58,10 @@ volumes:
   api_static:
   api_logs:
   api_db:
+    driver_opts:
+      type: none
+      device: /home/pi/DjangoHome/data
+      o: bind
   rabbit_data:
   rabbit_logs:
   ui_static:
