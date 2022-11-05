@@ -2,14 +2,15 @@ import logging
 from datetime import datetime
 
 import numpy as np
-import paho.mqtt.client as mqtt
 
+from app.CommunicationServices.AbcMqttCommunicator import AbcMqttCommunicator
 from app.DatabaseServices.ServiceBus import ServiceBus
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.models import Device, Property
 
 
-class MqttIOExtender(BaseDeviceService):
+class MqttIOExtender(BaseDeviceService, AbcMqttCommunicator):
+
 	def __init__(self, model: Device, serviceBus: ServiceBus):
 		BaseDeviceService.__init__(self, model, serviceBus)
 		self.__logger = logging.getLogger('MqttIOExtender({0})'.format(model.Id))
@@ -18,7 +19,6 @@ class MqttIOExtender(BaseDeviceService):
 		self.macAddress = 0
 		self.serverIp = ""
 		self.serverPort: int
-		self.client: mqtt.Client = mqtt.Client(client_id="IOExtender")
 		self._instantiateUsingModel()
 
 	def State(self, **kwargs):
@@ -59,10 +59,6 @@ class MqttIOExtender(BaseDeviceService):
 	def _instantiateUsingModel(self):
 		self.Address = self.Model.Parameters.get("address", "")
 		self.macAddress = self.Model.Parameters.get("macAddress", "")
-		self.serverIp = self.Model.Parameters.get("serverIp", "localhost")
-		self.serverPort = int(self.Model.Parameters.get("serverPort", "1883"))
-		self.client.connect(self.serverIp, self.serverPort)
-		self.client.loop_start()
 		self._populatePins(8)
 
 	def _populatePins(self, numberOfPins):

@@ -11,7 +11,7 @@ from app.enums import ClassEnum
 class AbsValueParser(object):
 	__metaclass__ = abc.ABCMeta
 
-	@abc.abstractproperty
+	@property
 	def TemplateClass(self):
 		return ClassEnum.Error
 

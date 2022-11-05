@@ -1,5 +1,6 @@
 from dependency_injector import containers, providers
 
+from app.CommunicationServices.MqttClient import MqttClient
 from app.DatabaseServices.ConditionService import ConditionService
 from app.DatabaseServices.ControlService import ControlService
 from app.DatabaseServices.DeviceService import DeviceService
@@ -22,6 +23,12 @@ from app.Repositories.TaskRepository import TaskRepository
 class Container(containers.DeclarativeContainer):
 	config = providers.Configuration()
 
+	mqttClient: MqttClient = providers.ThreadSafeSingleton(
+		MqttClient,
+		serverIp=config.mqtt.serverIp,
+		serverPort=config.mqtt.serverPort,
+		id=config.mqtt.id
+	)
 	propertyRepository: PropertyRepository = providers.ThreadSafeSingleton(
 		PropertyRepository
 	)
@@ -60,7 +67,8 @@ class Container(containers.DeclarativeContainer):
 	)
 	deviceFactory: DeviceFactory = providers.ThreadSafeSingleton(
 		DeviceFactory,
-		serviceBus=serviceBus
+		serviceBus=serviceBus,
+		mqttClient=mqttClient
 	)
 	propertyService: PropertyService = providers.ThreadSafeSingleton(
 		PropertyService,
@@ -100,6 +108,12 @@ class Container(containers.DeclarativeContainer):
 
 
 containers = Container()
-containers.config.from_dict({})
+containers.config.from_dict({
+	"mqtt": {
+		"serverIp": "rabbitmq",
+		"serverPort": "1883",
+		"id": "DjangoHomeClient"
+	}
+})
 for provider in [p for (k, p) in containers.providers.items() if p.kwargs.get('serviceBus')]:
 	provider()  # instantiate services that depends on the bus
