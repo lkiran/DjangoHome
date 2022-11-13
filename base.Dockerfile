@@ -7,6 +7,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ADD requirements.txt .
 ADD build.requirements.txt .
 
+RUN apt install libatlas3-base libgfortran5
 RUN pip3 install --upgrade pip
-RUN pip3 install --index-url=https://www.piwheels.org/simple --no-cache-dir -r requirements.txt
-RUN pip3 install --no-cache-dir -r build.requirements.txt
+RUN pip3 install -r requirements.txt
