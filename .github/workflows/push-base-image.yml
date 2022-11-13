@@ -1,7 +1,12 @@
 name: Docker Build/Publish Base Image 
 on:  
-  pull_request:
+  push:
     branches: [ master ]
+    paths:
+    - 'requirements.txt'
+    - 'build.requirements.txt'
+    - 'base.Dockerfile'
+  
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
