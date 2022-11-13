@@ -7,4 +7,5 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ADD requirements.txt .
 ADD build.requirements.txt .
 
+RUN pip install -r build.requirements.txt
 RUN pip install -r requirements.txt
