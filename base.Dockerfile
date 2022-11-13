@@ -7,6 +7,5 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ADD requirements.txt .
 ADD build.requirements.txt .
 
-RUN sudo apt install libatlas3-base libgfortran5
 RUN sudo pip3 install --upgrade pip
 RUN sudo pip3 install -r requirements.txt
