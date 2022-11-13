@@ -1,0 +1,1 @@
+dependency_injector >= 4.36.0, < 4.37
