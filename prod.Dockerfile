@@ -1,11 +1,6 @@
 # Use an official Python runtime as a parent image
-FROM arm32v7/python:3.8
+FROM lkiran/python:v1
 LABEL Home Automation Server
-
-# The enviroment variable ensures that the python output is set straight
-# to the terminal with out buffering it first
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
 
 # create the appropriate directories
 ENV HOME=/
@@ -17,8 +12,5 @@ WORKDIR $APP_HOME
 
 # Copy the current directory contents into the container at /DjangoHome
 ADD . $APP_HOME
-
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
 
 RUN python manage.py collectstatic --no-input
