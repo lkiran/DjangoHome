@@ -7,4 +7,4 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ADD requirements.txt .
 ADD build.requirements.txt .
 
-RUN sudo pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
