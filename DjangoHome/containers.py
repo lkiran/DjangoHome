@@ -111,7 +111,7 @@ containers = Container()
 containers.config.from_dict({
 	"mqtt": {
 		"serverIp": "rabbitmq",
-		"serverPort": "1883",
+		"serverPort": 1883,
 		"id": "DjangoHomeClient"
 	}
 })

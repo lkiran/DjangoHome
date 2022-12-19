@@ -1,15 +1,15 @@
 import abc
+from typing import Optional
 
 from app.CommunicationServices.MqttClient import MqttClient
 
 
 class AbcMqttCommunicator(object):
-	__metaclass__ = abc.ABCMeta
+    __metaclass__ = abc.ABCMeta
 
-	@property
-	def client(self) -> MqttClient:
-		return self.client
+    def __init__(self, mqttClient: MqttClient):
+        self._client: Optional[MqttClient] = mqttClient
 
-	@client.setter
-	def client(self, value: MqttClient) -> None:
-		self.client = value
+    @property
+    def client(self) -> MqttClient:
+        return self._client

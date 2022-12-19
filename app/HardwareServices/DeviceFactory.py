@@ -32,9 +32,10 @@ class DeviceFactory:
 			deviceClass = self.devices.get(type, None)
 			if not deviceClass:
 				raise Exception(u"Cannot find a device class with name {0}".format(type))
-			producedDevice: BaseDeviceService = deviceClass(device, self.__serviceBus)
-			if issubclass(producedDevice.__class__, AbcMqttCommunicator):
-				producedDevice.client = self.__mqttClient
+			if issubclass(deviceClass, AbcMqttCommunicator):
+				producedDevice: AbcMqttCommunicator = deviceClass(device, self.__serviceBus, self.__mqttClient)
+			else:
+				producedDevice: BaseDeviceService = deviceClass(device, self.__serviceBus)
 			return producedDevice
 
 		except Exception as e:

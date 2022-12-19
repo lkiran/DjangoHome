@@ -9,7 +9,8 @@ class MqttClient:
 		self.client.loop_start()
 
 	def subscribe(self, topic: str, callback):
-		self.subscribe(topic, callback)
+		self.client.subscribe(topic)
+		self.client.message_callback_add(topic, callback)
 
 	def publish(self, topic: str, payload: any):
-		self.publish(topic, payload)
+		self.client.publish(topic, payload)

@@ -2,6 +2,7 @@ import logging
 from typing import Dict
 
 from app.CommunicationServices.AbcMqttCommunicator import AbcMqttCommunicator
+from app.CommunicationServices.MqttClient import MqttClient
 from app.DatabaseServices.ServiceBus import ServiceBus
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.ValueTypes import Color
@@ -10,8 +11,9 @@ from app.models import Property, Device
 
 class Wallswitch(BaseDeviceService, AbcMqttCommunicator):
 
-	def __init__(self, model: Device, serviceBus: ServiceBus):
+	def __init__(self, model: Device, serviceBus: ServiceBus, mqttClient: MqttClient):
 		BaseDeviceService.__init__(self, model, serviceBus)
+		AbcMqttCommunicator.__init__(self, mqttClient)
 		self.__logger = logging.getLogger('Wallswitch({0})'.format(model.Id))
 		self.buttons: Dict[str, Button] = {}
 		self._InstantiateUsingModel()

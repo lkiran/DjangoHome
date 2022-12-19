@@ -4,6 +4,7 @@ from datetime import datetime
 import numpy as np
 
 from app.CommunicationServices.AbcMqttCommunicator import AbcMqttCommunicator
+from app.CommunicationServices.MqttClient import MqttClient
 from app.DatabaseServices.ServiceBus import ServiceBus
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.models import Device, Property
@@ -11,8 +12,9 @@ from app.models import Device, Property
 
 class MqttIOExtender(BaseDeviceService, AbcMqttCommunicator):
 
-	def __init__(self, model: Device, serviceBus: ServiceBus):
+	def __init__(self, model: Device, serviceBus: ServiceBus, mqttClient: MqttClient):
 		BaseDeviceService.__init__(self, model, serviceBus)
+		AbcMqttCommunicator.__init__(self, mqttClient)
 		self.__logger = logging.getLogger('MqttIOExtender({0})'.format(model.Id))
 		self.Pins = []
 		self.Address = 0
