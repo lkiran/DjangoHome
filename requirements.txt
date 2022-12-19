@@ -11,3 +11,6 @@ paho-mqtt >= 1.5.1, < 1.6
 shortuuid >= 1.0.1, < 1.1
 six >= 1.16.0, < 1.17
 smbus2
+
+numpy == 1.22.4
+django-shortuuidfield == 0.1.3
