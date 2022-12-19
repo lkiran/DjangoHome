@@ -1,18 +1,20 @@
 import logging
 from inspect import getmembers, isclass
-from typing import Dict, Type
+from typing import Dict
 
 from app import HardwareServices
-from app.DatabaseServices.PropertyService import PropertyService
+from app.CommunicationServices.AbcMqttCommunicator import AbcMqttCommunicator
+from app.CommunicationServices.MqttClient import MqttClient
 from app.DatabaseServices.ServiceBus import ServiceBus
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
 from app.models import Device
 
 
 class DeviceFactory:
-	def __init__(self, serviceBus: ServiceBus):
+	def __init__(self, serviceBus: ServiceBus, mqttClient: MqttClient):
 		self.devices: Dict[str, type] = {}
 		self.__serviceBus = serviceBus
+		self.__mqttClient = mqttClient
 		self.__collectDevices()
 		self.__logger = logging.getLogger('DeviceFactory')
 
@@ -30,7 +32,10 @@ class DeviceFactory:
 			deviceClass = self.devices.get(type, None)
 			if not deviceClass:
 				raise Exception(u"Cannot find a device class with name {0}".format(type))
-			producedDevice: BaseDeviceService = deviceClass(device, self.__serviceBus)
+			if issubclass(deviceClass, AbcMqttCommunicator):
+				producedDevice: AbcMqttCommunicator = deviceClass(device, self.__serviceBus, self.__mqttClient)
+			else:
+				producedDevice: BaseDeviceService = deviceClass(device, self.__serviceBus)
 			return producedDevice
 
 		except Exception as e:
