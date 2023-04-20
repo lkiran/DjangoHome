@@ -115,5 +115,3 @@ containers.config.from_dict({
 		"id": "DjangoHomeClient"
 	}
 })
-for provider in [p for (k, p) in containers.providers.items() if p.kwargs.get('serviceBus')]:
-	provider()  # instantiate services that depends on the bus
