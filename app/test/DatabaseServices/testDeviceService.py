@@ -3,6 +3,7 @@ from unittest import mock
 from django.test import TestCase
 
 from DjangoHome.containers import containers
+from app.CommunicationServices.MqttClient import MqttClient
 from app.DatabaseServices.DeviceService import DeviceService
 from app.DatabaseServices.ServiceBus import ServiceBus
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
@@ -23,8 +24,10 @@ class TestDevice(BaseDeviceService):
 
 
 class DeviceServiceTest(TestCase):
-	deviceService: DeviceService = containers.deviceService()
 	serviceBusMock = mock.Mock(spec=ServiceBus)
+	mqttClientMock = mock.Mock(spec=MqttClient)
+	containers.mqttClient.override(mqttClientMock)
+	deviceService: DeviceService = containers.deviceService()
 	property: Property = None
 	function: Function = None
 	device: Device = None
