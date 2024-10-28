@@ -25,7 +25,7 @@ class Wallswitch(BaseDeviceService, AbcMqttCommunicator):
 
 		for function in self.Model.Functions.all():
 			properties = function.Properties.all()
-			if any(p.get("CallFunction") == "celcius" for p in properties):
+			if any(p.CallFunction == "celcius" for p in properties):
 				self.thermometer = Thermometer(self.macAddress, self, properties)
 			else:
 				button = Button(self.macAddress, self, properties)
