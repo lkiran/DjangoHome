@@ -16,6 +16,7 @@ class Wallswitch(BaseDeviceService, AbcMqttCommunicator):
 		AbcMqttCommunicator.__init__(self, mqttClient)
 		self.__logger = logging.getLogger('Wallswitch({0})'.format(model.Id))
 		self.buttons: Dict[str, Button] = {}
+		self.thermometer: Thermometer
 		self._InstantiateUsingModel()
 
 	def _InstantiateUsingModel(self):
@@ -24,8 +25,11 @@ class Wallswitch(BaseDeviceService, AbcMqttCommunicator):
 
 		for function in self.Model.Functions.all():
 			properties = function.Properties.all()
-			button = Button(self.macAddress, self, properties)
-			self.buttons[button.id] = button
+			if any(p.CallFunction == "celcius" for p in properties):
+				self.thermometer = Thermometer(self.macAddress, self, properties)
+			else:
+				button = Button(self.macAddress, self, properties)
+				self.buttons[button.id] = button
 
 	def lightColor(self, **kwargs):
 		button = self.buttons.get(kwargs.get("id"))
@@ -37,13 +41,40 @@ class Wallswitch(BaseDeviceService, AbcMqttCommunicator):
 		id = kwargs.get("id")
 		return None
 
+	def celcius(self, **kwargs):
+		return self.thermometer.celcius
+
 	def handleStart(self, client, userdata, message):
 		for button in self.buttons.values():
 			button.initializeButton()
 
 
-class Button(object):
+class Thermometer(object):
+	def __init__(self, deviceId: str, device: Wallswitch, properties):
+		self.deviceId = deviceId
+		self.device = device
+		self.properties = properties
+		self.__logger = logging.getLogger('Wallswitch({0}).Thermometer'.format(device.Model.Id))
+		self.celciusProperty = properties.filter(CallFunction='celcius').first()
+		self._celcius = self.celciusProperty.Object
+		self.device.client.subscribe("{0}/temperature".format(self.deviceId), self.handleTemperature)
 
+	@property
+	def celcius(self):
+		return self._celcius
+
+	def handleTemperature(self, client, userdata, message):
+		try:
+			self.__logger.info(
+				"Received message '" + str(message.payload) + "' on topic '" + message.topic + "' with QoS " + str(
+					message.qos))
+			self._celcius = message.payload.decode("utf-8")
+			self.device.SetValue(self.celciusProperty, self._celcius)
+		except Exception as e:
+			self.__logger.error("Error on message handling", e)
+
+
+class Button(object):
 	def __init__(self, deviceId: str, device: Wallswitch, properties):
 		self.deviceId = deviceId
 		self.device = device
