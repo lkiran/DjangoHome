@@ -24,3 +24,6 @@ __pycache__/
 .env/
 .venv/
 venv/
+
+# Exclude .log files under DjangoHome/Logs
+DjangoHome/Logs/*.log

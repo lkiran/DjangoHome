@@ -7,9 +7,15 @@ services:
     volumes:
       - api_static:/DjangoHome/static
       - ui_static:/usr/share/nginx/html
+      - nginx_logs:/var/log/nginx
     restart: always
     ports:
       - "80:80"
+    logging:   
+      driver: "json-file"  
+      options:
+        max-size: "1m"     
+        max-file: "3"
     depends_on:
       - ui
       - api
@@ -22,6 +28,11 @@ services:
       - "1883:1883"
       - "15672:15672"
       - "15692:15692"
+    logging:   
+      driver: "json-file"  
+      options:
+        max-size: "1m"     
+        max-file: "3"
     volumes:
       - rabbit_data:/var/lib/rabbitmq/
       - rabbit_logs:/var/log/rabbitmq/
@@ -38,6 +49,7 @@ services:
     restart: always
     ports:
       - "8000:8000"
+      - "5678:5678"
     environment:
       - SECRET_KEY=aa59e3e2-b398-4170-85d8-ef91c2315514
       - ENABLE_FILE_LOGGING=1
@@ -51,6 +63,36 @@ services:
       - "8080:80"
     volumes:
       - ui_static:/usr/share/nginx/html
+  elasticsearch:
+    image: elasticsearch:8.15.1
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - xpack.license.self_generated.type=BASIC
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+    mem_limit: 1g
+  logstash:
+    image: logstash:8.15.1
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - api_logs:/DjangoHome/Logs
+      - nginx_logs:/Nginx/Logs
+    environment:
+      - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
+    ports:
+      - "5044:5044"
+  kibana:
+    image: kibana:8.15.1
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+ 
+   
 volumes:
   api_static:
   api_logs:
@@ -58,3 +100,4 @@ volumes:
   rabbit_data:
   rabbit_logs:
   ui_static:
+  nginx_logs:

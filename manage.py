@@ -22,12 +22,12 @@ if __name__ == "__main__":
 	#   D - Days
 	#   midnight - roll over at midnight
 	#   W{0-6} - roll over on a certain day; 0 - Monday
-	logging_level = logging.DEBUG
+	logging_level = logging.INFO
 	formatter = logging.Formatter(
 		fmt='%(asctime)s,%(msecs)d - %(name)s - %(levelname)s - %(message)s',
-		datefmt='%b %d, %a %H:%M:%S'
+		datefmt='%Y-%m-%d %H:%M:%S'
 	)
-	logger = logging.getLogger()
+	logger = logging.getLogger()   
 	logger.setLevel(logging_level)
 
 	consoleHandler = logging.StreamHandler()
@@ -35,7 +35,7 @@ if __name__ == "__main__":
 	logger.addHandler(consoleHandler)
 
 	if bool(os.environ.get("ENABLE_FILE_LOGGING", 0)):
-		log_file_name = 'Logs/log'
+		log_file_name = 'Logs/log.log'
 
 		if not os.path.exists("./Logs"):
 			os.makedirs("./Logs", 777)

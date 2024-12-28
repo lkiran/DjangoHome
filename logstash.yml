@@ -1,0 +1,18 @@
+# Core settings
+node.name: logstash-node1
+
+# Pipeline settings
+pipeline.ordered: false
+pipeline.workers: 2
+pipeline.batch.size: 125
+pipeline.batch.delay: 50
+
+# Path settings
+path.data: /usr/share/logstash/data
+path.logs: /usr/share/logstash/logs
+
+xpack.monitoring.enabled: false
+xpack.monitoring.elasticsearch.hosts: ["http://elasticsearch:9200"]
+
+# Log level
+log.level: info

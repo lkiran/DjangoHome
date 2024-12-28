@@ -1,0 +1,13 @@
+# Kibana server settings
+server.host: "kibana"        # Listen on all network interfaces
+server.port: 5601             # Default Kibana port
+server.shutdownTimeout: "5s"
+
+# Elasticsearch connection settings
+elasticsearch.hosts: ["http://elasticsearch:9200"]   # Change this to your Elasticsearch host URL
+elasticsearch.username: "kibana_user"                    # Elasticsearch superuser
+elasticsearch.password: "kibana_user_password"      # Replace with your actual password
+elasticsearch.ssl.verificationMode: none            # Optional: If you're using self-signed certificates
+
+monitoring.ui.container.elasticsearch.enabled: true
+
