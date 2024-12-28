@@ -54,9 +54,9 @@ class IntegerValueParser(AbsValueParser):
 		return ClassEnum.Integer
 
 	def ToObject(self, value: any):
-		return int(value)
+		return float(value)
 
-	def ToString(self, value: int):
+	def ToString(self, value: float):
 		return str(value)
 
 

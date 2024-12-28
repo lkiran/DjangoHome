@@ -48,5 +48,9 @@ class ConditionService(Service):
 		self.serviceBus.register(self, NOTIFY_CONDITIONS_OF_PROPERTY)
 
 	def handle(self, event: str, payload: any):
-		if event is NOTIFY_CONDITIONS_OF_PROPERTY:
-			return self.NotifyConditionsOfProperty(payload)
+		try:
+			if event is NOTIFY_CONDITIONS_OF_PROPERTY:
+				return self.NotifyConditionsOfProperty(payload)
+		except Exception as e:
+			self.__logger.error(u"Error while handling event {0} with payload {1}".format(event, payload), exc_info=True)
+		return None
