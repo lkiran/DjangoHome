@@ -40,7 +40,7 @@ services:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
   api:
-    image: lkiran/django-home:win-20042023
+    image: lkiran/django-home:win-13072025
     command: python manage.py runserver 0.0.0.0:8000 --noreload
     volumes:
       - api_static:/DjangoHome/static
@@ -58,7 +58,7 @@ services:
     depends_on:
       - rabbitmq
   ui:
-    image: lkiran/ng-home:20042023
+    image: lkiran/ng-home:13072025
     ports:
       - "8080:80"
     volumes:
