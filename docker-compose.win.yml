@@ -96,8 +96,18 @@ services:
 volumes:
   api_static:
   api_logs:
+    driver: local
+    driver_opts:
+      type: none
+      device: C:\djangohome-api-logs
+      o: bind
   api_db:
   rabbit_data:
   rabbit_logs:
   ui_static:
   nginx_logs:
+    driver: local
+    driver_opts:
+      type: none
+      device: C:\djangohome-nginx-logs
+      o: bind
