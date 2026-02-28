@@ -1,13 +1,32 @@
 version: '3'
 services:
-    api:
-        build:
-            context: .
-        restart: always
-        ports:
-            - 8000:8000
-        volumes:
-            - .:/docker_remote_interpreter
-        environment:
-            - SECRET_KEY=aa59e3e2-b398-4170-85d8-ef91c2315514
-            - DEBUG=1
+  api:
+    build:
+      context: .
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/docker_remote_interpreter
+    environment:
+      - SECRET_KEY=aa59e3e2-b398-4170-85d8-ef91c2315514
+      - DEBUG=1
+  db:
+    build:
+      context: ./postgres
+      dockerfile: ./postgres.Dockerfile
+    restart: always
+    ports:
+      - 5432:5432
+  rabbitmq:
+    image: lkiran/rabbit-home:latest
+    restart: always
+    hostname: home-rabbit
+    ports:
+      - "1883:1883"
+      - "15672:15672"
+      - "15692:15692"
+
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest

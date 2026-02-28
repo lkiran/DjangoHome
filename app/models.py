@@ -212,7 +212,7 @@ class Condition(models.Model):
 
 class Control(models.Model):
 	Id = ShortUUIDField(unique=True, primary_key=True, blank=False, editable=False)
-	Name = models.CharField(max_length=50)
+	Name = models.CharField(max_length=60)
 	Tasks = models.ManyToManyField(Task, blank=True)
 	Conditions = models.ManyToManyField(Condition, blank=True)
 	CreatedOn = models.DateTimeField(auto_now_add=True)
