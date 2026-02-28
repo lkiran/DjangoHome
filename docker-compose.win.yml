@@ -74,17 +74,25 @@ services:
       - xpack.security.enabled=false
       - xpack.security.http.ssl.enabled=false
     mem_limit: 1g
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+
   logstash:
     image: logstash:8.15.1
     volumes:
+      # read logs produced by other containers
+      - C:\djangohome-api-logs:/logs/api:ro
+      - C:\djangohome-nginx-logs:/logs/nginx:ro
+      # pipeline configs
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       - ./logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - api_logs:/DjangoHome/Logs
-      - nginx_logs:/Nginx/Logs
+      # remember read offsets
+      - logstash_data:/usr/share/logstash/data
     environment:
       - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
     ports:
       - "5044:5044"
+ 
   kibana:
     image: kibana:8.15.1
     environment:
@@ -111,3 +119,17 @@ volumes:
       type: none
       device: C:\djangohome-nginx-logs
       o: bind
+  es_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: C:\es-data
+      o: bind
+
+  logstash_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: C:\logstash-data
+      o: bind
+
