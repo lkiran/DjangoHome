@@ -37,5 +37,9 @@ jobs:
           tags: |
             lkiran/django-home:latest
             lkiran/django-home:${{ steps.vars.outputs.TAG }}
-          cache-from: type=registry,ref=lkiran/django-home:buildcache
-          cache-to: type=registry,ref=lkiran/django-home:buildcache,mode=max
+          cache-from: |
+            type=gha
+            type=registry,ref=lkiran/django-home:buildcache
+          cache-to: |
+            type=gha,mode=max
+            type=registry,ref=lkiran/django-home:buildcache,mode=max
