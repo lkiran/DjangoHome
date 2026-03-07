@@ -1,8 +1,6 @@
 import logging
 from datetime import datetime
 
-import numpy as np
-
 from app.CommunicationServices.AbcMqttCommunicator import AbcMqttCommunicator
 from app.CommunicationServices.MqttClient import MqttClient
 from app.DatabaseServices.ServiceBus import ServiceBus
@@ -70,7 +68,7 @@ class MqttIOExtender(BaseDeviceService, AbcMqttCommunicator):
 			pin = Pin(i, pinProperties, self)
 			self.Pins.append(pin)
 		result = [not self.Pins[i].Status for i in range(0, len(self.Pins))]
-		stateAsByte = np.packbits(np.uint8(result))
+		stateAsByte = int(''.join(['1' if bit else '0' for bit in result]), 2)
 		topic: str = "{0}/i2c/{1}".format(self.macAddress, self.Address)
 		self.client.publish(topic, int(stateAsByte))
 		self.__logger.info("Publishing message topic '{0}' with payload {1}".format(topic, int(stateAsByte)))
@@ -94,7 +92,7 @@ class Pin(object):
 	def _writeToDevice(self, value):
 		state = self._readFromDevice()
 		state[self.Id] = not value
-		stateAsByte = np.packbits(np.uint8(state))
+		stateAsByte = int(''.join(['1' if bit else '0' for bit in state]), 2)
 		topic: str = "{0}/i2c/{1}".format(self.device.macAddress, self.device.Address)
 		self.device.client.publish(topic, int(stateAsByte))
 		self.__logger.info("Publishing message topic '{0}' with payload {1}".format(topic, int(stateAsByte)))

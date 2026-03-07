@@ -1,7 +1,5 @@
 from datetime import datetime
 
-import numpy as np
-
 from app.CommunicationServices.TwoWireInterface import TwoWireInterface
 from app.DatabaseServices.ServiceBus import ServiceBus
 from app.HardwareServices.BaseDeviceService import BaseDeviceService
@@ -84,7 +82,7 @@ class Pin(object):
 	def _WriteToDevice(self, value):
 		state = self._ReadFromDevice()
 		state[7 - self.Id] = not value
-		stateAsByte = np.packbits(np.uint8(state))
+		stateAsByte = int(''.join(['1' if bit else '0' for bit in state]), 2)
 		self.__i2c.Write(self.Address, stateAsByte)
 		return state
 
