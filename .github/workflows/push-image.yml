@@ -1,5 +1,5 @@
 name: 🐳 Docker Build / Publish Image
-run-name: Build ${{ inputs.environment }}
+
 on:
   pull_request:
     branches: [ master ]
