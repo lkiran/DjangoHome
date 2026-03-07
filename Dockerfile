@@ -5,7 +5,7 @@ LABEL Home Automation Server
 COPY ./requirements.txt .
 
 RUN pip install --upgrade pip && \
-    pip install -r requirements.txt \
+    pip install -r requirements.txt
 
 # The enviroment variable ensures that the python output is set straight
 # to the terminal with out buffering it first
