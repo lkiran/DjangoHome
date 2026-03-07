@@ -17,10 +17,7 @@ jobs:
 
       - name: 🏷️ Generate Build Tag
         id: vars
-        run: |
-          TAG=$(date +'%Y%m%d')-${GITHUB_RUN_NUMBER}
-          echo "TAG=$TAG" >> $GITHUB_OUTPUT
-          echo "GITHUB_RUN_NAME=$TAG" >> $GITHUB_ENV
+        run: echo "TAG=$(date +'%Y%m%d').$(gh run list --limit 100 --json createdAt --jq "[.[] | select(.createdAt | startswith(\"$(date +%Y-%m-%d)\"))] | length + 1")" >> $GITHUB_OUTPUT
 
       - name: 🧰 Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
